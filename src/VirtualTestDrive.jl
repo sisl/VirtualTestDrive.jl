@@ -1,6 +1,7 @@
 module VirtualTestDrive
     
 using LibExpat
+using Compat
 
 import Base: TcpSocket, ==
 
@@ -28,6 +29,7 @@ export
     idle_and_print_messages
 
 include("constants.jl")
+include("system.jl")
 include("driver_definition.jl")
 include("io.jl")
 include("viresconnection.jl")

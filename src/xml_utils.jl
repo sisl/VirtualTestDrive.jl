@@ -10,8 +10,8 @@ function ==(sent::ETree, received::ETree)
                 # there must be one of these in received
                 elem_rec_index = 0
 
-                for (i,e) in enumerate(received.elements)
-                    if isa(e, ETree) && e.name == elem_sent.name
+                for (i,node) in enumerate(received.elements)
+                    if isa(node, ETree) && node.name == elem_sent.name
                         elem_rec_index = i
                         break
                     end
@@ -23,7 +23,6 @@ function ==(sent::ETree, received::ETree)
                    return true
                end
             end
-
         end
     end
 
@@ -40,10 +39,10 @@ function message_payload_to_etree(payload::String)
 end
 function message_contains_packet_with_element(message::SCPMessage, name::String, elementname::String)
     str = "<MSG>" * string_from_buffer(message.payload) * "</MSG>"
-    for e in xp_parse(str).elements
-        if isa(e, ETree)
-            if e.name == name
-                payload = e.elements[findfirst(elem->isa(elem, ETree), e.elements)]
+    for node in xp_parse(str).elements
+        if isa(node, ETree)
+            if node.name == name
+                payload = node.elements[findfirst(elem->isa(elem, ETree), node.elements)]
                 if payload.name == elementname
                     return true
                 end

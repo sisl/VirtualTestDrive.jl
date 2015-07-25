@@ -8,7 +8,7 @@ type ViresConnection
         )
 
         start_vires_vtd_tasks()
-        socket = connect(TCP_PORT)
+        socket = connect(port)
 
         # idle until connection is available
         start_time = time()

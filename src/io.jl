@@ -103,7 +103,7 @@ end
 function print_message_bytes(message::SCPMessage)
     dat = Array(Uint8, VIRES_HEADER_LEN + message.header.len + 1)
     buf = IOBuffer(dat, true, true)
-    write(buf, message_out)
+    write(buf, message)
     println(STDOUT, "STRING BUFFER: ")
     println(STDOUT, bytes2hex(dat))
 end
@@ -116,37 +116,39 @@ function idle_and_print_messages(io::IO, sleeptime::Float64)
     end
 end
 
-function scan_for_next_message(io::IO, timeout::Uint64=uint64(2e9), sleepduration::Float64=0.001)
-    while read(io, Uint16) != VIRES_MAGIC_NUMBER
-        sleep(sleepduration)
+function scan_for_next_message(io::IO, timeout::Float64=TIMEOUT_DEFAULT)
+    start_time = time()
+    finished = false
+    while !finished && time() - start_time < timeout
+        finished = read(io, Uint16) == VIRES_MAGIC_NUMBER
     end
-    true
+    finished
 end
 
 function wait_for_packet_with_element(io::IO, name::String, elementname::String; timeout::Float64=TIMEOUT_DEFAULT)
 
-    done = false  
+    finished = false  
     start_time = time()
-    while !done && time() - start_time < timeout
+    while !finished && time() - start_time < timeout
         received = read(io, SCPMessage)
-        done = message_contains_packet_with_element(received, name, elementname)
+        finished = message_contains_packet_with_element(received, name, elementname)
     end
 
-    done # if done is true, we did not time out
+    finished # if finished is true, we did not time out
 end
 function wait_for_mirrored_messsage(io::IO, message::SCPMessage; timeout::Float64=TIMEOUT_DEFAULT)
 
     sent::ETree = message_payload_to_etree(message)
 
-    done = false  
+    finished = false  
     start_time = time()
-    while !done && time() - start_time < timeout
+    while !finished && time() - start_time < timeout
         received = read(io, SCPMessage)
-        done = (string_from_buffer(received.header.sender) == string_from_buffer(received.header.receiver) == CLIENT_NAME) &&
+        finished = (string_from_buffer(received.header.sender) == string_from_buffer(received.header.receiver) == CLIENT_NAME) &&
                 sent == message_payload_to_etree(received)
     end
 
-    done # if done = true, we did not time out
+    finished # if finished = true, we did not time out
 end
 function write_and_wait_for_mirrored_message(io::IO, message::SCPMessage; timeout::Float64=TIMEOUT_DEFAULT)
     write(io, message)

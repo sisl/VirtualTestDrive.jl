@@ -144,7 +144,7 @@ function record_scenario_run(
                                         timeout=timeout)
 
     
-    convert_recording_to_csv(dir, file_dat, vires, "Info", "Message",timeout=timeout)
+    convert_recording_to_csv(dir, file_dat, vires, timeout=timeout)
     
     idle_and_print_messages(vires.socket, 3.0)
 
@@ -190,37 +190,34 @@ function set_driver_behavior(
     )
 
     write_and_wait_for_mirrored_message(vires.socket,
-        SCPMessage("SCP","TaskControl", Vires.get_xml_player_driver_behavior_normalized(def, name=name, id=id, visible=visible)),
+        SCPMessage("SCP","TaskControl", get_xml_player_driver_behavior_normalized(def, name=name, id=id, visible=visible)),
         "set driver behavior timed out",
         timeout=timeout)
 end
 function convert_recording_to_csv(
-    dir::String, file_dat::String, vires::ViresConnection, name::String, elementname::String; timeout::Float64=TIMEOUT_LONG_DEFAULT)
-    # READING
-    # TaskControl -> SCP: 
-    #     PAYLOAD:      <Info level="info"> <Message popup="true" text="Data export complete."/> </Info>
+    dir::String,
+    file_dat::String,
+    vires::ViresConnection;
+    timeout::Float64=TIMEOUT_LONG_DEFAULT
+    )
+
     write(vires.socket, SCPMessage(get_xml_replay_convert(dir, file_dat)))
 
-
-    done = false  
+    finished = false  
     start_time = time()
-    while !done && time() - start_time < timeout
+    while !finished && time() - start_time < timeout
         received = read(vires.socket, SCPMessage)
         str = "<MSG>" * string_from_buffer(received.payload) * "</MSG>"
-        for e in xp_parse(str).elements
-            if isa(e, ETree)
-                if e.name == "Info"
-                    index = findfirst(elem->isa(elem, ETree) && elem.name == "Message", e.elements)
+        for node in xp_parse(str).elements
+            if isa(node, ETree)
+                if node.name == "Info"
+                    index = findfirst(elem->isa(elem, ETree) && elem.name == "Message", node.elements)
                     if index != 0
-                        element = e.elements[index]
-                        done = get(element.attr, "text", "") == "Data export complete."
+                        element = node.elements[index]
+                        finished = get(element.attr, "text", "") == "Data export complete."
                     end
                 end
             end
         end 
     end
-
-    # if !wait_for_packet_with_element(vires.socket, "Replay", "Convert", timeout=timeout)
-    #     error("did not convert")
-    # end
 end

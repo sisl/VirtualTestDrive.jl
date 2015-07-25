@@ -5,7 +5,7 @@ function find_vtd_directory()
                 for content in readdir(hd)
                     path = joinpath(hd, content)
                     if ismatch(r"VTD\.\d+\.\d+", content) && isdir(path)
-                        return dir
+                        return path
                     end
                 end
                 error("VTD directory not found")  
