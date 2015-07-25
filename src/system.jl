@@ -5,7 +5,6 @@ function find_vtd_directory()
                 for content in readdir(hd)
                     path = joinpath(hd, content)
                     if ismatch(r"VTD\.\d+\.\d+", content) && isdir(path)
-                        dir = joinpath(path, "Data", "Setups", "Current", "Bin")
                         return dir
                     end
                 end
@@ -15,13 +14,13 @@ function find_vtd_directory()
             )
 end
 function start_vires_vtd_tasks()
-    dir = find_vtd_directory()
+    dir = joinpath(find_vtd_directory(), "Data", "Setups", "Current", "Bin")
     cd(dir) do
         run(`./startTasks`)
     end
 end
 function stop_vires_components()
-    dir = find_vtd_directory()
+    dir = joinpath(find_vtd_directory(), "Data", "Setups", "Current", "Bin")
     cd(dir) do
         run(`./stopTasks`)
     end

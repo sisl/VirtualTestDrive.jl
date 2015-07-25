@@ -28,10 +28,11 @@ export
     idle_and_print_messages
 
 include("constants.jl")
+include("driver_definition.jl")
 include("io.jl")
 include("viresconnection.jl")
 include("xml_utils.jl")
-include("outward_facing.jl")
 include("scp_xml.jl")
+include("outward_facing.jl")
 
 end # module

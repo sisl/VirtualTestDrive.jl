@@ -49,7 +49,6 @@ function string_to_zeroed_null_terminated_array(str::String)
 end
 function string_to_zeroed_null_terminated_array(str::String, array_length::Int)
     array = zeros(Uint8, array_length)
-
     len = min(array_length-1, length(str))
     array[1:len] = convert(Vector{Uint8}, str)[1:len]
     array
@@ -108,22 +107,20 @@ function print_message_bytes(message::SCPMessage)
     println(STDOUT, "STRING BUFFER: ")
     println(STDOUT, bytes2hex(dat))
 end
+function idle_and_print_messages(io::IO, sleeptime::Float64)
+    start_time = time()
+    while time() - start_time < sleeptime
+        message = read(io, SCPMessage)
+        print_with_color(:red, "RECEIVED\n")
+        print_message(message)
+    end
+end
+
 function scan_for_next_message(io::IO, timeout::Uint64=uint64(2e9), sleepduration::Float64=0.001)
     while read(io, Uint16) != VIRES_MAGIC_NUMBER
         sleep(sleepduration)
     end
     true
-end
-
-function idle_and_print_messages(io::IO, sleeptime::Float64)
-    start_time = time()
-    while time() - start_time < sleeptime
-        message = read(io, SCPMessage)
-        # if bytestring(message.payload[2:6]) != "Info "
-            print_with_color(:red, "RECEIVED\n")
-            print_message(message)
-        # end
-    end
 end
 
 function wait_for_packet_with_element(io::IO, name::String, elementname::String; timeout::Float64=TIMEOUT_DEFAULT)
@@ -135,7 +132,7 @@ function wait_for_packet_with_element(io::IO, name::String, elementname::String;
         done = message_contains_packet_with_element(received, name, elementname)
     end
 
-    done # if done = true, we did not time out
+    done # if done is true, we did not time out
 end
 function wait_for_mirrored_messsage(io::IO, message::SCPMessage; timeout::Float64=TIMEOUT_DEFAULT)
 

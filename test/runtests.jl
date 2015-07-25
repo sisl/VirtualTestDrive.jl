@@ -1,4 +1,5 @@
 using VirtualTestDrive
+using LibExpat
 using Base.Test
 
 helloworld = Uint8[0x68, 0x65, 0x6C, 0x6C, 0x6F, 0x20, 0x77, 0x6F, 0x72, 0x6C, 0x64, 0x00]
@@ -13,4 +14,19 @@ helloworld = Uint8[0x68, 0x65, 0x6C, 0x6C, 0x6F, 0x20, 0x77, 0x6F, 0x72, 0x6C, 0
     VirtualTestDrive.string_to_zeroed_null_terminated_array("hi",10)
     ) == "hi"
 
+
+e = ETree("Set")
+e.attr["entity"] = "player"
+push!(e.elements, ETree("Speed"))
+e.elements[1].attr["value"] = "29.06"
+
+f = VirtualTestDrive.message_payload_to_etree(
+    "<Set entity=\"player\"><Speed value=\"29.06\"/></Set>")
+
+@test f.name == e.name
+@test f.attr == e.attr
+@test f.elements[1].name == e.elements[1].name
+@test f.elements[1].attr == e.elements[1].attr
+@test length(f.elements) == length(e.elements)
+@test f == e
 
