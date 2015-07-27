@@ -34,3 +34,5 @@ f = VirtualTestDrive.message_payload_to_etree(
 @test length(f.elements) == length(e.elements)
 @test f == e
 
+@test VirtualTestDrive.message_contains_packet_with_element(
+    e, "Set", "Speed")
