@@ -7,8 +7,6 @@ julia:
 # - nightly
 notifications:
   email: false
-notifications:
-  email: false
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
   - julia --check-bounds=yes -e 'Pkg.clone(pwd()); Pkg.build("VirtualTestDrive"); Pkg.test("VirtualTestDrive"; coverage=true)'
