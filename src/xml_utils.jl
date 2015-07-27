@@ -38,25 +38,22 @@ function message_payload_to_etree(payload::String)
     root.elements[index_of_first_etree]::ETree
 end
 
-function message_contains_packet_with_element(message::SCPMessage, name::String, elementname::String)
-    str = "<MSG>" * string_from_buffer(message.payload) * "</MSG>"
-    for node in xp_parse(str).elements
-        if isa(node, ETree)
-            if node.name == name
-                payload = node.elements[findfirst(elem->isa(elem, ETree), node.elements)]
-                if payload.name == elementname
-                    return true
-                end
-            end
-        end
-    end
-    false
-end
 function message_contains_packet_with_element(message::ETree, name::String, elementname::String)
     if message.name == name
         payload = message.elements[findfirst(elem->isa(elem, ETree), message.elements)]
         if payload.name == elementname
             return true
+        end
+    end
+    false
+end
+function message_contains_packet_with_element(message::SCPMessage, name::String, elementname::String)
+    str = "<MSG>" * string_from_buffer(message.payload) * "</MSG>"
+    for node in xp_parse(str).elements
+        if isa(node, ETree)
+            if message_contains_packet_with_element(node, name, elementname)
+                return true
+            end
         end
     end
     false
