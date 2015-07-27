@@ -36,3 +36,5 @@ f = VirtualTestDrive.message_payload_to_etree(
 
 @test VirtualTestDrive.message_contains_packet_with_element(
     e, "Set", "Speed")
+
+@test isa(find_vtd_directory(), String)

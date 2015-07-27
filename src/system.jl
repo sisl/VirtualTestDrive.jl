@@ -1,4 +1,4 @@
-function find_vtd_directory()
+function find_vtd_directory(error_on_fail::Bool=true)
     @linux ? (
             begin
                 hd = homedir()
@@ -8,10 +8,13 @@ function find_vtd_directory()
                         return path
                     end
                 end
-                error("VTD directory not found")  
+                error_on_fail && error("VTD directory not found")
             end
-            : error("non-linux os's not supported!")
+            : begin
+                error_on_fail && error("non-linux os's not supported!")
+            end
             )
+    "" # return empty string if no error was thrown and path was not found
 end
 function start_vires_vtd_tasks()
     dir = joinpath(find_vtd_directory(), "Data", "Setups", "Current", "Bin")
