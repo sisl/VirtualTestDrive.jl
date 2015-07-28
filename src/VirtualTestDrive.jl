@@ -5,6 +5,9 @@ using Compat
 
 import Base: TcpSocket, ==
 
+macro lintpragma(s)
+end
+
 export
     ViresConnection, 
     SCPMessage,
@@ -20,11 +23,14 @@ export
     start_vires_vtd_tasks,
     stop_vires_components,
 
-    load_scenario,
+    load_and_init,
     record_scenario_run,
     set_driver_behavior,
-    init,
     convert_recording_to_csv,
+
+    write_and_wait_for_mirrored_message,
+
+    get_xml_traffic_action_autonomous,
     
     idle_and_print_messages
 

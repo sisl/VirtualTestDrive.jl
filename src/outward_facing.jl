@@ -1,18 +1,19 @@
-function load_scenario(vires::ViresConnection, scenario::String, mode::Symbol; timeout::Float64=TIMEOUT_DEFAULT, timeout_init::Float64=TIMEOUT_LONG_DEFAULT)
-
-    write_and_wait_for_mirrored_message(vires.socket, 
-                                        SCPMessage(get_xml_simctrl_loadscenario(scenario)),
-                                        "load scenario timed out",
-                                        timeout=timeout)
-
-    init(vires, mode, timeout=timeout_init)
-end
-function init(vires::ViresConnection, mode::Symbol; timeout::Float64=TIMEOUT_LONG_DEFAULT)
-    # NOTE(tim): this is wrong: we need to wait for InitDone message
-    @assert(in(mode, (:operation, :preparation)))
-    write(vires.socket, SCPMessage(get_xml_simctrl_init(mode)))
-    if !wait_for_packet_with_element(vires.socket, "SimCtrl", "InitDone", timeout=timeout)
-        error("init timed out")
+function load_and_init(
+    vires::ViresConnection,
+    scenario::Union(String, ETree),
+    mode::Symbol;
+    timeout::Float64=TIMEOUT_LONG_DEFAULT,
+    ntries::Int=3
+    )
+    
+    completed = false
+    while ntries > 0 && !completed
+        ntries -= 1
+        write(vires.socket, SCPMessage(get_xml_simctrl_load_init(scenario, mode)))
+        completed = wait_for_packet_with_element(vires.socket, "SimCtrl", "InitDone", timeout=timeout)
+    end
+    if !completed
+        error("failed to init")
     end
 end
 function record_scenario_run(
@@ -22,8 +23,10 @@ function record_scenario_run(
     timeout::Float64=TIMEOUT_DEFAULT)
 
     dir, file = splitdir(destpath)
+    dir = isempty(dir) ? "." : dir
     file_base = splitext(file)[1]
     file_dat = file_base * ".dat"
+
 
     # write_and_wait_for_mirrored_message(vires.socket,
     #                                     SCPMessage(get_xml_set_path(1, 1, 0.0)),
@@ -32,7 +35,7 @@ function record_scenario_run(
 
     write_and_wait_for_mirrored_message(vires.socket, 
                                         SCPMessage(get_xml_record_overwrite(dir, file_dat)),
-                                        "init timed out",
+                                        "record timed out",
                                         timeout=timeout)
 
     # NOTE(tim): this is the one that worked, set(speed) did not for some reason

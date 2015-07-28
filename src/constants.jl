@@ -14,4 +14,4 @@ const RDB_PKG_ID_END_OF_FRAME = @compat UInt16(2)
 const NULL = zero(Uint8)
 
 const TIMEOUT_DEFAULT = 2.0 # [s]
-const TIMEOUT_LONG_DEFAULT = 20.0 # [s]
+const TIMEOUT_LONG_DEFAULT = 10.0 # [s]

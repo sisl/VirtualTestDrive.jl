@@ -1,4 +1,44 @@
+get_xml_simctrl_step(nsteps::Int) = @sprintf("<SimCtrl><Step size=\"%d\"/></SimCtrl>", nsteps)
 get_xml_simctrl_loadscenario(scenario::String) = "<SimCtrl><LoadScenario filename=\""*scenario*"\"/></SimCtrl>"
+function get_xml_simctrl_loadscenario(scenario::ETree)
+    @assert(scenario.name == "Scenario")
+
+    retval = ETree("SimCtrl")
+    loadscenario = ETree("LoadScenario")
+    push!(loadscenario.elements, scenario)
+    push!(retval.elements, loadscenario)
+
+    string(retval)
+end
+get_xml_simctrl_load_init(scenario::String) = "<SimCtrl><LoadScenario filename=\""*scenario*"\"/><Init/></SimCtrl>"
+get_xml_simctrl_init() = "<SimCtrl><Init/></SimCtrl>"
+function get_xml_simctrl_init(mode::Symbol) # ∈ {:preparation, :operation}
+    @assert(mode == :preparation || mode == :operation)
+    "<SimCtrl><Init mode=\"" * string(mode) * "\"/></SimCtrl>"
+end
+function get_xml_simctrl_load_init(scenario::String, initmode::Symbol)
+    @assert(initmode == :preparation || initmode == :operation)
+    "<SimCtrl><LoadScenario filename=\""*scenario*"\"/><Init mode=\""*string(initmode)*"\"/></SimCtrl>"
+end
+function get_xml_simctrl_load_init(scenario::ETree, initmode::Union(Nothing,Symbol)=nothing)
+    @assert(scenario.name == "Scenario")
+
+    retval = ETree("SimCtrl")
+
+    loadscenario = ETree("LoadScenario")
+    push!(loadscenario.elements, scenario)
+    push!(retval.elements, loadscenario)
+
+    init = ETree("Init")
+    if isa(initmode, Symbol)
+        @assert(initmode == :preparation || initmode == :operation)
+        init.attr["mode"] = string(initmode)
+    end
+    push!(retval.elements, init)
+
+    string(retval)
+end
+
 get_xml_record_overwrite(dir::String, file_dat::String) = "<Record stream=\"simulation\"><File path=\""*dir*"\" name=\""*file_dat*"\" overwrite=\"true\"/><Start/></Record>"
 get_xml_replay_convert(dir::String, file_dat::String) = "<Replay><File path=\""*dir*"\"  name=\""*file_dat*"\"/><Convert format=\"CSV\"/></Replay>"
 get_xml_record_stop() = "<Record stream=\"simulation\"><Stop/></Record>"
@@ -21,12 +61,7 @@ get_xml_set_speed(id::Int, speed::Float64) = @sprintf("<Set entity=\"player\" id
 get_xml_set_speed(name::String, speed::Float64) = @sprintf("<Set entity=\"player\" name=\"%s\"><Speed value=\"%f\"/></Set>", name, speed)
 get_xml_set_path(id::Int, pathid::Int, s::Real) = @sprintf("<Set entity=\"player\" id=\"%d\"><Path id=\"%d\" s=\"%f\"/></Set>", id, pathid, s)
 
-get_xml_simctrl_step(nsteps::Int) = @sprintf("<SimCtrl><Step size=\"%d\"/></SimCtrl>", nsteps)
-get_xml_simctrl_init() = "<SimCtrl><Init/></SimCtrl>"
-function get_xml_simctrl_init(mode::Symbol) # ∈ {:preparation, :operation}
-    @assert(mode == :preparation || mode == :operation)
-    "<SimCtrl><Init mode=\"" * string(mode) * "\"/></SimCtrl>"
-end
+
 get_xml_query(entity::String, id::Int) = @sprintf("<Query entity=\"%s\" id=\"%d\"> </Query>", entity, id)
 get_xml_query_path(entity::String, id::Int) = @sprintf("<Query entity=\"%s\" id=\"%d\"><Path/></Query>", entity, id)
 get_xml_query_posinertial() = "<Query entity=\"player\" id=\"1\"><PosInertial/></Query>"

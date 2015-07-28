@@ -18,8 +18,9 @@ type ViresConnection
         
         @assert(isopen(socket))
         retval = new(socket)
+        
+        @lintpragma( "Ignore unused obj" )
         finalizer(retval, obj->begin
-            close(obj.socket)
             stop_vires_components()
         end)
         retval
