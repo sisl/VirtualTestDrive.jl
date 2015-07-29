@@ -43,7 +43,9 @@ const CTYPE_TO_JULIA = [
         "float" => "Cfloat",
         "double" => "Cdouble",
     ]
-
+const RESERVED_NAMES = [
+        "type" => "thetype",
+    ]
 
 lines = open(fh->readlines(fh), FILEPATH)
 
@@ -54,14 +56,14 @@ for i = 1 : length(lines)
         value = match(r"(0x\d+|\d+)\Z", m.match).match
 
         if ismatch(r"0x\d+", value) # hex value
-            nbytes = length(value)-2
+            nbytes = div(length(value)-2, 2)
             @assert(nbytes > 0)
 
             nbits = nbytes > 2 && mod(nbytes,2)==1 ? 8*(nbytes+1) : 8*nbytes
-            println("const ", name, " @compat Uint", string(nbits), "(", value, ")")
+            println("const ", name, " = @compat UInt", string(nbits), "(", value, ")")
 
         else # base 10 value
-            println("const ", name, " convert(Cint, ", value, ")")
+            println("const ", name, " = convert(Cint, ", value, ")")
         end
     else
         m = match(r"typedef struct", lines[i])
@@ -83,8 +85,9 @@ for i = 1 : length(lines)
                 if isa(m, RegexMatch)
                     
                     ctype = match(r"\w+", m.match).match
-                    name = match(r"\s\w+", m.match).match
+                    name = match(r"\s\w+", m.match).match[2:end]
                     jtype = get(CTYPE_TO_JULIA, ctype, ctype)
+                    name = get(RESERVED_NAMES, name, name)
 
                     if ismatch(r"\[\d+\]\Z", m.match)
                         # is an array type
@@ -97,7 +100,7 @@ for i = 1 : length(lines)
                 end
             end
             println("end")
-            println("\n")
+            println("")
         end
     end
 end
