@@ -9,8 +9,8 @@ function load_and_init(
     completed = false
     while ntries > 0 && !completed
         ntries -= 1
-        write(vires.socket, SCPMessage(get_xml_simctrl_load_init(scenario, mode)))
-        completed = wait_for_packet_with_element(vires.socket, "SimCtrl", "InitDone", timeout=timeout)
+        write(vires.SCP, SCPMessage(get_xml_simctrl_load_init(scenario, mode)))
+        completed = wait_for_packet_with_element(vires.SCP, "SimCtrl", "InitDone", timeout=timeout)
     end
     if !completed
         error("failed to init")
@@ -28,94 +28,95 @@ function record_scenario_run(
     file_dat = file_base * ".dat"
 
 
-    # write_and_wait_for_mirrored_message(vires.socket,
+    # write_and_wait_for_mirrored_message(vires.SCP,
     #                                     SCPMessage(get_xml_set_path(1, 1, 0.0)),
     #                                         "action speedchange failed",
     #                                         timeout=timeout)
 
-    write_and_wait_for_mirrored_message(vires.socket, 
+    write_and_wait_for_mirrored_message(vires.SCP, 
                                         SCPMessage(get_xml_record_overwrite(dir, file_dat)),
                                         "record timed out",
                                         timeout=timeout)
 
     # NOTE(tim): this is the one that worked, set(speed) did not for some reason
-    # write_and_wait_for_mirrored_message(vires.socket, 
+    # write_and_wait_for_mirrored_message(vires.SCP, 
     #                                     SCPMessage(get_xml_egoctrl_speed(egospeed)),
     #                                     "did not set speed",
     #                                     timeout=timeout)
 
-    write_and_wait_for_mirrored_message(vires.socket, 
-                                        SCPMessage("<Player><DriverBehaviorNormalized distanceKeeping=\"0.05\"/></Player>"),
-                                        "did not set speed",
-                                        timeout=timeout)
+    # write_and_wait_for_mirrored_message(vires.SCP, 
+    #                                     SCPMessage("<Player><DriverBehaviorNormalized distanceKeeping=\"0.05\"/></Player>"),
+    #                                     "did not set speed",
+    #                                     timeout=timeout)
     
-    # write_and_wait_for_mirrored_message(vires.socket, 
+    # write_and_wait_for_mirrored_message(vires.SCP, 
     #                                     SCPMessage(get_xml_set_pos_inertial(1, 1860.67+10.0, 713.983+10.0, 4.99979+2.0, 2.00554037, 0, 0)),
     #                                     "did not set pos inertial",
     #                                     timeout=timeout)
     
-    # write_and_wait_for_mirrored_message(vires.socket, 
+    # write_and_wait_for_mirrored_message(vires.SCP, 
     #                                     SCPMessage(get_xml_set_speed(1, egospeed)),
     #                                     "did not set speed",
     #                                     timeout=timeout)
-    # write_and_wait_for_mirrored_message(vires.socket,
+    # write_and_wait_for_mirrored_message(vires.SCP,
     #                                     SCPMessage("SCP" , "TaskControl",
     #                                     get_xml_player_driver_input(id=1, throttle=0.9)),
     #                                     "driver input timed out",
     #                                     timeout=timeout)
-    # write_and_wait_for_mirrored_message(vires.socket,
+    # write_and_wait_for_mirrored_message(vires.SCP,
     #                                     SCPMessage(get_xml_traffic_action_autonomous("Ego")),
     #                                         "action autonomous failed",
     #                                         timeout=timeout)
-    # write_and_wait_for_mirrored_message(vires.socket,
+    # write_and_wait_for_mirrored_message(vires.SCP,
     #                                     SCPMessage(get_xml_traffic_action_speedchange("Ego", 29.06, 1.0, delayTime=0.0)),
     #                                         "action speedchange failed",
     #                                         timeout=timeout)
-    write_and_wait_for_mirrored_message(vires.socket, 
-                                        SCPMessage(get_xml_simctrl_step(1)),
-                                        "did not step",
-                                        timeout=timeout)
 
-    # write_and_wait_for_mirrored_message(vires.socket, 
+    # write_and_wait_for_mirrored_message(vires.SCP, 
     #                                     SCPMessage(get_xml_traffic_trigger("EgoAutonomous", true)),
     #                                     "failed", timeout=timeout)
 
-    # write_and_wait_for_mirrored_message(vires.socket, 
+    # write_and_wait_for_mirrored_message(vires.SCP, 
     #                                     SCPMessage(get_xml_query_path("player", 1)),
     #                                     "failed",
     #                                     timeout=timeout)
-    # write_and_wait_for_mirrored_message(vires.socket,
+    # write_and_wait_for_mirrored_message(vires.SCP,
     #                                     SCPMessage(get_xml_traffic_action_autonomous("Ego", delayTime=0.5)),
     #                                         "action autonomous failed",
     #                                         timeout=timeout)
 
-    # write_and_wait_for_mirrored_message(vires.socket, 
+    # write_and_wait_for_mirrored_message(vires.SCP, 
     #                                     SCPMessage(get_xml_query_posinertial()),
     #                                     "did not query PosInertial",
     #                                     timeout=timeout)                 
 
-    # idle_and_print_messages(vires.socket, 10.0)
 
-
-    # write_and_wait_for_mirrored_message(vires.socket, 
+    # write_and_wait_for_mirrored_message(vires.SCP, 
     #                                     SCPMessage(get_xml_simctrl_step(nsteps)),
     #                                     "did not step",
     #                                     timeout=timeout)
 
+    
+    # NOTE(tim): for some reason we need this single step
+    write_and_wait_for_mirrored_message(vires.SCP, 
+                                        SCPMessage(get_xml_simctrl_step(1)),
+                                        "did not step",
+                                        timeout=timeout)
 
     # TODO(tim): put this into a "step" function
     message = SCPMessage(get_xml_simctrl_step(nsteps))
-    write(vires.socket, message)
+    write(vires.SCP, message)
 
     sent::ETree = message_payload_to_etree(message)
-    timeout = nsteps / 10.0
+    timeout = nsteps / 5.0
     received_mirrored = false
+    received_taskcontrol_run = false
     received_taskcontrol_paused = false
     start_time = time()
     while (!received_mirrored || !received_taskcontrol_paused) && 
            time() - start_time < timeout
 
-        received = read(vires.socket, SCPMessage)
+        received = read(vires.SCP, SCPMessage)
         if  (string_from_buffer(received.header.sender) == string_from_buffer(received.header.receiver) == CLIENT_NAME) &&
              sent == message_payload_to_etree(received)
             received_mirrored = true
@@ -125,61 +126,70 @@ function record_scenario_run(
                 index = findfirst(elem->isa(elem, ETree) && elem.name == "TaskState" && get(elem.attr, "name", "") == "TaskControl", received_etree.elements)
                 if index != 0
                     element = received_etree.elements[index]
-                    received_taskcontrol_paused = get(element.attr, "state", "") == "pause"
+                    state = get(element.attr, "state", "")
+                    if !received_taskcontrol_run 
+                        received_taskcontrol_run = state == "run"
+                    else
+                        received_taskcontrol_paused = state == "pause"
+                    end
                 end
             end 
         end
     end
 
+    println(time() - start_time < timeout)
+    println("received_mirrored: ", received_mirrored)
+    println("received_taskcontrol_paused: ", received_taskcontrol_paused)
+
     if !received_mirrored || !received_taskcontrol_paused
         error("timeout")
     end
 
-    # write_and_wait_for_mirrored_message(vires.socket, 
+    # write_and_wait_for_mirrored_message(vires.SCP, 
     #                                     SCPMessage(get_xml_query_posinertial()),
     #                                     "did not query PosInertial",
     #                                     timeout=timeout)
-    # idle_and_print_messages(vires.socket, 5.0)
+    # idle_and_print_messages(vires.SCP, 5.0)
 
-    write_and_wait_for_mirrored_message(vires.socket, 
+    write_and_wait_for_mirrored_message(vires.SCP, 
                                         SCPMessage(get_xml_record_stop()),
                                         "did not stop record",
                                         timeout=timeout)
 
     
     convert_recording_to_csv(dir, file_dat, vires, timeout=timeout)
-    
-    idle_and_print_messages(vires.socket, 3.0)
+
+    # idle_and_print_messages(vires.SCP, 3.0)
 
    
 
 
 
 
-    # write(vires.socket, SCPMessage(get_xml_simctrl_step(1)))
-    # write(vires.socket, SCPMessage(get_xml_query_posinertial()))
-    # idle_and_print_messages(vires.socket, 10.0)
-    # write(vires.socket, SCPMessage(get_xml_egoctrl_speed(egospeed)))
-    # write(vires.socket, SCPMessage(get_xml_simctrl_step(10000)))
-    # write(vires.socket, SCPMessage(get_xml_query_posinertial()))
+    # write(vires.SCP, SCPMessage(get_xml_simctrl_step(1)))
+    # write(vires.SCP, SCPMessage(get_xml_query_posinertial()))
+    # idle_and_print_messages(vires.SCP, 10.0)
+    # write(vires.SCP, SCPMessage(get_xml_egoctrl_speed(egospeed)))
+    # write(vires.SCP, SCPMessage(get_xml_simctrl_step(10000)))
+    # write(vires.SCP, SCPMessage(get_xml_query_posinertial()))
     # sleep(5.0)
-    # write(vires.socket, SCPMessage(get_xml_record_stop()))
-    # write(vires.socket, SCPMessage(get_xml_replay_convert(dir, file_dat)))
-    # idle_and_print_messages(vires.socket, 5.0)
+    # write(vires.SCP, SCPMessage(get_xml_record_stop()))
+    # write(vires.SCP, SCPMessage(get_xml_replay_convert(dir, file_dat)))
+    # idle_and_print_messages(vires.SCP, 5.0)
 
 
 
 
-    # write(vires.socket, SCPMessage("<Record stream=\"simulation\"><File path=\""*dir*"\" name=\""*file_dat*"\" overwrite=\"true\"/><Start/></Record>"))
-    # write(vires.socket, SCPMessage("<SimCtrl> <Step size=\"1\"/> </SimCtrl>"))
-    # write(vires.socket, SCPMessage("<Query entity=\"player\" id=\"1\"><PosInertial/></Query>")) #  type=\"reset\"
-    # idle_and_print_messages(vires.socket, 2.0)
-    # write(vires.socket, SCPMessage("SCP", "TaskControl","<EgoCtrl> <Speed value=\"29.06\"/> </EgoCtrl>"))
-    # write(vires.socket, SCPMessage("<SimCtrl> <Step size=\"10000\"/> </SimCtrl>"))
-    # write(vires.socket, SCPMessage("<Query entity=\"player\" id=\"1\"><PosInertial/></Query>"))
+    # write(vires.SCP, SCPMessage("<Record stream=\"simulation\"><File path=\""*dir*"\" name=\""*file_dat*"\" overwrite=\"true\"/><Start/></Record>"))
+    # write(vires.SCP, SCPMessage("<SimCtrl> <Step size=\"1\"/> </SimCtrl>"))
+    # write(vires.SCP, SCPMessage("<Query entity=\"player\" id=\"1\"><PosInertial/></Query>")) #  type=\"reset\"
+    # idle_and_print_messages(vires.SCP, 2.0)
+    # write(vires.SCP, SCPMessage("SCP", "TaskControl","<EgoCtrl> <Speed value=\"29.06\"/> </EgoCtrl>"))
+    # write(vires.SCP, SCPMessage("<SimCtrl> <Step size=\"10000\"/> </SimCtrl>"))
+    # write(vires.SCP, SCPMessage("<Query entity=\"player\" id=\"1\"><PosInertial/></Query>"))
     # sleep(5.0)
-    # write(vires.socket, SCPMessage("<Record stream=\"simulation\"><Stop/></Record>"))
-    # write(vires.socket, SCPMessage("<Replay><File path=\""*dir*"\"  name=\""*file_dat*"\"/><Convert format=\"CSV\"/></Replay>"))
+    # write(vires.SCP, SCPMessage("<Record stream=\"simulation\"><Stop/></Record>"))
+    # write(vires.SCP, SCPMessage("<Replay><File path=\""*dir*"\"  name=\""*file_dat*"\"/><Convert format=\"CSV\"/></Replay>"))
 
     #TODO(tim): remove old file_dat
 end
@@ -192,7 +202,7 @@ function set_driver_behavior(
     timeout::Float64=TIMEOUT_DEFAULT
     )
 
-    write_and_wait_for_mirrored_message(vires.socket,
+    write_and_wait_for_mirrored_message(vires.SCP,
         SCPMessage("SCP","TaskControl", get_xml_player_driver_behavior_normalized(def, name=name, id=id, visible=visible)),
         "set driver behavior timed out",
         timeout=timeout)
@@ -204,12 +214,12 @@ function convert_recording_to_csv(
     timeout::Float64=TIMEOUT_LONG_DEFAULT
     )
 
-    write(vires.socket, SCPMessage(get_xml_replay_convert(dir, file_dat)))
+    write(vires.SCP, SCPMessage(get_xml_replay_convert(dir, file_dat)))
 
     finished = false  
     start_time = time()
     while !finished && time() - start_time < timeout
-        received = read(vires.socket, SCPMessage)
+        received = read(vires.SCP, SCPMessage)
         str = "<MSG>" * string_from_buffer(received.payload) * "</MSG>"
         for node in xp_parse(str).elements
             if isa(node, ETree)

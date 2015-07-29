@@ -71,7 +71,7 @@ end
 function Base.write(io::IO, message::SCPMessage)
     write(io, message.header)
     write(io, message.payload)
-    println(STDOUT, "SENDING")
+    print_with_color(:blue, STDOUT, "SENDING\n")
     print_message(message)
 end
 
@@ -116,14 +116,16 @@ function idle_and_print_messages(io::IO, sleeptime::Float64)
     end
 end
 
-function scan_for_next_message(io::IO, timeout::Float64=TIMEOUT_DEFAULT)
+function scan_for_value{T<:Any}(io::IO, value::T, timeout::Float64=TIMEOUT_DEFAULT)
     start_time = time()
     finished = false
     while !finished && time() - start_time < timeout
-        finished = read(io, Uint16) == VIRES_MAGIC_NUMBER
+        finished = read(io, T) == value
     end
     finished
 end
+scan_for_next_message(io::IO, timeout::Float64=TIMEOUT_DEFAULT) =
+    scan_for_value(io, VIRES_MAGIC_NUMBER, timeout)
 
 function wait_for_packet_with_element(io::IO, name::String, elementname::String; timeout::Float64=TIMEOUT_DEFAULT)
 

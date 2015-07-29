@@ -35,6 +35,8 @@ export
     idle_and_print_messages
 
 include("constants.jl")
+include("rdb_definitions.jl")
+include("rdb.jl")
 include("system.jl")
 include("driver_definition.jl")
 include("io.jl")
