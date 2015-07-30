@@ -33,14 +33,14 @@ type ViresConnection
 
         retval = new(SCP, UDP)
         
-        fout = open("/tmp/textudp.dat", "w")
-        @async while isopen(UDP)
-            # print(STDOUT, hex(read(UDP, Uint8)))
-            # header = read(UDP, RDB_MSG_HDR_t)
-            # println(STDOUT, header)
-            # write(fout, read(UDP, Uint8))
-            println(fout, read(UDP, RDB_MSG_HDR_t))
-        end
+        # fout = open("/tmp/textudp.dat", "w")
+        # @async while isopen(UDP)
+        #     # print(STDOUT, hex(read(UDP, Uint8)))
+        #     # header = read(UDP, RDB_MSG_HDR_t)
+        #     # println(STDOUT, header)
+        #     # write(fout, read(UDP, Uint8))
+        #     println(fout, read(UDP, RDB_Package))
+        # end
 
         @lintpragma( "Ignore unused obj" )
         finalizer(retval, obj->stop_vires_components())

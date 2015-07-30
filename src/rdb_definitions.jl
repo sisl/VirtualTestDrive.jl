@@ -1017,6 +1017,106 @@ type RDB_SHM_HDR_t
     noBuffers::Uint8
 end
 
+############
+
+function rdb_pkg_id_to_string(id::Integer)
+    if id == RDB_PKG_ID_START_OF_FRAME    
+        "START_OF_FRAME"
+    elseif id == RDB_PKG_ID_END_OF_FRAME      
+        "END_OF_FRAME"
+    elseif id == RDB_PKG_ID_COORD_SYSTEM      
+        "COORD_SYSTEM"
+    elseif id == RDB_PKG_ID_COORD             
+        "COORD"
+    elseif id == RDB_PKG_ID_ROAD_POS          
+        "ROAD_POS"
+    elseif id == RDB_PKG_ID_LANE_INFO         
+        "LANE_INFO"
+    elseif id == RDB_PKG_ID_ROADMARK          
+        "ROADMARK"
+    elseif id == RDB_PKG_ID_OBJECT_CFG        
+        "OBJECT_CFG"
+    elseif id == RDB_PKG_ID_OBJECT_STATE      
+        "OBJECT_STATE"
+    elseif id == RDB_PKG_ID_VEHICLE_SYSTEMS   
+        "VEHICLE_SYSTEMS"
+    elseif id == RDB_PKG_ID_VEHICLE_SETUP     
+        "VEHICLE_SETUP"
+    elseif id == RDB_PKG_ID_ENGINE            
+        "ENGINE"
+    elseif id == RDB_PKG_ID_DRIVETRAIN        
+        "DRIVETRAIN"
+    elseif id == RDB_PKG_ID_WHEEL             
+        "WHEEL"
+    elseif id == RDB_PKG_ID_PED_ANIMATION     
+        "PED_ANIMATION"
+    elseif id == RDB_PKG_ID_SENSOR_STATE      
+        "SENSOR_STATE"
+    elseif id == RDB_PKG_ID_SENSOR_OBJECT     
+        "SENSOR_OBJECT"
+    elseif id == RDB_PKG_ID_CAMERA            
+        "CAMERA"
+    elseif id == RDB_PKG_ID_CONTACT_POINT     
+        "CONTACT_POINT"
+    elseif id == RDB_PKG_ID_TRAFFIC_SIGN      
+        "TRAFFIC_SIGN"
+    elseif id == RDB_PKG_ID_ROAD_STATE        
+        "ROAD_STATE"
+    elseif id == RDB_PKG_ID_IMAGE             
+        "IMAGE"
+    elseif id == RDB_PKG_ID_LIGHT_SOURCE      
+        "LIGHT_SOURCE"
+    elseif id == RDB_PKG_ID_ENVIRONMENT       
+        "ENVIRONMENT"
+    elseif id == RDB_PKG_ID_TRIGGER           
+        "TRIGGER"
+    elseif id == RDB_PKG_ID_DRIVER_CTRL       
+        "DRIVER_CTRL"
+    elseif id == RDB_PKG_ID_TRAFFIC_LIGHT     
+        "TRAFFIC_LIGHT"
+    elseif id == RDB_PKG_ID_SYNC              
+        "SYNC"
+    elseif id == RDB_PKG_ID_DRIVER_PERCEPTION 
+        "DRIVER_PERCEPTION"
+    elseif id == RDB_PKG_ID_LIGHT_MAP         
+        "LIGHT_MAP"
+    elseif id == RDB_PKG_ID_TONE_MAPPING      
+        "TONE_MAPPING"
+    elseif id == RDB_PKG_ID_ROAD_QUERY        
+        "ROAD_QUERY"
+    elseif id == RDB_PKG_ID_SCP               
+        "SCP"
+    elseif id == RDB_PKG_ID_TRAJECTORY        
+        "TRAJECTORY"
+    elseif id == RDB_PKG_ID_DYN_2_STEER       
+        "DYN_2_STEER"
+    elseif id == RDB_PKG_ID_STEER_2_DYN       
+        "STEER_2_DYN"
+    elseif id == RDB_PKG_ID_PROXY             
+        "PROXY"
+    elseif id == RDB_PKG_ID_MOTION_SYSTEM     
+        "MOTION_SYSTEM"
+    elseif id == RDB_PKG_ID_OCCLUSION_MATRIX  
+        "OCCLUSION_MATRIX"
+    elseif id == RDB_PKG_ID_CUSTOM_SCORING
+        "RDB_PKG_ID_CUSTOM_SCORING"     
+    elseif id == RDB_PKG_ID_CUSTOM_AUDI_FORUM
+        "RDB_PKG_ID_CUSTOM_AUDI_FORUM"  
+    elseif id == RDB_PKG_ID_CUSTOM_OPTIX_START
+        "RDB_PKG_ID_CUSTOM_OPTIX_START" 
+    elseif id == RDB_PKG_ID_OPTIX_BUFFER
+        "RDB_PKG_ID_OPTIX_BUFFER"       
+    elseif id == RDB_PKG_ID_CUSTOM_OPTIX_END
+        "RDB_PKG_ID_CUSTOM_OPTIX_END"   
+    elseif id == RDB_PKG_ID_CUSTOM_USER_A_START
+        "RDB_PKG_ID_CUSTOM_USER_A_START"
+    elseif id == RDB_PKG_ID_CUSTOM_USER_A_END
+        "RDB_PKG_ID_CUSTOM_USER_A_END"  
+    else
+        warn("unknown RDB package id $id")
+        "UNKNOWN"
+    end
+end
 
 
 
