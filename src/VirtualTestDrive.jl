@@ -32,7 +32,25 @@ export
 
     get_xml_traffic_action_autonomous,
     
-    idle_and_print_messages
+    idle_and_print_messages,
+
+
+
+#virescsv functions
+    PlayerHeader,
+    read_vires_csv,
+    export_to_bosch_csv,
+
+    inbounds,
+    carind_inbounds,
+    frameind_inbounds,
+
+    set!,
+    get_nplayers,
+    get_nframes,
+    get_column_symbol,
+    get_pos_inertial,
+    get_orientation
 
 include("constants.jl")
 include("rdb_definitions.jl")
@@ -44,5 +62,6 @@ include("viresconnection.jl")
 include("xml_utils.jl")
 include("scp_xml.jl")
 include("outward_facing.jl")
+include("virescsv.jl")
 
 end # module
