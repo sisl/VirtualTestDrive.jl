@@ -43,6 +43,20 @@ const CTYPE_TO_JULIA = [
         "float" => "Cfloat",
         "double" => "Cdouble",
     ]
+const JTYPE_TO_SIZE = [
+        "Uint8" => sizeof(Uint8),
+        "Uint16" => sizeof(Uint16),
+        "Uint32" => sizeof(Uint32),
+        "Uint64" => sizeof(Uint64),
+        "Int8" => sizeof(Int8),
+        "Int16" => sizeof(Int16),
+        "Int32" => sizeof(Int32),
+        "Int64" => sizeof(Int64),
+        "Cint" => sizeof(Cint),
+        "Cfloat" => sizeof(Cfloat),
+        "Cdouble" => sizeof(Cdouble),
+        "RDB_COORD_t" => 44,
+    ]
 const RESERVED_NAMES = [
         "type" => "thetype",
     ]
@@ -110,7 +124,7 @@ function parse_struct{S<:String}(lines::Vector{S}, startlineindex::Int)
             jtype = get(CTYPE_TO_JULIA, ctype, ctype)
             array_length = 0
 
-            if ismatch(r"\[\d+\]\Z", name) # is an array type
+            if ismatch(r"\[\d+\]\Z", m.match) # is an array type
                 array_length = int(match(r"(?<=\[)\d+(?=\])", m.match).match)
             end
 
@@ -137,6 +151,14 @@ function Base.print(io::IO, struct::Struct)
     end
     println("end")
 end
+function contains_tuple(struct::Struct)
+    for entry in struct.entries
+        if entry.array_length > 0
+            return true
+        end
+    end
+    return false
+end
 function print_read(io::IO, struct::Struct)
 
     #=
@@ -146,13 +168,25 @@ function print_read(io::IO, struct::Struct)
         elementSize = read(io, Uint32)
         pkgId = read(io, Uint16)
         flags = read(io, Uint16)
+        spare0 = (read(io, Uint8), read(io, Uint8))
         RDB_MSG_ENTRY_HDR_t(headerSize, dataSize, elementSize, pkgId, flags)
     end
     =#
 
     println(io, "function Base.read(io::IO, ::Type{", struct.name, "})")
     for entry in struct.entries
-        println(io, "\t", entry.name, " = read(io, ", entry.jtype, ")")
+        if entry.array_length == 0
+            println(io, "\t", entry.name, " = read(io, ", entry.jtype, ")")
+        else
+            print(io, "\t", entry.name, " = (")
+            for i = 1 : entry.array_length
+                if i > 1
+                    print(io, ", ")
+                end
+                print(io, "read(io, ", entry.jtype, ")")
+            end
+            println(io, ")")
+        end
     end
     print(io, "\t", struct.name, "(")
     for (i,entry) in enumerate(struct.entries)
@@ -179,7 +213,18 @@ function print_read!(io::IO, struct::Struct)
 
     println(io, "function Base.read!(io::IO, struct::", struct.name, ")")
     for entry in struct.entries
-        println(io, "\tstruct.", entry.name, " = read(io, ", entry.jtype, ")")
+        if entry.array_length == 0
+            println(io, "\tstruct.", entry.name, " = read(io, ", entry.jtype, ")")
+        else
+            print(io, "\tstruct.", entry.name, " = (")
+            for i = 1 : entry.array_length
+                if i > 1
+                    print(io, ", ")
+                end
+                print(io, "read(io, ", entry.jtype, ")")
+            end
+            println(io, ")")
+        end
     end
     println(io, "\tstruct")
     println(io, "end")
@@ -211,7 +256,7 @@ function print_show(io::IO, struct::Struct)
         println(io, "\theaderSize: %d", struct.headerSize)
         println(io, "\tdataSize:   %d", struct.dataSize)
         println(io, "\tframeNo:    %d", struct.frameNo)
-        @printf(io, "\tsimTime:    %.16e", struct.simTime)
+        @printf(io, "\tsimTime:    %+.16e", struct.simTime)
     end
     =#
 
@@ -224,18 +269,40 @@ function print_show(io::IO, struct::Struct)
     for entry in struct.entries
         name = entry.name
         spacing = max_name_length + 1 - length(name)
-        print(io, "\tprintln(io, \"\t", name, ":", " "^spacing)
-        if ismatch(r"Uint", entry.jtype)
-            println(io, "%s\", hex(struct.", entry.name, "))")
+        print(io, "\t@printf(io, \"\t", name, ":", " "^spacing)
+        if ismatch(r"Uint", entry.jtype) || entry.array_length > 0
+            println(io, "%s\\n\", hex(struct.", entry.name, "))")
         elseif ismatch(r"(Int|Cint)", entry.jtype)
-            println(io, "%d\",struct.", entry.name, ")")
+            println(io, "%d\\n\",struct.", entry.name, ")")
         elseif ismatch(r"(Cfloat|Cdouble)", entry.jtype)
-            println(io, "%.16e\",struct.", entry.name, ")")
+            println(io, "%+.16e\\n\",struct.", entry.name, ")")
         else
-            println(io, entry.jtype, "\")")
+            println(io, entry.jtype, "\\n\")")
         end
     end
     println(io, "end")
+end
+function print_sizeof(io::IO, struct::Struct)
+    #=
+    Base.sizeof(::RDB_MSG_HDR_t) = 24
+    Base.sizeof(::Type{RDB_MSG_HDR_t}) = 24
+
+    NOTE: this fails if it contains non-standard Ctypes
+          e.g. other header entry types
+    =#
+
+    nbytes = 0
+    for entry in struct.entries
+        typesize = JTYPE_TO_SIZE[entry.jtype]
+        if entry.array_length == 0    
+            nbytes += typesize
+        else
+            nbytes += typesize*entry.array_length
+        end
+    end
+
+    println(io, "Base.sizeof(::", struct.name, ") = ", nbytes)
+    println(io, "Base.sizeof(::Type{", struct.name, "}) = ", nbytes)
 end
 
 lines = open(fh->readlines(fh), FILEPATH)
@@ -277,4 +344,5 @@ for struct in structs
     print_read!(STDOUT, struct)
     print_write(STDOUT, struct)
     print_show(STDOUT, struct)
+    !contains_tuple(struct) || print_sizeof(STDOUT, struct)
 end
