@@ -35,7 +35,6 @@ export
     idle_and_print_messages,
 
 
-
 #virescsv functions
     PlayerHeader,
     read_vires_csv,
