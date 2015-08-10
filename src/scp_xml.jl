@@ -65,6 +65,19 @@ get_xml_set_path(id::Int, pathid::Int, s::Real) = @sprintf("<Set entity=\"player
 get_xml_query(entity::String, id::Int) = @sprintf("<Query entity=\"%s\" id=\"%d\"> </Query>", entity, id)
 get_xml_query_path(entity::String, id::Int) = @sprintf("<Query entity=\"%s\" id=\"%d\"><Path/></Query>", entity, id)
 get_xml_query_posinertial() = "<Query entity=\"player\" id=\"1\"><PosInertial/></Query>"
+function get_xml_query_sync(;
+    entity::String="RDB",
+    source::String="USER",
+    delete::Bool=false
+    )
+
+    if !delete
+        "<Query entity=\""*entity*"\"><Sync source=\""*source*"\"/></Query>"
+    else
+        "<Query entity=\""*entity*"\"><Sync source=\""*source*"\" delete=\"true\"/></Query>"
+    end
+end
+
 
 function get_xml_player_driver_behavior_normalized(
     def::DriverDefinition; 
@@ -139,6 +152,54 @@ function get_xml_player_driver_input(;
     end
     @sprintf("%s><DriverInput%s/></Player>", retval, input_str)
 end
+# function get_xml_player_driver(;
+#     name::Union(Nothing,String)=nothing,
+#     id::Union(Nothing,Int)=nothing,
+#     visible::Union(Nothing,Bool)=nothing,
+#     ctrlLatLong::Union(Nothing,Symbol)=nothing, # ∈ :ghostdriver, extern, none
+#     throttle::Union(Nothing,Float64)=nothing,
+#     brake::Union(Nothing,Float64)=nothing
+#     )
+
+#     @assert(isa(override,Bool) || isa(throttle,Float64) || isa(brake, Float64))
+
+#     retval = "<Player"
+#     if isa(name,String)
+#         retval *= @sprintf(" name=\"%s\"", name)
+#     end
+#     if isa(id,Int)
+#         retval *= @sprintf(" id=\"%d\"", id)
+#     end
+#     if isa(visible,Bool)
+#         retval *= @sprintf(" visible=\"%s\"", visible)
+#     end
+
+#     input_str ="" 
+#     if isa(override,Bool)
+#         input_str *= @sprintf(" override=\"%s\"",override)
+#     end
+#     if isa(throttle,Float64)
+#         if throttle < 0.0
+#             throttle = 0.0
+#             warn("Throttle value set to 0")
+#         elseif throttle > 1.0
+#             throttle = 1.0
+#             warn("Throttle value set to 1")
+#         end
+#         input_str *= @sprintf(" throttle=\"%f\"", throttle)
+#     end
+#     if isa(brake, Float64)
+#         if brake < 0.0
+#             brake = 0.0
+#             warn("brake value set to 0")
+#         elseif brake > 1.0
+#             brake = 1.0
+#             warn("brake value set to 1")
+#         end
+#         input_str *= @sprintf(" brake=\"%f\"", brake)
+#     end
+#     @sprintf("%s><DriverInput%s/></Player>", retval, input_str)
+# end
 
 get_xml_traffic_trigger(id::String, active::Bool) = @sprintf("<Traffic><Trigger id=\"%s\" active=\"%s\"/></Traffic>", id, active)
 function get_xml_traffic_action_autonomous(actor::String; 

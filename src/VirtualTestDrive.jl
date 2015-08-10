@@ -22,11 +22,21 @@ export
     find_vtd_directory,
     start_vires_vtd_tasks,
     stop_vires_components,
+    rdbsniffer,
 
     load_and_init,
     record_scenario_run,
     set_driver_behavior,
     convert_recording_to_csv,
+    register_to_authorize_framesteps!,
+    unregister_to_authorize_framesteps!,
+
+    create_camera_directly_above_ego,
+    create_camera_relative_to_ego,
+    
+    step_with_udp_checking_frameid,
+    step_with_udp_authorization,
+    step_with_udp_explicit_stepwidth,
 
     write_and_wait_for_mirrored_message,
 
@@ -53,6 +63,7 @@ export
 
 include("constants.jl")
 include("rdb_definitions.jl")
+include("rdb_package_gen.jl")
 include("rdb.jl")
 include("system.jl")
 include("driver_definition.jl")

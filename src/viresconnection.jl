@@ -5,6 +5,11 @@ type ViresConnection
     SCP::TcpSocket
     UDP::TcpSocket
 
+
+    registered_to_authorize_framestep::Bool # if true, then must send RDB_PKG_ID_SYNC for each frame
+                                            # see 11.2.3 Multiple Sync Dependencies in manual
+    sync_mask::Uint32
+
     ViresConnection() = ViresConnection(SCP_PORT, UDP_PORT)
     ViresConnection(SCP::TcpSocket, UDP::TcpSocket) = new(SCP, UDP)
     function ViresConnection(scp_port::Integer, udp_port::Integer;
@@ -31,7 +36,7 @@ type ViresConnection
         @assert(isopen(SCP))
         @assert(isopen(UDP))
 
-        retval = new(SCP, UDP)
+        retval = new(SCP, UDP, false, 0x00000000)
         
         # fout = open("/tmp/textudp.dat", "w")
         # @async while isopen(UDP)

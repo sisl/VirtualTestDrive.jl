@@ -77,7 +77,7 @@ end
 
 function Base.read(io::IO, ::Type{SCPMessage}, already_has_magic_number::Bool=false)
     if !already_has_magic_number
-        @assert(scan_for_next_message(io)) # TODO(tim): handle this correctly
+        scan_for_value(io, VIRES_MAGIC_NUMBER)
     end
 
     version_number = read(io, Uint16)
@@ -89,6 +89,14 @@ function Base.read(io::IO, ::Type{SCPMessage}, already_has_magic_number::Bool=fa
     println(STDOUT, "READING")
     print_message(message)
     message
+end
+function write_bytehex_to_stdout(f::Function)
+    # ex: write_bytehex_to_stdout((buf)->write(buf, 0x08))
+
+    # io -> f(io)
+    buf = IOBuffer()
+    f(buf)
+    println(STDOUT, bytes2hex(takebuf_array(buf)))
 end
 function print_message(message::SCPMessage)
     # println(STDOUT, "\tSENDER:       ", bytes2hex(message.header.sender))
@@ -116,16 +124,37 @@ function idle_and_print_messages(io::IO, sleeptime::Float64)
     end
 end
 
-function scan_for_value{T<:Any}(io::IO, value::T, timeout::Float64=TIMEOUT_DEFAULT)
-    start_time = time()
-    finished = false
-    while !finished && time() - start_time < timeout
-        finished = read(io, T) == value
+function scan_for_value(io::IO, target::Uint8)
+    #=
+    Blocks the stream until you get the byte you want
+    =#
+
+    while read(io, Uint8) != target
+        # do nothing
     end
-    finished
+    nothing
 end
-scan_for_next_message(io::IO, timeout::Float64=TIMEOUT_DEFAULT) =
-    scan_for_value(io, VIRES_MAGIC_NUMBER, timeout)
+function scan_for_value(io::IO, value::Uint16)
+
+    #=
+    Blocks the stream until you get the bytes you want
+    Note: value[1] must be found first, then value[2], etc.
+    =#
+
+    byte_index = 1
+    lo = uint8(value & 0x00FF)
+    hi = uint8((value & 0xFF00) >> 8)
+
+    while byte_index ≤ 2
+        val = read(io, Uint8)
+        if byte_index == 1
+            byte_index += (val == lo)
+        else
+            byte_index = (val == hi) ? 3 : 1
+        end
+    end
+    nothing
+end
 
 function wait_for_packet_with_element(io::IO, name::String, elementname::String; timeout::Float64=TIMEOUT_DEFAULT)
 
