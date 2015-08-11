@@ -3559,10 +3559,10 @@ function rdb_pkg_id_to_type(id::Integer)
         RDB_SYNC_t
     elseif id == RDB_PKG_ID_DRIVER_PERCEPTION 
         RDB_DRIVER_PERCEPTION_t
-    elseif id == RDB_PKG_ID_LIGHT_MAP         
-        RDB_LIGHT_MAP_t
-    elseif id == RDB_PKG_ID_TONE_MAPPING      
-        RDB_TONE_MAPPING_t
+    # elseif id == RDB_PKG_ID_LIGHT_MAP         
+    #     RDB_LIGHT_MAP_t
+    # elseif id == RDB_PKG_ID_TONE_MAPPING      
+    #     RDB_TONE_MAPPING_t
     elseif id == RDB_PKG_ID_ROAD_QUERY        
         RDB_ROAD_QUERY_t
     elseif id == RDB_PKG_ID_SCP               
@@ -3577,22 +3577,22 @@ function rdb_pkg_id_to_type(id::Integer)
         RDB_PROXY_t
     elseif id == RDB_PKG_ID_MOTION_SYSTEM     
         RDB_MOTION_SYSTEM_t
-    elseif id == RDB_PKG_ID_OCCLUSION_MATRIX  
-        RDB_OCCLUSION_MATRIX_t
-    elseif id == RDB_PKG_ID_CUSTOM_SCORING
-        RDB_RDB_PKG_ID_CUSTOM_SCORING_t     
-    elseif id == RDB_PKG_ID_CUSTOM_AUDI_FORUM
-        RDB_RDB_PKG_ID_CUSTOM_AUDI_FORUM_t  
-    elseif id == RDB_PKG_ID_CUSTOM_OPTIX_START
-        RDB_RDB_PKG_ID_CUSTOM_OPTIX_START_t 
-    elseif id == RDB_PKG_ID_OPTIX_BUFFER
-        RDB_RDB_PKG_ID_OPTIX_BUFFER_t       
-    elseif id == RDB_PKG_ID_CUSTOM_OPTIX_END
-        RDB_RDB_PKG_ID_CUSTOM_OPTIX_END_t   
-    elseif id == RDB_PKG_ID_CUSTOM_USER_A_START
-        RDB_RDB_PKG_ID_CUSTOM_USER_A_START_t
-    elseif id == RDB_PKG_ID_CUSTOM_USER_A_END
-        RDB_RDB_PKG_ID_CUSTOM_USER_A_END_t  
+    # elseif id == RDB_PKG_ID_OCCLUSION_MATRIX  
+    #     RDB_OCCLUSION_MATRIX_t
+    # elseif id == RDB_PKG_ID_CUSTOM_SCORING
+    #     RDB_RDB_PKG_ID_CUSTOM_SCORING_t     
+    # elseif id == RDB_PKG_ID_CUSTOM_AUDI_FORUM
+    #     RDB_RDB_PKG_ID_CUSTOM_AUDI_FORUM_t  
+    # elseif id == RDB_PKG_ID_CUSTOM_OPTIX_START
+    #     RDB_RDB_PKG_ID_CUSTOM_OPTIX_START_t 
+    # elseif id == RDB_PKG_ID_OPTIX_BUFFER
+    #     RDB_RDB_PKG_ID_OPTIX_BUFFER_t       
+    # elseif id == RDB_PKG_ID_CUSTOM_OPTIX_END
+    #     RDB_RDB_PKG_ID_CUSTOM_OPTIX_END_t   
+    # elseif id == RDB_PKG_ID_CUSTOM_USER_A_START
+    #     RDB_RDB_PKG_ID_CUSTOM_USER_A_START_t
+    # elseif id == RDB_PKG_ID_CUSTOM_USER_A_END
+    #     RDB_RDB_PKG_ID_CUSTOM_USER_A_END_t  
     else
         warn("unknown RDB package id $id")
         "UNKNOWN"

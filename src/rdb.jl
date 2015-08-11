@@ -121,7 +121,7 @@ function write_udp_packet(io::IO, elem::RDB_PACKAGE_ELEMENT, frameNo::Integer, s
     write(io, elem)
 end
 
-function write_udp_packet(io::IO, elem::RDB_START_OF_FRAME_t, frameNo::Integer, simTime::Real, flags::Uint16=0x0000)
+function write_udp_packet(io::IO, ::RDB_START_OF_FRAME_t, frameNo::Integer, simTime::Real, flags::Uint16=0x0000)
 
     println("sending start of frame")
 
@@ -140,7 +140,7 @@ function write_udp_packet(io::IO, elem::RDB_START_OF_FRAME_t, frameNo::Integer, 
     write(io, RDB_PKG_ID_START_OF_FRAME::Uint16)
     write(io, flags)
 end
-function write_udp_packet(io::IO, elem::RDB_END_OF_FRAME_t, frameNo::Integer, simTime::Real, flags::Uint16=0x0000)
+function write_udp_packet(io::IO, ::RDB_END_OF_FRAME_t, frameNo::Integer, simTime::Real, flags::Uint16=0x0000)
 
     println("sending end of frame")
 

@@ -142,8 +142,7 @@ function step_with_udp_explicit_stepwidth(
         trigger.frameNo = frameNo + 1
         # write_udp_packet(vires.UDP, start_of_frame, frameNo, simTime)
         # write_bytehex_to_stdout((buf)->write_udp_packet(buf, ctrl, frameNo, simTime))
-        write_udp_packet(vires.UDP, ctrl, frameNo, simTime)
-        # write_udp_packet(vires.UDP, trigger, frameNo, simTime)
+        # write_udp_packet(vires.UDP, ctrl, frameNo, simTime)
         write_udp_packet(vires.UDP, trigger, frameNo, simTime)
         # write_udp_packet(vires.UDP, end_of_frame, frameNo, simTime)
         # sleep(2.0)
@@ -217,7 +216,7 @@ function record_scenario_run(
                                         "record timed out",
                                         timeout=timeout)
 
-    create_camera_relative_to_ego(vires, dx=9.0)
+    # create_camera_relative_to_ego(vires, dx=9.0)
 
     # NOTE(tim): for some reason we need this single step (which does not occur)
     # write_and_wait_for_mirrored_message(vires.SCP, 
@@ -445,7 +444,9 @@ function register_to_authorize_framesteps!(
         end
     end
 end
-function unregister_to_authorize_framesteps!(vires::ViresConnection;
+function unregister_to_authorize_framesteps!(
+    vires::ViresConnection,
+    timeout::Float64=TIMEOUT_DEFAULT;
     source="USER")
 
     freed = true

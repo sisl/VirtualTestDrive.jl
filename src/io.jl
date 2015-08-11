@@ -42,16 +42,16 @@ end
 
 function string_to_zeroed_null_terminated_array(str::String)
     strlen = length(str)
-    array = zeros(Uint8, strlen+1)
-    array[1:strlen] = convert(Vector{Uint8}, str)
-    array[end] = NULL
-    array
+    arr = zeros(Uint8, strlen+1)
+    arr[1:strlen] = convert(Vector{Uint8}, str)
+    arr[end] = NULL
+    arr
 end
 function string_to_zeroed_null_terminated_array(str::String, array_length::Int)
-    array = zeros(Uint8, array_length)
+    arr = zeros(Uint8, array_length)
     len = min(array_length-1, length(str))
-    array[1:len] = convert(Vector{Uint8}, str)[1:len]
-    array
+    arr[1:len] = convert(Vector{Uint8}, str)[1:len]
+    arr
 end
 function string_from_buffer(arr::Vector{Uint8})
     nulindex = findfirst(arr, NULL)
@@ -148,7 +148,7 @@ function scan_for_value(io::IO, value::Uint16)
     while byte_index ≤ 2
         val = read(io, Uint8)
         if byte_index == 1
-            byte_index += (val == lo)
+            byte_index += int(val == lo)
         else
             byte_index = (val == hi) ? 3 : 1
         end

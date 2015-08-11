@@ -11,7 +11,7 @@ type ViresConnection
     sync_mask::Uint32
 
     ViresConnection() = ViresConnection(SCP_PORT, UDP_PORT)
-    ViresConnection(SCP::TcpSocket, UDP::TcpSocket) = new(SCP, UDP)
+    ViresConnection(SCP::TcpSocket, UDP::TcpSocket) = new(SCP, UDP, false, 0x00000000)
     function ViresConnection(scp_port::Integer, udp_port::Integer;
         sleeptime::Float64=0.05, # [sec]
         timeout::Float64=TIMEOUT_LONG_DEFAULT # [sec]

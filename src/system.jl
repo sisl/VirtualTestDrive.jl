@@ -30,7 +30,8 @@ function stop_vires_components()
 end
 function rdbsniffer(; port::Integer=RDB_FEEDBACK_PORT)
     # run RDB sniffer on given port in debug mode
-    
+
+    @lintpragma("Ignore unused port")
     dir = joinpath(find_vtd_directory(), "Runtime", "Tools", "RDBSniffer")
     cd(dir) do
         run(`./rdbSniffer -c udp -p $port -d`)
