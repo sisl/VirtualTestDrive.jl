@@ -80,7 +80,7 @@ end
 
 
 function get_xml_player_driver_behavior_normalized(
-    def::DriverDefinition; 
+    def::DriverBehavior; 
     name::Union(Nothing,String)=nothing,
     id::Union(Nothing,Int)=nothing,
     visible::Union(Nothing,Bool)=nothing
@@ -97,7 +97,7 @@ function get_xml_player_driver_behavior_normalized(
     end
     #NOTE(Deon) not passing in use_of_indicator because its not in the API
     @sprintf("%s><DriverBehaviorNormalized desiredSpeed=\"%f\" desiredAcc=\"%f\" desiredDec=\"%f\" curveSpeed=\"%f\" observeSpeedLimits=\"%f\" distanceKeeping=\"%f\" laneKeeping=\"%f\" speedKeeping=\"%f\" laneChangeDyn=\"%f\" urgeToOvertake=\"%f\" keepRightRule=\"%f\" respondToTailgating=\"%f\" foresightDist=\"%f\" steeringDist=\"%f\" obeyTrafficSigns=\"%s\" obeyTrafficLights=\"%s\"/></Player>",
-        retval, def.desired_velocity, def.desired_acceleraion, def.desired_deceleration,
+        retval, def.desired_speed, def.desired_acceleraion, def.desired_deceleration,
         def.curve_speed, def.observe_speed_limits, def.distance_keeping, def.lane_keeping,
         def.speed_keeping, def.lane_change_dynamic, def.urge_to_overtake, def.keep_right_rule,
         def.respond_to_tailgate, def.foresight_distance, def.steering_distance,

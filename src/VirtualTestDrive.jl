@@ -12,7 +12,7 @@ end
 export
     ViresConnection, 
     SCPMessage,
-    DriverDefinition,
+    DriverBehavior,
 
     BRISK_DRIVER,
     COMFORTABLE_DRIVER,
@@ -43,7 +43,7 @@ export
 
     get_xml_traffic_action_autonomous,
     
-    idle_and_print_messages,
+    idle_and_print_messages
 
     include("constants.jl")
     include("rdb_definitions.jl")

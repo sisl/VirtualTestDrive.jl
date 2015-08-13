@@ -87,32 +87,32 @@ function step_with_udp_explicit_stepwidth(
     # myDriver->gear           = RDB_GEAR_BOX_POS_D;  
     # myDriver->validityFlags  = RDB_DRIVER_INPUT_VALIDITY_STEERING_WHEEL | RDB_DRIVER_INPUT_VALIDITY_THROTTLE | RDB_DRIVER_INPUT_VALIDITY_BRAKE;
 
-    ctrl = RDB_DRIVER_CTRL_t(
-        convert(Uint32, 1), # playerId
-        convert(Cfloat, 4.0), # steeringWheel
-        convert(Cfloat, 0.0), # steeringSpeed::Cfloat
-        convert(Cfloat, 1.0), # throttlePedal::Cfloat
-        convert(Cfloat, 0.0), # brakePedal::Cfloat
-        convert(Cfloat, 0.0), # clutchPedal::Cfloat
-        convert(Cfloat, 0.0), # accelTgt::Cfloat
-        convert(Cfloat, 0.0), # steeringTgt::Cfloat
-        convert(Cdouble, 0.0), # curvatureTgt::Cdouble
-        convert(Cfloat, 0.0), # steeringTorque::Cfloat
-        convert(Cfloat, 0.0), # engineTorqueTgt::Cfloat
-        convert(Cfloat, 0.0), # speedTgt::Cfloat
-        convert(Uint8, RDB_GEAR_BOX_POS_D), # gear::Uint8
-        convert(Uint8, RDB_DRIVER_SOURCE_UNKNOWN), # sourceId::Uint8 
-        (convert(Uint8, 0), convert(Uint8, 0)), # spare0::(Uint8, Uint8)
-        convert(Uint32, RDB_DRIVER_INPUT_VALIDITY_STEERING_WHEEL | RDB_DRIVER_INPUT_VALIDITY_THROTTLE | 
-                        RDB_DRIVER_INPUT_VALIDITY_BRAKE), # validityFlags::Uint32
-        convert(Uint32, RDB_DRIVER_FLAG_NONE), # flags::Uint32
-        convert(Uint32, 0), # mockupInput0::Uint32
-        convert(Uint32, 0), # mockupInput1::Uint32
-        convert(Uint32, 0), # mockupInput2::Uint32
-        convert(Uint32, 0), # spare::Uint32        
-        )
-    start_of_frame = RDB_START_OF_FRAME_t()
-    end_of_frame = RDB_END_OF_FRAME_t()
+    # ctrl = RDB_DRIVER_CTRL_t(
+        # convert(Uint32, 1), # playerId
+        # convert(Cfloat, 4.0), # steeringWheel
+        # convert(Cfloat, 0.0), # steeringSpeed::Cfloat
+        # convert(Cfloat, 1.0), # throttlePedal::Cfloat
+        # convert(Cfloat, 0.0), # brakePedal::Cfloat
+        # convert(Cfloat, 0.0), # clutchPedal::Cfloat
+        # convert(Cfloat, 0.0), # accelTgt::Cfloat
+        # convert(Cfloat, 0.0), # steeringTgt::Cfloat
+        # convert(Cdouble, 0.0), # curvatureTgt::Cdouble
+        # convert(Cfloat, 0.0), # steeringTorque::Cfloat
+        # convert(Cfloat, 0.0), # engineTorqueTgt::Cfloat
+        # convert(Cfloat, 0.0), # speedTgt::Cfloat
+        # convert(Uint8, RDB_GEAR_BOX_POS_D), # gear::Uint8
+        # convert(Uint8, RDB_DRIVER_SOURCE_UNKNOWN), # sourceId::Uint8 
+        # (convert(Uint8, 0), convert(Uint8, 0)), # spare0::(Uint8, Uint8)
+        # convert(Uint32, RDB_DRIVER_INPUT_VALIDITY_STEERING_WHEEL | RDB_DRIVER_INPUT_VALIDITY_THROTTLE | 
+        #                 RDB_DRIVER_INPUT_VALIDITY_BRAKE), # validityFlags::Uint32
+        # convert(Uint32, RDB_DRIVER_FLAG_NONE), # flags::Uint32
+        # convert(Uint32, 0), # mockupInput0::Uint32
+        # convert(Uint32, 0), # mockupInput1::Uint32
+        # convert(Uint32, 0), # mockupInput2::Uint32
+        # convert(Uint32, 0), # spare::Uint32        
+        # )
+    # start_of_frame = RDB_START_OF_FRAME_t()
+    # end_of_frame = RDB_END_OF_FRAME_t()
 
     println("listening")
     
@@ -216,18 +216,14 @@ function record_scenario_run(
                                         "record timed out",
                                         timeout=timeout)
 
-    # create_camera_relative_to_ego(vires, dx=9.0)
+    # create_camera_relative_to_ego(vires, dx=18.0, dz=100.0)
 
-    # NOTE(tim): for some reason we need this single step (which does not occur)
-    # write_and_wait_for_mirrored_message(vires.SCP, 
-    #                                     SCPMessage(get_xml_simctrl_step(0)),
-    #                                     "did not step",
-    #                                     timeout=timeout)
-
-    # write_and_wait_for_mirrored_message(vires.SCP, 
-    #                                     SCPMessage(get_xml_simctrl_step(nsteps)),
-    #                                     "did not step",
-    #                                     timeout=timeout)
+    # write_and_wait_for_mirrored_message(vires.SCP,
+    #     SCPMessage("<Player name=\"Ego\" visible=\"true\"/>"),
+    #     "make player visible timed out")
+    # write_and_wait_for_mirrored_message(vires.SCP,
+    #     SCPMessage("<Camera><PosEyepoint player=\"Ego\"/><ViewRelative dh=\"0.0\"  dp=\"0.0\" dr=\"0.0\"/></Camera>"),
+    #     "set camera timed out")
 
     write_and_wait_for_mirrored_message(vires.SCP, 
                                         SCPMessage("<SimCtrl><Start/></SimCtrl>"),
@@ -246,86 +242,6 @@ function record_scenario_run(
     # end
     step_with_udp_explicit_stepwidth(vires, nsteps)
 
-    # finished = false
-    # timeout = 5.0
-    # start_time = time()
-    # while !finished && time() - start_time < timeout
-    #     pkg = read(vires.UDP, RDB_Package)
-    #     if !isempty(pkg.entry_headers)
-    #         finished = pkg.entry_headers[1].pkgId == RDB_PKG_ID_START_OF_FRAME
-    #     end
-    # end
-    # if !finished
-    #     print_with_color(:red, STDOUT, "did not finish UDP packet!")
-    # else
-    #     println("found start!")
-    # end
-
-    # timeout = 5.0
-    # start_time = time()
-    # finished = false
-    # while !finished && time() - start_time < timeout
-    #     pkg = read(vires.UDP, RDB_Package)
-    #     println(pkg)
-    #     if !isempty(pkg.entry_headers)
-    #         finished = pkg.entry_headers[1].pkgId == RDB_PKG_ID_END_OF_FRAME
-    #     end 
-    # end
-    # if !finished
-    #     print_with_color(:red, STDOUT, "did not finish UDP packet!")
-    # else
-    #     println("found end!")
-    # end
-
-    # # TODO(tim): put this into a "step" function
-    # message = SCPMessage(get_xml_simctrl_step(nsteps))
-    # write(vires.SCP, message)
-
-    # sent::ETree = message_payload_to_etree(message)
-    # timeout = nsteps / 5.0
-    # received_mirrored = false
-    # received_taskcontrol_run = false
-    # received_taskcontrol_paused = false
-    # start_time = time()
-    # while (!received_mirrored || !received_taskcontrol_paused) && 
-    #        time() - start_time < timeout
-
-    #     received = read(vires.SCP, SCPMessage)
-    #     if  (string_from_buffer(received.header.sender) == string_from_buffer(received.header.receiver) == CLIENT_NAME) &&
-    #          sent == message_payload_to_etree(received)
-    #         received_mirrored = true
-    #     else
-    #         received_etree = message_payload_to_etree(received)
-    #         if received_etree.name == "Info"
-    #             index = findfirst(elem->isa(elem, ETree) && elem.name == "TaskState" && get(elem.attr, "name", "") == "TaskControl", received_etree.elements)
-    #             if index != 0
-    #                 element = received_etree.elements[index]
-    #                 state = get(element.attr, "state", "")
-    #                 if !received_taskcontrol_run 
-    #                     received_taskcontrol_run = state == "run"
-    #                 else
-    #                     received_taskcontrol_paused = state == "pause"
-    #                 end
-    #             end
-    #         end 
-    #     end
-    # end
-
-    # println(time() - start_time < timeout)
-    # println("received_mirrored: ", received_mirrored)
-    # println("received_taskcontrol_paused: ", received_taskcontrol_paused)
-    # println(STDOUT, read(vires.UDP, RDB_Package))
-
-    # if !received_mirrored || !received_taskcontrol_paused
-    #     error("timeout")
-    # end
-
-    # write_and_wait_for_mirrored_message(vires.SCP, 
-    #                                     SCPMessage(get_xml_query_posinertial()),
-    #                                     "did not query PosInertial",
-    #                                     timeout=timeout)
-    # idle_and_print_messages(vires.SCP, 5.0)
-
     write_and_wait_for_mirrored_message(vires.SCP, 
                                         SCPMessage(get_xml_record_stop()),
                                         "did not stop record",
@@ -342,7 +258,7 @@ function record_scenario_run(
 end
 function set_driver_behavior(
     vires::ViresConnection,
-    def::DriverDefinition; 
+    def::DriverBehavior; 
     name::Union(Nothing,String)=nothing,
     id::Union(Nothing,Int)=nothing,
     visible::Union(Nothing,Bool)=nothing,
@@ -401,7 +317,7 @@ function create_camera_relative_to_ego(
         SCPMessage("<Player name=\"Ego\" visible=\"true\"/>"),
         "make player visible timed out")
     write_and_wait_for_mirrored_message(vires.SCP,
-        SCPMessage("<Camera><PosRelative player=\"Ego\" dx=\"" * string(dx) * "\" " *
+        SCPMessage("<Camera><PosRelative player=\"Bot03\" dx=\"" * string(dx) * "\" " *
                                                        "dy=\"" * string(dy) * "\" " *
                                                        "dz=\"" * string(dz) * "\"/>" *
                             "<ViewRelative dh=\"0.0\" dp=\"1.5708\" dr=\"0.0\"/></Camera>"),

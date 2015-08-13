@@ -100,7 +100,7 @@ end
 
 function write_udp_packet(io::IO, elem::RDB_PACKAGE_ELEMENT, frameNo::Integer, simTime::Real, flags::Uint16=0x0000)
 
-    println("sending $(typeof(elem)) packet")
+    # println("sending $(typeof(elem)) packet")
 
     # write the RDB_MSG_HDR_t
     write(io, RDB_MAGIC_NO)
@@ -123,7 +123,7 @@ end
 
 function write_udp_packet(io::IO, ::RDB_START_OF_FRAME_t, frameNo::Integer, simTime::Real, flags::Uint16=0x0000)
 
-    println("sending start of frame")
+    # println("sending start of frame")
 
     # write the RDB_MSG_HDR_t
     write(io, RDB_MAGIC_NO)
@@ -142,7 +142,7 @@ function write_udp_packet(io::IO, ::RDB_START_OF_FRAME_t, frameNo::Integer, simT
 end
 function write_udp_packet(io::IO, ::RDB_END_OF_FRAME_t, frameNo::Integer, simTime::Real, flags::Uint16=0x0000)
 
-    println("sending end of frame")
+    # println("sending end of frame")
 
     # write the RDB_MSG_HDR_t
     write(io, RDB_MAGIC_NO)
