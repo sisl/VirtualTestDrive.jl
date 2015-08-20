@@ -233,11 +233,8 @@ function _global2ego( egocarGx::Real, egocarGy::Real, egocarYaw::Real, posGx::Re
     Convert an (x,y) in inertial coordinates to (x,y) relative to the ego vehicle's body frame
     =#
 
-    pt = [posGx, posGy]
-    eo = [egocarGx, egocarGy]
-
     # translate to be relative to ego car
-    pt -= eo
+    pt = [posGx-egocarGx, posGy-egocarGy]
 
     # rotate to be in ego car frame
     cθ, sθ = cos(egocarYaw), sin(egocarYaw)
@@ -246,6 +243,28 @@ function _global2ego( egocarGx::Real, egocarGy::Real, egocarYaw::Real, posGx::Re
     pt = R*pt
 
     return (pt[1], pt[2]) # posEx, posEy
+end
+function _ego2global(egocarGx::Real, egocarGy::Real, egocarYaw::Real, posEx::Real, posEy::Real )
+
+    #=
+    Convert an (x,y) in body coordinates to (x,y) relative to the global frame
+    =#
+
+    pt = [posEx, posEy]
+    eo = [egocarGx, egocarGy]
+
+    # rotate
+    c, s = cos(egocarYaw), sin(egocarYaw)
+    R = [ c -s;
+          s  c]
+    pt = R*pt
+
+    # translate
+    pt += eo
+
+    (pt[1], pt[2]) # posGx, posGy
+end
+
 end
 function export_to_bosch_csv(io::IO, csv::ViresCSV;
     start_frame::Int=5, # first frame to export
@@ -305,6 +324,7 @@ function export_to_bosch_csv(io::IO, csv::ViresCSV;
         quat = _euler2quat(r, p, h)
         vx,vy,vz = get_speed_body(csv, 0, i)
         ax,ay,az = get_acceleration_body(csv, 0, i)
+        vxi,vyi = _ego2global(0,0,h,vx,vy)
 
         print(io, export_frameind_count, ",", get(csv, i, :_simTime), ",", CONTROL_STATUS_VIRES_AUTO, ",", x, ",", y,
             ",", z, ",", quat[1], ",", quat[2], ",", quat[3], ",", quat[4], ",", vx, ",", vy, ",",
@@ -315,7 +335,7 @@ function export_to_bosch_csv(io::IO, csv::ViresCSV;
             cx,cy,cz = get_pos_inertial(csv, j, i)
             cvx,cvy,cvz = get_speed_body(csv, j, i)
             ex,ey = _global2ego(x, y, h, cx, cy)
-            evx,evy = _global2ego(vx, vy, h, cvx, cvy)
+            evx,evy = _global2ego(vxi, vyi, h, cvx, cvy)
             velEx = evx + vx # NOTE(tim): in the ego frame but not a relative speed
             velEy = evy + vy
 
