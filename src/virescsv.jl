@@ -22,6 +22,24 @@ The following representations shall be used for the different data types:
     The separator between data entries is a comma (,).
 =#
 
+export
+    read_vires_csv,
+    export_to_bosch_csv,
+
+    inbouds,
+    carind_inbounds,
+    frameind_inbounds,
+
+    set!,
+    get_nplayers,
+    get_nframes,
+    get_column_symbol,
+    get_pos_inertial,
+    get_orientation,
+    get_speed_body,
+    get_inertial_rate,
+    get_acceleration_body
+
 type PlayerHeader
     ptype           :: Int     # player type
     id              :: Uint    # player ID
@@ -213,17 +231,17 @@ function _euler2quat( roll::Real, pitch::Real, yaw::Real )
     Converts roll, pitch, yaw in radians to the corresponding unit quaternion (w,x,y,z)
     =#
 
-    cr = cos(0.5roll)
-    sr = sin(0.5roll)
-    cp = cos(0.5pitch)
-    sp = sin(0.5pitch)
-    cy = cos(0.5yaw)
-    sy = sin(0.5yaw)
+    c_r = cos(0.5roll)
+    s_r = sin(0.5roll)
+    c_p = cos(0.5pitch)
+    s_p = sin(0.5pitch)
+    c_y = cos(0.5yaw)
+    s_y = sin(0.5yaw)
 
-    w2 = cr*cp*cy + sr*sp*sy
-    x2 = sr*cp*cy - cr*sp*sy
-    y2 = cr*sp*cy + sr*cp*sy
-    z2 = cr*cp*sy - sr*sp*cy
+    w2 = c_r*c_p*c_y + s_r*s_p*s_y
+    x2 = s_r*c_p*c_y - c_r*s_p*s_y
+    y2 = c_r*s_p*c_y + s_r*c_p*s_y
+    z2 = c_r*c_p*s_y - s_r*s_p*c_y
 
     return [w2, x2, y2, z2]
 end
@@ -263,8 +281,6 @@ function _ego2global(egocarGx::Real, egocarGy::Real, egocarYaw::Real, posEx::Rea
     pt += eo
 
     (pt[1], pt[2]) # posGx, posGy
-end
-
 end
 function export_to_bosch_csv(io::IO, csv::ViresCSV;
     start_frame::Int=5, # first frame to export
@@ -324,7 +340,7 @@ function export_to_bosch_csv(io::IO, csv::ViresCSV;
         quat = _euler2quat(r, p, h)
         vx,vy,vz = get_speed_body(csv, 0, i)
         ax,ay,az = get_acceleration_body(csv, 0, i)
-        vxi,vyi = _ego2global(0,0,h,vx,vy)
+        # vxi,vyi = _ego2global(0,0,h,vx,vy)
 
         print(io, export_frameind_count, ",", get(csv, i, :_simTime), ",", CONTROL_STATUS_VIRES_AUTO, ",", x, ",", y,
             ",", z, ",", quat[1], ",", quat[2], ",", quat[3], ",", quat[4], ",", vx, ",", vy, ",",
@@ -333,11 +349,11 @@ function export_to_bosch_csv(io::IO, csv::ViresCSV;
         for j = 1 : n_other_cars
             id = j-1
             cx,cy,cz = get_pos_inertial(csv, j, i)
-            cvx,cvy,cvz = get_speed_body(csv, j, i)
+            cvxb,cvyb,cvzb = get_speed_body(csv, j, i)
+            ch = get_orientation(csv, j, i)[1]
+            cvx,cvy = _ego2global(0,0,ch,cvxb,cvyb)
             ex,ey = _global2ego(x, y, h, cx, cy)
-            evx,evy = _global2ego(vxi, vyi, h, cvx, cvy)
-            velEx = evx + vx # NOTE(tim): in the ego frame but not a relative speed
-            velEy = evy + vy
+            velEx,velEy = _global2ego(0, 0, h, cvx, cvy)
 
             print(io, ",", id, ",", ex, ",", ey, ",", velEx, ",", velEy, ",", cx, ",", vy, ",",
                   cvx, ",", cvy, ",", get(csv, j, i, "hdg"), ",", 1, ",", 0.0, ",", 0.0, ",",
