@@ -11,52 +11,52 @@ const RDB_SIZE_SCP_NAME = convert(Cint, 64)
 const RDB_SIZE_FILENAME = convert(Cint, 1024)
 const RDB_SIZE_TRLIGHT_PHASES = convert(Cint, 8)
 
-const RDB_PKG_ID_START_OF_FRAME = convert(Uint16, 1)
-const RDB_PKG_ID_END_OF_FRAME = convert(Uint16, 2)
-const RDB_PKG_ID_COORD_SYSTEM = convert(Uint16, 3)
-const RDB_PKG_ID_COORD = convert(Uint16, 4)
-const RDB_PKG_ID_ROAD_POS = convert(Uint16, 5)
-const RDB_PKG_ID_LANE_INFO = convert(Uint16, 6)
-const RDB_PKG_ID_ROADMARK = convert(Uint16, 7)
-const RDB_PKG_ID_OBJECT_CFG = convert(Uint16, 8)
-const RDB_PKG_ID_OBJECT_STATE = convert(Uint16, 9)
-const RDB_PKG_ID_VEHICLE_SYSTEMS = convert(Uint16, 10)
-const RDB_PKG_ID_VEHICLE_SETUP = convert(Uint16, 11)
-const RDB_PKG_ID_ENGINE = convert(Uint16, 12)
-const RDB_PKG_ID_DRIVETRAIN = convert(Uint16, 13)
-const RDB_PKG_ID_WHEEL = convert(Uint16, 14)
-const RDB_PKG_ID_PED_ANIMATION = convert(Uint16, 15)
-const RDB_PKG_ID_SENSOR_STATE = convert(Uint16, 16)
-const RDB_PKG_ID_SENSOR_OBJECT = convert(Uint16, 17)
-const RDB_PKG_ID_CAMERA = convert(Uint16, 18)
-const RDB_PKG_ID_CONTACT_POINT = convert(Uint16, 19)
-const RDB_PKG_ID_TRAFFIC_SIGN = convert(Uint16, 20)
-const RDB_PKG_ID_ROAD_STATE = convert(Uint16, 21)
-const RDB_PKG_ID_IMAGE = convert(Uint16, 22)
-const RDB_PKG_ID_LIGHT_SOURCE = convert(Uint16, 23)
-const RDB_PKG_ID_ENVIRONMENT = convert(Uint16, 24)
-const RDB_PKG_ID_TRIGGER = convert(Uint16, 25)
-const RDB_PKG_ID_DRIVER_CTRL = convert(Uint16, 26)
-const RDB_PKG_ID_TRAFFIC_LIGHT = convert(Uint16, 27)
-const RDB_PKG_ID_SYNC = convert(Uint16, 28)
-const RDB_PKG_ID_DRIVER_PERCEPTION = convert(Uint16, 29)
-const RDB_PKG_ID_LIGHT_MAP = convert(Uint16, 30)
-const RDB_PKG_ID_TONE_MAPPING = convert(Uint16, 31)
-const RDB_PKG_ID_ROAD_QUERY = convert(Uint16, 32)
-const RDB_PKG_ID_SCP = convert(Uint16, 33)
-const RDB_PKG_ID_TRAJECTORY = convert(Uint16, 34)
-const RDB_PKG_ID_DYN_2_STEER = convert(Uint16, 35)
-const RDB_PKG_ID_STEER_2_DYN = convert(Uint16, 36)
-const RDB_PKG_ID_PROXY = convert(Uint16, 37)
-const RDB_PKG_ID_MOTION_SYSTEM = convert(Uint16, 38)
-const RDB_PKG_ID_OCCLUSION_MATRIX = convert(Uint16, 39)
-const RDB_PKG_ID_CUSTOM_SCORING = convert(Uint16, 10000)
-const RDB_PKG_ID_CUSTOM_AUDI_FORUM = convert(Uint16, 12000)
-const RDB_PKG_ID_CUSTOM_OPTIX_START = convert(Uint16, 12100)
-const RDB_PKG_ID_OPTIX_BUFFER = convert(Uint16, 12101)
-const RDB_PKG_ID_CUSTOM_OPTIX_END = convert(Uint16, 12149)
-const RDB_PKG_ID_CUSTOM_USER_A_START = convert(Uint16, 12150)
-const RDB_PKG_ID_CUSTOM_USER_A_END = convert(Uint16, 12174)
+const RDB_PKG_ID_START_OF_FRAME = convert(UInt16, 1)
+const RDB_PKG_ID_END_OF_FRAME = convert(UInt16, 2)
+const RDB_PKG_ID_COORD_SYSTEM = convert(UInt16, 3)
+const RDB_PKG_ID_COORD = convert(UInt16, 4)
+const RDB_PKG_ID_ROAD_POS = convert(UInt16, 5)
+const RDB_PKG_ID_LANE_INFO = convert(UInt16, 6)
+const RDB_PKG_ID_ROADMARK = convert(UInt16, 7)
+const RDB_PKG_ID_OBJECT_CFG = convert(UInt16, 8)
+const RDB_PKG_ID_OBJECT_STATE = convert(UInt16, 9)
+const RDB_PKG_ID_VEHICLE_SYSTEMS = convert(UInt16, 10)
+const RDB_PKG_ID_VEHICLE_SETUP = convert(UInt16, 11)
+const RDB_PKG_ID_ENGINE = convert(UInt16, 12)
+const RDB_PKG_ID_DRIVETRAIN = convert(UInt16, 13)
+const RDB_PKG_ID_WHEEL = convert(UInt16, 14)
+const RDB_PKG_ID_PED_ANIMATION = convert(UInt16, 15)
+const RDB_PKG_ID_SENSOR_STATE = convert(UInt16, 16)
+const RDB_PKG_ID_SENSOR_OBJECT = convert(UInt16, 17)
+const RDB_PKG_ID_CAMERA = convert(UInt16, 18)
+const RDB_PKG_ID_CONTACT_POINT = convert(UInt16, 19)
+const RDB_PKG_ID_TRAFFIC_SIGN = convert(UInt16, 20)
+const RDB_PKG_ID_ROAD_STATE = convert(UInt16, 21)
+const RDB_PKG_ID_IMAGE = convert(UInt16, 22)
+const RDB_PKG_ID_LIGHT_SOURCE = convert(UInt16, 23)
+const RDB_PKG_ID_ENVIRONMENT = convert(UInt16, 24)
+const RDB_PKG_ID_TRIGGER = convert(UInt16, 25)
+const RDB_PKG_ID_DRIVER_CTRL = convert(UInt16, 26)
+const RDB_PKG_ID_TRAFFIC_LIGHT = convert(UInt16, 27)
+const RDB_PKG_ID_SYNC = convert(UInt16, 28)
+const RDB_PKG_ID_DRIVER_PERCEPTION = convert(UInt16, 29)
+const RDB_PKG_ID_LIGHT_MAP = convert(UInt16, 30)
+const RDB_PKG_ID_TONE_MAPPING = convert(UInt16, 31)
+const RDB_PKG_ID_ROAD_QUERY = convert(UInt16, 32)
+const RDB_PKG_ID_SCP = convert(UInt16, 33)
+const RDB_PKG_ID_TRAJECTORY = convert(UInt16, 34)
+const RDB_PKG_ID_DYN_2_STEER = convert(UInt16, 35)
+const RDB_PKG_ID_STEER_2_DYN = convert(UInt16, 36)
+const RDB_PKG_ID_PROXY = convert(UInt16, 37)
+const RDB_PKG_ID_MOTION_SYSTEM = convert(UInt16, 38)
+const RDB_PKG_ID_OCCLUSION_MATRIX = convert(UInt16, 39)
+const RDB_PKG_ID_CUSTOM_SCORING = convert(UInt16, 10000)
+const RDB_PKG_ID_CUSTOM_AUDI_FORUM = convert(UInt16, 12000)
+const RDB_PKG_ID_CUSTOM_OPTIX_START = convert(UInt16, 12100)
+const RDB_PKG_ID_OPTIX_BUFFER = convert(UInt16, 12101)
+const RDB_PKG_ID_CUSTOM_OPTIX_END = convert(UInt16, 12149)
+const RDB_PKG_ID_CUSTOM_USER_A_START = convert(UInt16, 12150)
+const RDB_PKG_ID_CUSTOM_USER_A_END = convert(UInt16, 12174)
 
 const RDB_OBJECT_CATEGORY_NONE = convert(Cint, 0)
 const RDB_OBJECT_CATEGORY_PLAYER = convert(Cint, 1)
@@ -476,9 +476,9 @@ type RDB_POINT_t <: RDB_PACKAGE_ELEMENT
     x::Cdouble
     y::Cdouble
     z::Cdouble
-    flags::Uint8
-    thetype::Uint8
-    system::Uint16
+    flags::UInt8
+    thetype::UInt8
+    system::UInt16
 end
 
 type RDB_COORD_t <: RDB_PACKAGE_ELEMENT
@@ -488,40 +488,40 @@ type RDB_COORD_t <: RDB_PACKAGE_ELEMENT
     h::Cfloat
     p::Cfloat
     r::Cfloat
-    flags::Uint8
-    thetype::Uint8
-    system::Uint16
+    flags::UInt8
+    thetype::UInt8
+    system::UInt16
 end
 
 type RDB_COORD_SYSTEM_t <: RDB_PACKAGE_ELEMENT
-    id::Uint16
-    spare::Uint16
+    id::UInt16
+    spare::UInt16
     pos::RDB_COORD_t
 end
 
 type RDB_ROAD_POS_t <: RDB_PACKAGE_ELEMENT
-    playerId::Uint32
-    roadId::Uint16
+    playerId::UInt32
+    roadId::UInt16
     laneId::Int8
-    flags::Uint8
+    flags::UInt8
     roadS::Cfloat
     roadT::Cfloat
     laneOffset::Cfloat
     hdgRel::Cfloat
     pitchRel::Cfloat
     rollRel::Cfloat
-    roadType::Uint8
-    spare1::Uint8
-    spare2::Uint16
+    roadType::UInt8
+    spare1::UInt8
+    spare2::UInt16
     pathS::Cfloat
 end
 
 type RDB_ROADMARK_t <: RDB_PACKAGE_ELEMENT
-    playerId::Uint32
+    playerId::UInt32
     id::Int8
     prevId::Int8
     nextId::Int8
-    spare0::Uint8
+    spare0::UInt8
     lateralDist::Cfloat
     yawRel::Cfloat
     curvHor::Cdouble
@@ -532,39 +532,40 @@ type RDB_ROADMARK_t <: RDB_PACKAGE_ELEMENT
     height::Cfloat
     curvVert::Cdouble
     curvVertDot::Cdouble
-    thetype::Uint8
-    color::Uint8
-    noDataPoints::Uint16
-    spare1::(Uint32, Uint32)
+    thetype::UInt8
+    color::UInt8
+    noDataPoints::UInt16
+    #spare1::(UInt32, UInt32) #in type definition, expected Type{T}, got Tuple{DataType,DataType}
+    spare1::Union{UInt32, UInt32} #Xiaobai
 end
 
 type RDB_LANE_INFO_t <: RDB_PACKAGE_ELEMENT
-    roadId::Uint16
+    roadId::UInt16
     id::Int8
-    neighborMask::Uint8
+    neighborMask::UInt8
     leftLaneId::Int8
     rightLaneId::Int8
-    borderType::Uint8
-    material::Uint8
-    status::Uint16
-    thetype::Uint16
+    borderType::UInt8
+    material::UInt8
+    status::UInt16
+    thetype::UInt16
     width::Cfloat
     curvVert::Cdouble
     curvVertDot::Cdouble
     curvHor::Cdouble
     curvHorDot::Cdouble
-    playerId::Uint32
-    spare1::Uint32
+    playerId::UInt32
+    spare1::UInt32
 end
 
 type RDB_OBJECT_CFG_t <: RDB_PACKAGE_ELEMENT
-    id::Uint32
-    category::Uint8
-    thetype::Uint8
+    id::UInt32
+    category::UInt8
+    thetype::UInt8
     modelId::Int16
-    flags::Uint16
-    spare0::Uint16
-    spare1::Uint32
+    flags::UInt16
+    spare0::UInt16
+    spare1::UInt32
 end
 
 type RDB_GEOMETRY_t <: RDB_PACKAGE_ELEMENT
@@ -577,20 +578,21 @@ type RDB_GEOMETRY_t <: RDB_PACKAGE_ELEMENT
 end
 
 type RDB_OBJECT_STATE_BASE_t
-    id::Uint32
-    category::Uint8
-    thetype::Uint8
-    visMask::Uint16
+    id::UInt32
+    category::UInt8
+    thetype::UInt8
+    visMask::UInt16
     geo::RDB_GEOMETRY_t
     pos::RDB_COORD_t
-    parent::Uint32
-    spare1::Uint32
+    parent::UInt32
+    spare1::UInt32
 end
 
 type RDB_OBJECT_STATE_EXT_t
     speed::RDB_COORD_t
     accel::RDB_COORD_t
-    spare::(Uint32, Uint32, Uint32, Uint32)
+    #spare::(UInt32, UInt32, UInt32, UInt32)
+    spare::Union{UInt32, UInt32, UInt32, UInt32} #Xiaobai
 end
 
 type RDB_OBJECT_STATE_t <: RDB_PACKAGE_ELEMENT
@@ -599,10 +601,11 @@ type RDB_OBJECT_STATE_t <: RDB_PACKAGE_ELEMENT
 end
 
 type RDB_ENGINE_BASE_t
-    playerId::Uint32
+    playerId::UInt32
     rps::Cfloat
     load::Cfloat
-    spare1::(Uint32, Uint32)
+    #spare1::(UInt32, UInt32)
+    spare1::Union{UInt32, UInt32} #Xiaobai
 end
 
 type RDB_ENGINE_EXT_t
@@ -613,7 +616,8 @@ type RDB_ENGINE_EXT_t
     torqueFriction::Cfloat
     fuelCurrent::Cfloat
     fuelAverage::Cfloat
-    spare::(Uint32, Uint32)
+    #spare::(UInt32, UInt32)
+    spare::Union{UInt32, UInt32} #Xiaobai
 end
 
 type RDB_ENGINE_t <: RDB_PACKAGE_ELEMENT
@@ -622,19 +626,21 @@ type RDB_ENGINE_t <: RDB_PACKAGE_ELEMENT
 end
 
 type RDB_DRIVETRAIN_BASE_t
-    playerId::Uint32
-    gearBoxType::Uint8
-    driveTrainType::Uint8
-    gear::Uint8
-    spare0::Uint8
-    spare1::(Uint32, Uint32)
+    playerId::UInt32
+    gearBoxType::UInt8
+    driveTrainType::UInt8
+    gear::UInt8
+    spare0::UInt8
+    #spare1::(UInt32, UInt32)
+    spare1::Union{UInt32, UInt32} #Xiaobai
 end
 
 type RDB_DRIVETRAIN_EXT_t
     torqueGearBoxIn::Cfloat
     torqueCenterDiffOut::Cfloat
     torqueShaft::Cfloat
-    spare1::(Uint32, Uint32)
+    #spare1::(UInt32, UInt32)
+    spare1::Union{UInt32, UInt32} #Xiaobai
 end
 
 type RDB_DRIVETRAIN_t <: RDB_PACKAGE_ELEMENT
@@ -643,16 +649,18 @@ type RDB_DRIVETRAIN_t <: RDB_PACKAGE_ELEMENT
 end
 
 type RDB_WHEEL_BASE_t
-    playerId::Uint32
-    id::Uint8
-    flags::Uint8
-    spare0::(Uint8, Uint8)
+    playerId::UInt32
+    id::UInt8
+    flags::UInt8
+    #spare0::(UInt8, UInt8)
+    spare0::Union{UInt8, UInt8} #Xiaobai
     radiusStatic::Cfloat
     springCompression::Cfloat
     rotAngle::Cfloat
     slip::Cfloat
     steeringAngle::Cfloat
-    spare1::(Uint32, Uint32, Uint32, Uint32)
+    #spare1::(UInt32, UInt32, UInt32, UInt32)
+    spare1::Union{UInt32, UInt32, UInt32, UInt32} #Xiaobai
 end
 
 type RDB_WHEEL_EXT_t
@@ -660,12 +668,14 @@ type RDB_WHEEL_EXT_t
     forceZ::Cfloat
     forceLat::Cfloat
     forceLong::Cfloat
-    forceTireWheelXYZ::(Cfloat, Cfloat, Cfloat)
+    #forceTireWheelXYZ::(Cfloat, Cfloat, Cfloat)
+    forceTireWheelXYZ::Union{Cfloat, Cfloat, Cfloat} #Xiaobai
     radiusDynamic::Cfloat
     brakePressure::Cfloat
     torqueDriveShaft::Cfloat
     damperSpeed::Cfloat
-    spare2::(Uint32, Uint32, Uint32, Uint32)
+    #spare2::(UInt32, UInt32, UInt32, UInt32)
+    spare2::Union{UInt32, UInt32, UInt32, UInt32} #Xiaobai
 end
 
 type RDB_WHEEL_t <: RDB_PACKAGE_ELEMENT
@@ -674,78 +684,88 @@ type RDB_WHEEL_t <: RDB_PACKAGE_ELEMENT
 end
 
 type RDB_VEHICLE_SYSTEMS_t <: RDB_PACKAGE_ELEMENT
-    playerId::Uint32
-    lightMask::Uint32
+    playerId::UInt32
+    lightMask::UInt32
     steering::Cfloat
     steeringWheelTorque::Cfloat
-    accMask::Uint8
-    accSpeed::Uint8
-    batteryState::Uint8
+    accMask::UInt8
+    accSpeed::UInt8
+    batteryState::UInt8
     batteryRate::Int8
-    displayLightMask::Uint16
-    spare0::Uint16
-    spare::(Uint32, Uint32, Uint32, Uint32, Uint32)
+    displayLightMask::UInt16
+    spare0::UInt16
+    #spare::(UInt32, UInt32, UInt32, UInt32, UInt32)
+    spare::Union{UInt32, UInt32, UInt32, UInt32, UInt32} #Xiaobai
 end
 
 type RDB_VEHICLE_SETUP_t <: RDB_PACKAGE_ELEMENT
-    playerId::Uint32
+    playerId::UInt32
     mass::Cfloat
     wheelBase::Cfloat
-    spare::(Int32, Int32, Int32, Int32)
+    #spare::(Int32, Int32, Int32, Int32)
+    spare::Union{Int32, Int32, Int32, Int32} #Xiaobai
 end
 
 type RDB_IMAGE_t <: RDB_PACKAGE_ELEMENT
-    id::Uint32
-    width::Uint16
-    height::Uint16
-    pixelSize::Uint8
-    pixelFormat::Uint8
-    cameraId::Uint16
-    imgSize::Uint32
-    color::(Uint8, Uint8, Uint8, Uint8)
-    spare1::(Uint32, Uint32, Uint32)
+    id::UInt32
+    width::UInt16
+    height::UInt16
+    pixelSize::UInt8
+    pixelFormat::UInt8
+    cameraId::UInt16
+    imgSize::UInt32
+    #color::(UInt8, UInt8, UInt8, UInt8)
+    color::Union{UInt8, UInt8, UInt8, UInt8} #Xiaobai
+    #spare1::(UInt32, UInt32, UInt32)
+    spare1::Union{UInt32, UInt32, UInt32} #Xiaobai
 end
 
 type RDB_FUNCTION_t <: RDB_PACKAGE_ELEMENT
-    id::Uint32
-    thetype::Uint8
-    dimension::Uint8
-    spare::Uint16
-    dataSize::Uint32
-    spare1::(Uint32, Uint32, Uint32, Uint32)
+    id::UInt32
+    thetype::UInt8
+    dimension::UInt8
+    spare::UInt16
+    dataSize::UInt32
+    #spare1::(UInt32, UInt32, UInt32, UInt32)
+    spare1::Union{UInt32, UInt32, UInt32, UInt32} #Xiaobai
 end
 
 type RDB_SENSOR_STATE_t <: RDB_PACKAGE_ELEMENT
-    id::Uint32
-    thetype::Uint8
-    hostCategory::Uint8
-    spare0::Uint16
-    hostId::Uint32
-    fovHV::(Cfloat, Cfloat)
-    clipNF::(Cfloat, Cfloat)
+    id::UInt32
+    thetype::UInt8
+    hostCategory::UInt8
+    spare0::UInt16
+    hostId::UInt32
+    #fovHV::(Cfloat, Cfloat)
+    fovHV::Union{Cfloat, Cfloat} #Xiaobai
+    #clipNF::(Cfloat, Cfloat)
+    clipNF::Union{Cfloat, Cfloat}
     pos::RDB_COORD_t
     originCoordSys::RDB_COORD_t
-    spare::(Int32, Int32, Int32, Int32)
+    #spare::(Int32, Int32, Int32, Int32)
+    spare::Union{Int32, Int32, Int32, Int32} #Xiaobai
 end
 
 type RDB_SENSOR_OBJECT_t <: RDB_PACKAGE_ELEMENT
-    category::Uint8
-    thetype::Uint8
-    flags::Uint16
-    id::Uint32
-    sensorId::Uint32
+    category::UInt8
+    thetype::UInt8
+    flags::UInt16
+    id::UInt32
+    sensorId::UInt32
     dist::Cdouble
     sensorPos::RDB_COORD_t
     occlusion::Int8
-    spare0::(Uint8, Uint8, Uint8)
-    spare::(Uint32, Uint32, Uint32)
+    #spare0::(UInt8, UInt8, UInt8)
+    spare0::Union{UInt8, UInt8, UInt8}
+    #spare::(UInt32, UInt32, UInt32)
+    spare::Union{UInt32, UInt32, UInt32}
 end
 
 type RDB_CAMERA_t <: RDB_PACKAGE_ELEMENT
-    id::Uint16
-    width::Uint16
-    height::Uint16
-    spare0::Uint16
+    id::UInt16
+    width::UInt16
+    height::UInt16
+    spare0::UInt16
     clipNear::Cfloat
     clipFar::Cfloat
     focalX::Cfloat
@@ -753,26 +773,33 @@ type RDB_CAMERA_t <: RDB_PACKAGE_ELEMENT
     principalX::Cfloat
     principalY::Cfloat
     pos::RDB_COORD_t
-    spare1::(Uint32, Uint32, Uint32, Uint32)
+    #spare1::(UInt32, UInt32, UInt32, UInt32)
+    spare1::Union{UInt32, UInt32, UInt32, UInt32}
 end
 
 type RDB_LIGHT_SOURCE_BASE_t
-    id::Uint16
+    id::UInt16
     templateId::Int8
-    state::Uint8
+    state::UInt8
     playerId::Int32
     pos::RDB_COORD_t
-    flags::Uint16
-    spare0::Uint16
-    spare1::(Int32, Int32)
+    flags::UInt16
+    spare0::UInt16
+    #spare1::(Int32, Int32)
+    spare1::Union{Int32, Int32}
 end
 
 type RDB_LIGHT_SOURCE_EXT_t
-    nearFar::(Cfloat, Cfloat)
-    frustumLRBT::(Cfloat, Cfloat, Cfloat, Cfloat)
-    intensity::(Cfloat, Cfloat, Cfloat)
-    atten::(Cfloat, Cfloat, Cfloat)
-    spare1::(Int32, Int32, Int32)
+    #nearFar::(Cfloat, Cfloat)
+    nearFar::Union{Cfloat, Cfloat}
+    #frustumLRBT::(Cfloat, Cfloat, Cfloat, Cfloat)
+    frustumLRBT::Union{Cfloat, Cfloat, Cfloat, Cfloat}
+    #intensity::(Cfloat, Cfloat, Cfloat)
+    intensity::Union{Cfloat, Cfloat, Cfloat}
+    #atten::(Cfloat, Cfloat, Cfloat)
+    atten::Union{Cfloat, Cfloat, Cfloat}
+    #spare1::(Int32, Int32, Int32)
+    spare1::Union{Int32, Int32, Int32}
 end
 
 type RDB_LIGHT_SOURCE_t <: RDB_PACKAGE_ELEMENT
@@ -781,8 +808,8 @@ type RDB_LIGHT_SOURCE_t <: RDB_PACKAGE_ELEMENT
 end
 
 type RDB_CONTACT_POINT_t <: RDB_PACKAGE_ELEMENT
-    id::Uint16
-    flags::Uint16
+    id::UInt16
+    flags::UInt16
     roadDataIn::RDB_COORD_t
     friction::Cfloat
     playerId::Int32
@@ -790,72 +817,76 @@ type RDB_CONTACT_POINT_t <: RDB_PACKAGE_ELEMENT
 end
 
 type RDB_TRAFFIC_SIGN_t <: RDB_PACKAGE_ELEMENT
-    id::Uint32
-    playerId::Uint32
+    id::UInt32
+    playerId::UInt32
     roadDist::Cfloat
     pos::RDB_COORD_t
     thetype::Int32
     subType::Int32
     value::Cfloat
-    state::Uint32
+    state::UInt32
     readability::Int8
     occlusion::Int8
-    spare0::Uint16
-    addOnId::Uint32
+    spare0::UInt16
+    addOnId::UInt32
     minLane::Int8
     maxLane::Int8
-    spare::Uint16
+    spare::UInt16
 end
 
 type RDB_ROAD_STATE_t <: RDB_PACKAGE_ELEMENT
-    playerId::Uint32
+    playerId::UInt32
     wheelId::Int8
-    spare0::Uint8
-    spare1::Uint16
-    roadId::Uint32
+    spare0::UInt8
+    spare1::UInt16
+    roadId::UInt32
     defaultSpeed::Cfloat
     waterLevel::Cfloat
-    eventMask::Uint32
-    spare2::(Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32)
+    eventMask::UInt32
+    #spare2::(Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32)
+    spare2::Union{Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32}
 end
 
 type RDB_ENVIRONMENT_t <: RDB_PACKAGE_ELEMENT
     visibility::Cfloat
-    timeOfDay::Uint32
+    timeOfDay::UInt32
     brightness::Cfloat
-    precipitation::Uint8
-    cloudState::Uint8
-    flags::Uint16
-    spare1::(Uint32, Uint32, Uint32, Uint32, Uint32, Uint32, Uint32, Uint32)
+    precipitation::UInt8
+    cloudState::UInt8
+    flags::UInt16
+    #spare1::(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)
+    spare1::Union{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
 end
 
 type RDB_PED_ANIMATION_t <: RDB_PACKAGE_ELEMENT
-    playerId::Uint32
+    playerId::UInt32
     pos::RDB_COORD_t
-    spare::(Uint32, Uint32, Uint32, Uint32)
-    noCoords::Uint32
-    dataSize::Uint32
+    #spare::(UInt32, UInt32, UInt32, UInt32)
+    spare::Union{UInt32, UInt32, UInt32, UInt32}
+    noCoords::UInt32
+    dataSize::UInt32
 end
 
 type RDB_CUSTOM_SCORING_t <: RDB_PACKAGE_ELEMENT
-    playerId::Uint32
+    playerId::UInt32
     pathS::Cfloat
     roadS::Cfloat
     fuelCurrent::Cfloat
     fuelAverage::Cfloat
-    stateFlags::Uint32
+    stateFlags::UInt32
     slip::Cfloat
-    spare::(Uint32, Uint32, Uint32, Uint32)
+    #spare::(UInt32, UInt32, UInt32, UInt32)
+    spare::Union{UInt32, UInt32, UInt32, UInt32}
 end
 
 type RDB_TRIGGER_t <: RDB_PACKAGE_ELEMENT
     deltaT::Cfloat
-    frameNo::Uint32
+    frameNo::UInt32
     spare::Int32
 end
 
 type RDB_DRIVER_CTRL_t <: RDB_PACKAGE_ELEMENT
-    playerId::Uint32
+    playerId::UInt32
     steeringWheel::Cfloat
     steeringSpeed::Cfloat
     throttlePedal::Cfloat
@@ -867,43 +898,47 @@ type RDB_DRIVER_CTRL_t <: RDB_PACKAGE_ELEMENT
     steeringTorque::Cfloat
     engineTorqueTgt::Cfloat
     speedTgt::Cfloat
-    gear::Uint8
-    sourceId::Uint8
-    spare0::(Uint8, Uint8)
-    validityFlags::Uint32
-    flags::Uint32
-    mockupInput0::Uint32
-    mockupInput1::Uint32
-    mockupInput2::Uint32
-    spare::Uint32
+    gear::UInt8
+    sourceId::UInt8
+    #spare0::(UInt8, UInt8)
+    spare0::Union{UInt8, UInt8}
+    validityFlags::UInt32
+    flags::UInt32
+    mockupInput0::UInt32
+    mockupInput1::UInt32
+    mockupInput2::UInt32
+    spare::UInt32
 end
 
 type RDB_DRIVER_PERCEPTION_t <: RDB_PACKAGE_ELEMENT
-    playerId::Uint32
+    playerId::UInt32
     speedFromRules::Cfloat
     distToSpeed::Cfloat
-    spare0::(Cfloat, Cfloat, Cfloat, Cfloat)
-    flags::Uint32
-    spare::(Uint32, Uint32, Uint32, Uint32)
+    #spare0::(Cfloat, Cfloat, Cfloat, Cfloat)
+    spare0::Union{Cfloat, Cfloat, Cfloat, Cfloat}
+    flags::UInt32
+    #spare::(UInt32, UInt32, UInt32, UInt32)
+    spare::Union{UInt32, UInt32, UInt32, UInt32}
 end
 
 type RDB_TRAFFIC_LIGHT_BASE_t
     id::Int32
     state::Cfloat
-    stateMask::Uint32
+    stateMask::UInt32
 end
 
 type RDB_TRAFFIC_LIGHT_PHASE_t
     duration::Cfloat
-    thetype::Uint8
-    spare::(Uint8, Uint8, Uint8)
+    thetype::UInt8
+    #spare::(UInt8, UInt8, UInt8)
+    spare::Union{UInt8, UInt8, UInt8}
 end
 
 type RDB_TRAFFIC_LIGHT_EXT_t
     ctrlId::Int32
     cycleTime::Cfloat
-    noPhases::Uint16
-    dataSize::Uint32
+    noPhases::UInt16
+    dataSize::UInt32
 end
 
 type RDB_TRAFFIC_LIGHT_t <: RDB_PACKAGE_ELEMENT
@@ -912,46 +947,50 @@ type RDB_TRAFFIC_LIGHT_t <: RDB_PACKAGE_ELEMENT
 end
 
 type RDB_SYNC_t <: RDB_PACKAGE_ELEMENT
-    mask::Uint32
-    cmdMask::Uint32
+    mask::UInt32
+    cmdMask::UInt32
     systemTime::Cdouble
 end
 
 type RDB_ROAD_QUERY_t
-    id::Uint16
-    flags::Uint16
-    spare::(Uint16, Uint16)
+    id::UInt16
+    flags::UInt16
+    #spare::(UInt16, UInt16)
+    spare::Union{UInt16, UInt16}
     x::Cdouble
     y::Cdouble
 end
 
 type RDB_SCP_t
-    version::Uint16
-    spare::Uint16
-    dataSize::Uint32
+    version::UInt16
+    spare::UInt16
+    dataSize::UInt32
 end
 
 type RDB_PROXY_t <: RDB_PACKAGE_ELEMENT
-    protocol::Uint16
-    pkgId::Uint16
-    spare::(Uint32, Uint32, Uint32, Uint32, Uint32, Uint32)
-    dataSize::Uint32
+    protocol::UInt16
+    pkgId::UInt16
+    #spare::(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)
+    spare::Union{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
+    dataSize::UInt32
 end
 
 type RDB_TRAJECTORY_t
-    playerId::Uint32
+    playerId::UInt32
     spacing::Cdouble
-    flags::Uint16
-    noDataPoints::Uint16
-    spare::(Uint32, Uint32, Uint32, Uint32)
+    flags::UInt16
+    noDataPoints::UInt16
+    #spare::(UInt32, UInt32, UInt32, UInt32)
+    spare::Union{UInt32, UInt32, UInt32, UInt32}
 end
 
 type RDB_MOTION_SYSTEM_t <: RDB_PACKAGE_ELEMENT
-    playerId::Uint32
-    flags::Uint32
+    playerId::UInt32
+    flags::UInt32
     pos::RDB_COORD_t
     speed::RDB_COORD_t
-    spare::(Uint32, Uint32, Uint32, Uint32, Uint32, Uint32)
+    #spare::(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)
+    spare::Union{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
 end
 
 type RDB_END_OF_FRAME_t
@@ -961,43 +1000,45 @@ type RDB_START_OF_FRAME_t
 end
 
 type RDB_STEER_2_DYN_t
-    playerId::Uint32
-    state::Uint32
+    playerId::UInt32
+    state::UInt32
     angle::Cfloat
     rev::Cfloat
     torque::Cfloat
-    spare::(Uint32, Uint32, Uint32, Uint32, Uint32, Uint32, Uint32, Uint32)
+    #spare::(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)
+    spare::Union{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
 end
 
 type RDB_DYN_2_STEER_t
-    playerId::Uint32
-    state::Uint16
-    cmd::Uint16
-    effects::Uint32
+    playerId::UInt32
+    state::UInt16
+    cmd::UInt16
+    effects::UInt32
     torque::Cfloat
     friction::Cfloat
     damping::Cfloat
     stiffness::Cfloat
     velocity::Cfloat
     angle::Cfloat
-    spare::(Uint32, Uint32, Uint32, Uint32, Uint32, Uint32, Uint32, Uint32)
+    #spare::(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)
+    spare::Union{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
 end
 
 type RDB_MSG_HDR_t
-    magicNo::Uint16
-    version::Uint16
-    headerSize::Uint32
-    dataSize::Uint32
-    frameNo::Uint32
+    magicNo::UInt16
+    version::UInt16
+    headerSize::UInt32
+    dataSize::UInt32
+    frameNo::UInt32
     simTime::Cdouble
 end
 
 type RDB_MSG_ENTRY_HDR_t
-    headerSize::Uint32
-    dataSize::Uint32
-    elementSize::Uint32
-    pkgId::Uint16
-    flags::Uint16
+    headerSize::UInt32
+    dataSize::UInt32
+    elementSize::UInt32
+    pkgId::UInt16
+    flags::UInt16
 end
 
 # type RDB_MSG_t
@@ -1007,37 +1048,38 @@ end
 # end
 
 type RDB_SHM_BUFFER_INFO_t
-    thisSize::Uint32
-    bufferSize::Uint32
-    id::Uint16
-    spare0::Uint16
-    flags::Uint32
-    offset::Uint32
-    spare1::(Uint32, Uint32, Uint32, Uint32)
+    thisSize::UInt32
+    bufferSize::UInt32
+    id::UInt16
+    spare0::UInt16
+    flags::UInt32
+    offset::UInt32
+    #spare1::(UInt32, UInt32, UInt32, UInt32)
+    spare1::Union{UInt32, UInt32, UInt32, UInt32}
 end
 
 type RDB_SHM_HDR_t
-    headerSize::Uint32
-    dataSize::Uint32
-    noBuffers::Uint8
+    headerSize::UInt32
+    dataSize::UInt32
+    noBuffers::UInt8
 end
 
 function Base.read(io::IO, ::Type{RDB_POINT_t})
     x = read(io, Cdouble)
     y = read(io, Cdouble)
     z = read(io, Cdouble)
-    flags = read(io, Uint8)
-    thetype = read(io, Uint8)
-    system = read(io, Uint16)
+    flags = read(io, UInt8)
+    thetype = read(io, UInt8)
+    system = read(io, UInt16)
     RDB_POINT_t(x, y, z, flags, thetype, system)
 end
 function Base.read!(io::IO, struct::RDB_POINT_t)
     struct.x = read(io, Cdouble)
     struct.y = read(io, Cdouble)
     struct.z = read(io, Cdouble)
-    struct.flags = read(io, Uint8)
-    struct.thetype = read(io, Uint8)
-    struct.system = read(io, Uint16)
+    struct.flags = read(io, UInt8)
+    struct.thetype = read(io, UInt8)
+    struct.system = read(io, UInt16)
     struct
 end
 function Base.write(io::IO, struct::RDB_POINT_t)
@@ -1065,9 +1107,9 @@ function Base.read(io::IO, ::Type{RDB_COORD_t})
     h = read(io, Cfloat)
     p = read(io, Cfloat)
     r = read(io, Cfloat)
-    flags = read(io, Uint8)
-    thetype = read(io, Uint8)
-    system = read(io, Uint16)
+    flags = read(io, UInt8)
+    thetype = read(io, UInt8)
+    system = read(io, UInt16)
     RDB_COORD_t(x, y, z, h, p, r, flags, thetype, system)
 end
 function Base.read!(io::IO, struct::RDB_COORD_t)
@@ -1077,9 +1119,9 @@ function Base.read!(io::IO, struct::RDB_COORD_t)
     struct.h = read(io, Cfloat)
     struct.p = read(io, Cfloat)
     struct.r = read(io, Cfloat)
-    struct.flags = read(io, Uint8)
-    struct.thetype = read(io, Uint8)
-    struct.system = read(io, Uint16)
+    struct.flags = read(io, UInt8)
+    struct.thetype = read(io, UInt8)
+    struct.system = read(io, UInt16)
     struct
 end
 function Base.write(io::IO, struct::RDB_COORD_t)
@@ -1107,14 +1149,14 @@ function Base.show(io::IO, struct::RDB_COORD_t)
 end
 
 function Base.read(io::IO, ::Type{RDB_COORD_SYSTEM_t})
-    id = read(io, Uint16)
-    spare = read(io, Uint16)
+    id = read(io, UInt16)
+    spare = read(io, UInt16)
     pos = read(io, RDB_COORD_t)
     RDB_COORD_SYSTEM_t(id, spare, pos)
 end
 function Base.read!(io::IO, struct::RDB_COORD_SYSTEM_t)
-    struct.id = read(io, Uint16)
-    struct.spare = read(io, Uint16)
+    struct.id = read(io, UInt16)
+    struct.spare = read(io, UInt16)
     struct.pos = read(io, RDB_COORD_t)
     struct
 end
@@ -1131,36 +1173,36 @@ function Base.show(io::IO, struct::RDB_COORD_SYSTEM_t)
 end
 
 function Base.read(io::IO, ::Type{RDB_ROAD_POS_t})
-    playerId = read(io, Uint32)
-    roadId = read(io, Uint16)
+    playerId = read(io, UInt32)
+    roadId = read(io, UInt16)
     laneId = read(io, Int8)
-    flags = read(io, Uint8)
+    flags = read(io, UInt8)
     roadS = read(io, Cfloat)
     roadT = read(io, Cfloat)
     laneOffset = read(io, Cfloat)
     hdgRel = read(io, Cfloat)
     pitchRel = read(io, Cfloat)
     rollRel = read(io, Cfloat)
-    roadType = read(io, Uint8)
-    spare1 = read(io, Uint8)
-    spare2 = read(io, Uint16)
+    roadType = read(io, UInt8)
+    spare1 = read(io, UInt8)
+    spare2 = read(io, UInt16)
     pathS = read(io, Cfloat)
     RDB_ROAD_POS_t(playerId, roadId, laneId, flags, roadS, roadT, laneOffset, hdgRel, pitchRel, rollRel, roadType, spare1, spare2, pathS)
 end
 function Base.read!(io::IO, struct::RDB_ROAD_POS_t)
-    struct.playerId = read(io, Uint32)
-    struct.roadId = read(io, Uint16)
+    struct.playerId = read(io, UInt32)
+    struct.roadId = read(io, UInt16)
     struct.laneId = read(io, Int8)
-    struct.flags = read(io, Uint8)
+    struct.flags = read(io, UInt8)
     struct.roadS = read(io, Cfloat)
     struct.roadT = read(io, Cfloat)
     struct.laneOffset = read(io, Cfloat)
     struct.hdgRel = read(io, Cfloat)
     struct.pitchRel = read(io, Cfloat)
     struct.rollRel = read(io, Cfloat)
-    struct.roadType = read(io, Uint8)
-    struct.spare1 = read(io, Uint8)
-    struct.spare2 = read(io, Uint16)
+    struct.roadType = read(io, UInt8)
+    struct.spare1 = read(io, UInt8)
+    struct.spare2 = read(io, UInt16)
     struct.pathS = read(io, Cfloat)
     struct
 end
@@ -1199,11 +1241,11 @@ function Base.show(io::IO, struct::RDB_ROAD_POS_t)
 end
 
 function Base.read(io::IO, ::Type{RDB_ROADMARK_t})
-    playerId = read(io, Uint32)
+    playerId = read(io, UInt32)
     id = read(io, Int8)
     prevId = read(io, Int8)
     nextId = read(io, Int8)
-    spare0 = read(io, Uint8)
+    spare0 = read(io, UInt8)
     lateralDist = read(io, Cfloat)
     yawRel = read(io, Cfloat)
     curvHor = read(io, Cdouble)
@@ -1214,18 +1256,18 @@ function Base.read(io::IO, ::Type{RDB_ROADMARK_t})
     height = read(io, Cfloat)
     curvVert = read(io, Cdouble)
     curvVertDot = read(io, Cdouble)
-    thetype = read(io, Uint8)
-    color = read(io, Uint8)
-    noDataPoints = read(io, Uint16)
-    spare1 = (read(io, Uint32), read(io, Uint32))
+    thetype = read(io, UInt8)
+    color = read(io, UInt8)
+    noDataPoints = read(io, UInt16)
+    spare1 = (read(io, UInt32), read(io, UInt32))
     RDB_ROADMARK_t(playerId, id, prevId, nextId, spare0, lateralDist, yawRel, curvHor, curvHorDot, startDx, previewDx, width, height, curvVert, curvVertDot, thetype, color, noDataPoints, spare1)
 end
 function Base.read!(io::IO, struct::RDB_ROADMARK_t)
-    struct.playerId = read(io, Uint32)
+    struct.playerId = read(io, UInt32)
     struct.id = read(io, Int8)
     struct.prevId = read(io, Int8)
     struct.nextId = read(io, Int8)
-    struct.spare0 = read(io, Uint8)
+    struct.spare0 = read(io, UInt8)
     struct.lateralDist = read(io, Cfloat)
     struct.yawRel = read(io, Cfloat)
     struct.curvHor = read(io, Cdouble)
@@ -1236,10 +1278,10 @@ function Base.read!(io::IO, struct::RDB_ROADMARK_t)
     struct.height = read(io, Cfloat)
     struct.curvVert = read(io, Cdouble)
     struct.curvVertDot = read(io, Cdouble)
-    struct.thetype = read(io, Uint8)
-    struct.color = read(io, Uint8)
-    struct.noDataPoints = read(io, Uint16)
-    struct.spare1 = (read(io, Uint32), read(io, Uint32))
+    struct.thetype = read(io, UInt8)
+    struct.color = read(io, UInt8)
+    struct.noDataPoints = read(io, UInt16)
+    struct.spare1 = (read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_ROADMARK_t)
@@ -1289,41 +1331,41 @@ Base.sizeof(::RDB_ROADMARK_t) = 76
 Base.sizeof(::Type{RDB_ROADMARK_t}) = 76
 
 function Base.read(io::IO, ::Type{RDB_LANE_INFO_t})
-    roadId = read(io, Uint16)
+    roadId = read(io, UInt16)
     id = read(io, Int8)
-    neighborMask = read(io, Uint8)
+    neighborMask = read(io, UInt8)
     leftLaneId = read(io, Int8)
     rightLaneId = read(io, Int8)
-    borderType = read(io, Uint8)
-    material = read(io, Uint8)
-    status = read(io, Uint16)
-    thetype = read(io, Uint16)
+    borderType = read(io, UInt8)
+    material = read(io, UInt8)
+    status = read(io, UInt16)
+    thetype = read(io, UInt16)
     width = read(io, Cfloat)
     curvVert = read(io, Cdouble)
     curvVertDot = read(io, Cdouble)
     curvHor = read(io, Cdouble)
     curvHorDot = read(io, Cdouble)
-    playerId = read(io, Uint32)
-    spare1 = read(io, Uint32)
+    playerId = read(io, UInt32)
+    spare1 = read(io, UInt32)
     RDB_LANE_INFO_t(roadId, id, neighborMask, leftLaneId, rightLaneId, borderType, material, status, thetype, width, curvVert, curvVertDot, curvHor, curvHorDot, playerId, spare1)
 end
 function Base.read!(io::IO, struct::RDB_LANE_INFO_t)
-    struct.roadId = read(io, Uint16)
+    struct.roadId = read(io, UInt16)
     struct.id = read(io, Int8)
-    struct.neighborMask = read(io, Uint8)
+    struct.neighborMask = read(io, UInt8)
     struct.leftLaneId = read(io, Int8)
     struct.rightLaneId = read(io, Int8)
-    struct.borderType = read(io, Uint8)
-    struct.material = read(io, Uint8)
-    struct.status = read(io, Uint16)
-    struct.thetype = read(io, Uint16)
+    struct.borderType = read(io, UInt8)
+    struct.material = read(io, UInt8)
+    struct.status = read(io, UInt16)
+    struct.thetype = read(io, UInt16)
     struct.width = read(io, Cfloat)
     struct.curvVert = read(io, Cdouble)
     struct.curvVertDot = read(io, Cdouble)
     struct.curvHor = read(io, Cdouble)
     struct.curvHorDot = read(io, Cdouble)
-    struct.playerId = read(io, Uint32)
-    struct.spare1 = read(io, Uint32)
+    struct.playerId = read(io, UInt32)
+    struct.spare1 = read(io, UInt32)
     struct
 end
 function Base.write(io::IO, struct::RDB_LANE_INFO_t)
@@ -1365,23 +1407,23 @@ function Base.show(io::IO, struct::RDB_LANE_INFO_t)
 end
 
 function Base.read(io::IO, ::Type{RDB_OBJECT_CFG_t})
-    id = read(io, Uint32)
-    category = read(io, Uint8)
-    thetype = read(io, Uint8)
+    id = read(io, UInt32)
+    category = read(io, UInt8)
+    thetype = read(io, UInt8)
     modelId = read(io, Int16)
-    flags = read(io, Uint16)
-    spare0 = read(io, Uint16)
-    spare1 = read(io, Uint32)
+    flags = read(io, UInt16)
+    spare0 = read(io, UInt16)
+    spare1 = read(io, UInt32)
     RDB_OBJECT_CFG_t(id, category, thetype, modelId, flags, spare0, spare1)
 end
 function Base.read!(io::IO, struct::RDB_OBJECT_CFG_t)
-    struct.id = read(io, Uint32)
-    struct.category = read(io, Uint8)
-    struct.thetype = read(io, Uint8)
+    struct.id = read(io, UInt32)
+    struct.category = read(io, UInt8)
+    struct.thetype = read(io, UInt8)
     struct.modelId = read(io, Int16)
-    struct.flags = read(io, Uint16)
-    struct.spare0 = read(io, Uint16)
-    struct.spare1 = read(io, Uint32)
+    struct.flags = read(io, UInt16)
+    struct.spare0 = read(io, UInt16)
+    struct.spare1 = read(io, UInt32)
     struct
 end
 function Base.write(io::IO, struct::RDB_OBJECT_CFG_t)
@@ -1441,25 +1483,25 @@ function Base.show(io::IO, struct::RDB_GEOMETRY_t)
 end
 
 function Base.read(io::IO, ::Type{RDB_OBJECT_STATE_BASE_t})
-    id = read(io, Uint32)
-    category = read(io, Uint8)
-    thetype = read(io, Uint8)
-    visMask = read(io, Uint16)
+    id = read(io, UInt32)
+    category = read(io, UInt8)
+    thetype = read(io, UInt8)
+    visMask = read(io, UInt16)
     geo = read(io, RDB_GEOMETRY_t)
     pos = read(io, RDB_COORD_t)
-    parent = read(io, Uint32)
-    spare1 = read(io, Uint32)
+    parent = read(io, UInt32)
+    spare1 = read(io, UInt32)
     RDB_OBJECT_STATE_BASE_t(id, category, thetype, visMask, geo, pos, parent, spare1)
 end
 function Base.read!(io::IO, struct::RDB_OBJECT_STATE_BASE_t)
-    struct.id = read(io, Uint32)
-    struct.category = read(io, Uint8)
-    struct.thetype = read(io, Uint8)
-    struct.visMask = read(io, Uint16)
+    struct.id = read(io, UInt32)
+    struct.category = read(io, UInt8)
+    struct.thetype = read(io, UInt8)
+    struct.visMask = read(io, UInt16)
     struct.geo = read(io, RDB_GEOMETRY_t)
     struct.pos = read(io, RDB_COORD_t)
-    struct.parent = read(io, Uint32)
-    struct.spare1 = read(io, Uint32)
+    struct.parent = read(io, UInt32)
+    struct.spare1 = read(io, UInt32)
     struct
 end
 function Base.write(io::IO, struct::RDB_OBJECT_STATE_BASE_t)
@@ -1487,13 +1529,13 @@ end
 function Base.read(io::IO, ::Type{RDB_OBJECT_STATE_EXT_t})
     speed = read(io, RDB_COORD_t)
     accel = read(io, RDB_COORD_t)
-    spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     RDB_OBJECT_STATE_EXT_t(speed, accel, spare)
 end
 function Base.read!(io::IO, struct::RDB_OBJECT_STATE_EXT_t)
     struct.speed = read(io, RDB_COORD_t)
     struct.accel = read(io, RDB_COORD_t)
-    struct.spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    struct.spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_OBJECT_STATE_EXT_t)
@@ -1531,17 +1573,17 @@ function Base.show(io::IO, struct::RDB_OBJECT_STATE_t)
 end
 
 function Base.read(io::IO, ::Type{RDB_ENGINE_BASE_t})
-    playerId = read(io, Uint32)
+    playerId = read(io, UInt32)
     rps = read(io, Cfloat)
     load = read(io, Cfloat)
-    spare1 = (read(io, Uint32), read(io, Uint32))
+    spare1 = (read(io, UInt32), read(io, UInt32))
     RDB_ENGINE_BASE_t(playerId, rps, load, spare1)
 end
 function Base.read!(io::IO, struct::RDB_ENGINE_BASE_t)
-    struct.playerId = read(io, Uint32)
+    struct.playerId = read(io, UInt32)
     struct.rps = read(io, Cfloat)
     struct.load = read(io, Cfloat)
-    struct.spare1 = (read(io, Uint32), read(io, Uint32))
+    struct.spare1 = (read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_ENGINE_BASE_t)
@@ -1568,7 +1610,7 @@ function Base.read(io::IO, ::Type{RDB_ENGINE_EXT_t})
     torqueFriction = read(io, Cfloat)
     fuelCurrent = read(io, Cfloat)
     fuelAverage = read(io, Cfloat)
-    spare = (read(io, Uint32), read(io, Uint32))
+    spare = (read(io, UInt32), read(io, UInt32))
     RDB_ENGINE_EXT_t(rpsStart, torque, torqueInner, torqueMax, torqueFriction, fuelCurrent, fuelAverage, spare)
 end
 function Base.read!(io::IO, struct::RDB_ENGINE_EXT_t)
@@ -1579,7 +1621,7 @@ function Base.read!(io::IO, struct::RDB_ENGINE_EXT_t)
     struct.torqueFriction = read(io, Cfloat)
     struct.fuelCurrent = read(io, Cfloat)
     struct.fuelAverage = read(io, Cfloat)
-    struct.spare = (read(io, Uint32), read(io, Uint32))
+    struct.spare = (read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_ENGINE_EXT_t)
@@ -1627,21 +1669,21 @@ function Base.show(io::IO, struct::RDB_ENGINE_t)
 end
 
 function Base.read(io::IO, ::Type{RDB_DRIVETRAIN_BASE_t})
-    playerId = read(io, Uint32)
-    gearBoxType = read(io, Uint8)
-    driveTrainType = read(io, Uint8)
-    gear = read(io, Uint8)
-    spare0 = read(io, Uint8)
-    spare1 = (read(io, Uint32), read(io, Uint32))
+    playerId = read(io, UInt32)
+    gearBoxType = read(io, UInt8)
+    driveTrainType = read(io, UInt8)
+    gear = read(io, UInt8)
+    spare0 = read(io, UInt8)
+    spare1 = (read(io, UInt32), read(io, UInt32))
     RDB_DRIVETRAIN_BASE_t(playerId, gearBoxType, driveTrainType, gear, spare0, spare1)
 end
 function Base.read!(io::IO, struct::RDB_DRIVETRAIN_BASE_t)
-    struct.playerId = read(io, Uint32)
-    struct.gearBoxType = read(io, Uint8)
-    struct.driveTrainType = read(io, Uint8)
-    struct.gear = read(io, Uint8)
-    struct.spare0 = read(io, Uint8)
-    struct.spare1 = (read(io, Uint32), read(io, Uint32))
+    struct.playerId = read(io, UInt32)
+    struct.gearBoxType = read(io, UInt8)
+    struct.driveTrainType = read(io, UInt8)
+    struct.gear = read(io, UInt8)
+    struct.spare0 = read(io, UInt8)
+    struct.spare1 = (read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_DRIVETRAIN_BASE_t)
@@ -1668,14 +1710,14 @@ function Base.read(io::IO, ::Type{RDB_DRIVETRAIN_EXT_t})
     torqueGearBoxIn = read(io, Cfloat)
     torqueCenterDiffOut = read(io, Cfloat)
     torqueShaft = read(io, Cfloat)
-    spare1 = (read(io, Uint32), read(io, Uint32))
+    spare1 = (read(io, UInt32), read(io, UInt32))
     RDB_DRIVETRAIN_EXT_t(torqueGearBoxIn, torqueCenterDiffOut, torqueShaft, spare1)
 end
 function Base.read!(io::IO, struct::RDB_DRIVETRAIN_EXT_t)
     struct.torqueGearBoxIn = read(io, Cfloat)
     struct.torqueCenterDiffOut = read(io, Cfloat)
     struct.torqueShaft = read(io, Cfloat)
-    struct.spare1 = (read(io, Uint32), read(io, Uint32))
+    struct.spare1 = (read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_DRIVETRAIN_EXT_t)
@@ -1715,29 +1757,29 @@ function Base.show(io::IO, struct::RDB_DRIVETRAIN_t)
 end
 
 function Base.read(io::IO, ::Type{RDB_WHEEL_BASE_t})
-    playerId = read(io, Uint32)
-    id = read(io, Uint8)
-    flags = read(io, Uint8)
-    spare0 = (read(io, Uint8), read(io, Uint8))
+    playerId = read(io, UInt32)
+    id = read(io, UInt8)
+    flags = read(io, UInt8)
+    spare0 = (read(io, UInt8), read(io, UInt8))
     radiusStatic = read(io, Cfloat)
     springCompression = read(io, Cfloat)
     rotAngle = read(io, Cfloat)
     slip = read(io, Cfloat)
     steeringAngle = read(io, Cfloat)
-    spare1 = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    spare1 = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     RDB_WHEEL_BASE_t(playerId, id, flags, spare0, radiusStatic, springCompression, rotAngle, slip, steeringAngle, spare1)
 end
 function Base.read!(io::IO, struct::RDB_WHEEL_BASE_t)
-    struct.playerId = read(io, Uint32)
-    struct.id = read(io, Uint8)
-    struct.flags = read(io, Uint8)
-    struct.spare0 = (read(io, Uint8), read(io, Uint8))
+    struct.playerId = read(io, UInt32)
+    struct.id = read(io, UInt8)
+    struct.flags = read(io, UInt8)
+    struct.spare0 = (read(io, UInt8), read(io, UInt8))
     struct.radiusStatic = read(io, Cfloat)
     struct.springCompression = read(io, Cfloat)
     struct.rotAngle = read(io, Cfloat)
     struct.slip = read(io, Cfloat)
     struct.steeringAngle = read(io, Cfloat)
-    struct.spare1 = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    struct.spare1 = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_WHEEL_BASE_t)
@@ -1778,7 +1820,7 @@ function Base.read(io::IO, ::Type{RDB_WHEEL_EXT_t})
     brakePressure = read(io, Cfloat)
     torqueDriveShaft = read(io, Cfloat)
     damperSpeed = read(io, Cfloat)
-    spare2 = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    spare2 = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     RDB_WHEEL_EXT_t(vAngular, forceZ, forceLat, forceLong, forceTireWheelXYZ, radiusDynamic, brakePressure, torqueDriveShaft, damperSpeed, spare2)
 end
 function Base.read!(io::IO, struct::RDB_WHEEL_EXT_t)
@@ -1791,7 +1833,7 @@ function Base.read!(io::IO, struct::RDB_WHEEL_EXT_t)
     struct.brakePressure = read(io, Cfloat)
     struct.torqueDriveShaft = read(io, Cfloat)
     struct.damperSpeed = read(io, Cfloat)
-    struct.spare2 = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    struct.spare2 = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_WHEEL_EXT_t)
@@ -1843,31 +1885,31 @@ function Base.show(io::IO, struct::RDB_WHEEL_t)
 end
 
 function Base.read(io::IO, ::Type{RDB_VEHICLE_SYSTEMS_t})
-    playerId = read(io, Uint32)
-    lightMask = read(io, Uint32)
+    playerId = read(io, UInt32)
+    lightMask = read(io, UInt32)
     steering = read(io, Cfloat)
     steeringWheelTorque = read(io, Cfloat)
-    accMask = read(io, Uint8)
-    accSpeed = read(io, Uint8)
-    batteryState = read(io, Uint8)
+    accMask = read(io, UInt8)
+    accSpeed = read(io, UInt8)
+    batteryState = read(io, UInt8)
     batteryRate = read(io, Int8)
-    displayLightMask = read(io, Uint16)
-    spare0 = read(io, Uint16)
-    spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    displayLightMask = read(io, UInt16)
+    spare0 = read(io, UInt16)
+    spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     RDB_VEHICLE_SYSTEMS_t(playerId, lightMask, steering, steeringWheelTorque, accMask, accSpeed, batteryState, batteryRate, displayLightMask, spare0, spare)
 end
 function Base.read!(io::IO, struct::RDB_VEHICLE_SYSTEMS_t)
-    struct.playerId = read(io, Uint32)
-    struct.lightMask = read(io, Uint32)
+    struct.playerId = read(io, UInt32)
+    struct.lightMask = read(io, UInt32)
     struct.steering = read(io, Cfloat)
     struct.steeringWheelTorque = read(io, Cfloat)
-    struct.accMask = read(io, Uint8)
-    struct.accSpeed = read(io, Uint8)
-    struct.batteryState = read(io, Uint8)
+    struct.accMask = read(io, UInt8)
+    struct.accSpeed = read(io, UInt8)
+    struct.batteryState = read(io, UInt8)
     struct.batteryRate = read(io, Int8)
-    struct.displayLightMask = read(io, Uint16)
-    struct.spare0 = read(io, Uint16)
-    struct.spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    struct.displayLightMask = read(io, UInt16)
+    struct.spare0 = read(io, UInt16)
+    struct.spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_VEHICLE_SYSTEMS_t)
@@ -1901,14 +1943,14 @@ Base.sizeof(::RDB_VEHICLE_SYSTEMS_t) = 44
 Base.sizeof(::Type{RDB_VEHICLE_SYSTEMS_t}) = 44
 
 function Base.read(io::IO, ::Type{RDB_VEHICLE_SETUP_t})
-    playerId = read(io, Uint32)
+    playerId = read(io, UInt32)
     mass = read(io, Cfloat)
     wheelBase = read(io, Cfloat)
     spare = (read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32))
     RDB_VEHICLE_SETUP_t(playerId, mass, wheelBase, spare)
 end
 function Base.read!(io::IO, struct::RDB_VEHICLE_SETUP_t)
-    struct.playerId = read(io, Uint32)
+    struct.playerId = read(io, UInt32)
     struct.mass = read(io, Cfloat)
     struct.wheelBase = read(io, Cfloat)
     struct.spare = (read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32))
@@ -1931,27 +1973,27 @@ Base.sizeof(::RDB_VEHICLE_SETUP_t) = 28
 Base.sizeof(::Type{RDB_VEHICLE_SETUP_t}) = 28
 
 function Base.read(io::IO, ::Type{RDB_IMAGE_t})
-    id = read(io, Uint32)
-    width = read(io, Uint16)
-    height = read(io, Uint16)
-    pixelSize = read(io, Uint8)
-    pixelFormat = read(io, Uint8)
-    cameraId = read(io, Uint16)
-    imgSize = read(io, Uint32)
-    color = (read(io, Uint8), read(io, Uint8), read(io, Uint8), read(io, Uint8))
-    spare1 = (read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    id = read(io, UInt32)
+    width = read(io, UInt16)
+    height = read(io, UInt16)
+    pixelSize = read(io, UInt8)
+    pixelFormat = read(io, UInt8)
+    cameraId = read(io, UInt16)
+    imgSize = read(io, UInt32)
+    color = (read(io, UInt8), read(io, UInt8), read(io, UInt8), read(io, UInt8))
+    spare1 = (read(io, UInt32), read(io, UInt32), read(io, UInt32))
     RDB_IMAGE_t(id, width, height, pixelSize, pixelFormat, cameraId, imgSize, color, spare1)
 end
 function Base.read!(io::IO, struct::RDB_IMAGE_t)
-    struct.id = read(io, Uint32)
-    struct.width = read(io, Uint16)
-    struct.height = read(io, Uint16)
-    struct.pixelSize = read(io, Uint8)
-    struct.pixelFormat = read(io, Uint8)
-    struct.cameraId = read(io, Uint16)
-    struct.imgSize = read(io, Uint32)
-    struct.color = (read(io, Uint8), read(io, Uint8), read(io, Uint8), read(io, Uint8))
-    struct.spare1 = (read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    struct.id = read(io, UInt32)
+    struct.width = read(io, UInt16)
+    struct.height = read(io, UInt16)
+    struct.pixelSize = read(io, UInt8)
+    struct.pixelFormat = read(io, UInt8)
+    struct.cameraId = read(io, UInt16)
+    struct.imgSize = read(io, UInt32)
+    struct.color = (read(io, UInt8), read(io, UInt8), read(io, UInt8), read(io, UInt8))
+    struct.spare1 = (read(io, UInt32), read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_IMAGE_t)
@@ -1981,21 +2023,21 @@ Base.sizeof(::RDB_IMAGE_t) = 32
 Base.sizeof(::Type{RDB_IMAGE_t}) = 32
 
 function Base.read(io::IO, ::Type{RDB_FUNCTION_t})
-    id = read(io, Uint32)
-    thetype = read(io, Uint8)
-    dimension = read(io, Uint8)
-    spare = read(io, Uint16)
-    dataSize = read(io, Uint32)
-    spare1 = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    id = read(io, UInt32)
+    thetype = read(io, UInt8)
+    dimension = read(io, UInt8)
+    spare = read(io, UInt16)
+    dataSize = read(io, UInt32)
+    spare1 = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     RDB_FUNCTION_t(id, thetype, dimension, spare, dataSize, spare1)
 end
 function Base.read!(io::IO, struct::RDB_FUNCTION_t)
-    struct.id = read(io, Uint32)
-    struct.thetype = read(io, Uint8)
-    struct.dimension = read(io, Uint8)
-    struct.spare = read(io, Uint16)
-    struct.dataSize = read(io, Uint32)
-    struct.spare1 = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    struct.id = read(io, UInt32)
+    struct.thetype = read(io, UInt8)
+    struct.dimension = read(io, UInt8)
+    struct.spare = read(io, UInt16)
+    struct.dataSize = read(io, UInt32)
+    struct.spare1 = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_FUNCTION_t)
@@ -2019,11 +2061,11 @@ Base.sizeof(::RDB_FUNCTION_t) = 28
 Base.sizeof(::Type{RDB_FUNCTION_t}) = 28
 
 function Base.read(io::IO, ::Type{RDB_SENSOR_STATE_t})
-    id = read(io, Uint32)
-    thetype = read(io, Uint8)
-    hostCategory = read(io, Uint8)
-    spare0 = read(io, Uint16)
-    hostId = read(io, Uint32)
+    id = read(io, UInt32)
+    thetype = read(io, UInt8)
+    hostCategory = read(io, UInt8)
+    spare0 = read(io, UInt16)
+    hostId = read(io, UInt32)
     fovHV = (read(io, Cfloat), read(io, Cfloat))
     clipNF = (read(io, Cfloat), read(io, Cfloat))
     pos = read(io, RDB_COORD_t)
@@ -2032,11 +2074,11 @@ function Base.read(io::IO, ::Type{RDB_SENSOR_STATE_t})
     RDB_SENSOR_STATE_t(id, thetype, hostCategory, spare0, hostId, fovHV, clipNF, pos, originCoordSys, spare)
 end
 function Base.read!(io::IO, struct::RDB_SENSOR_STATE_t)
-    struct.id = read(io, Uint32)
-    struct.thetype = read(io, Uint8)
-    struct.hostCategory = read(io, Uint8)
-    struct.spare0 = read(io, Uint16)
-    struct.hostId = read(io, Uint32)
+    struct.id = read(io, UInt32)
+    struct.thetype = read(io, UInt8)
+    struct.hostCategory = read(io, UInt8)
+    struct.spare0 = read(io, UInt16)
+    struct.hostId = read(io, UInt32)
     struct.fovHV = (read(io, Cfloat), read(io, Cfloat))
     struct.clipNF = (read(io, Cfloat), read(io, Cfloat))
     struct.pos = read(io, RDB_COORD_t)
@@ -2073,29 +2115,29 @@ Base.sizeof(::RDB_SENSOR_STATE_t) = 132
 Base.sizeof(::Type{RDB_SENSOR_STATE_t}) = 132
 
 function Base.read(io::IO, ::Type{RDB_SENSOR_OBJECT_t})
-    category = read(io, Uint8)
-    thetype = read(io, Uint8)
-    flags = read(io, Uint16)
-    id = read(io, Uint32)
-    sensorId = read(io, Uint32)
+    category = read(io, UInt8)
+    thetype = read(io, UInt8)
+    flags = read(io, UInt16)
+    id = read(io, UInt32)
+    sensorId = read(io, UInt32)
     dist = read(io, Cdouble)
     sensorPos = read(io, RDB_COORD_t)
     occlusion = read(io, Int8)
-    spare0 = (read(io, Uint8), read(io, Uint8), read(io, Uint8))
-    spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    spare0 = (read(io, UInt8), read(io, UInt8), read(io, UInt8))
+    spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32))
     RDB_SENSOR_OBJECT_t(category, thetype, flags, id, sensorId, dist, sensorPos, occlusion, spare0, spare)
 end
 function Base.read!(io::IO, struct::RDB_SENSOR_OBJECT_t)
-    struct.category = read(io, Uint8)
-    struct.thetype = read(io, Uint8)
-    struct.flags = read(io, Uint16)
-    struct.id = read(io, Uint32)
-    struct.sensorId = read(io, Uint32)
+    struct.category = read(io, UInt8)
+    struct.thetype = read(io, UInt8)
+    struct.flags = read(io, UInt16)
+    struct.id = read(io, UInt32)
+    struct.sensorId = read(io, UInt32)
     struct.dist = read(io, Cdouble)
     struct.sensorPos = read(io, RDB_COORD_t)
     struct.occlusion = read(io, Int8)
-    struct.spare0 = (read(io, Uint8), read(io, Uint8), read(io, Uint8))
-    struct.spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    struct.spare0 = (read(io, UInt8), read(io, UInt8), read(io, UInt8))
+    struct.spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_SENSOR_OBJECT_t)
@@ -2127,10 +2169,10 @@ Base.sizeof(::RDB_SENSOR_OBJECT_t) = 80
 Base.sizeof(::Type{RDB_SENSOR_OBJECT_t}) = 80
 
 function Base.read(io::IO, ::Type{RDB_CAMERA_t})
-    id = read(io, Uint16)
-    width = read(io, Uint16)
-    height = read(io, Uint16)
-    spare0 = read(io, Uint16)
+    id = read(io, UInt16)
+    width = read(io, UInt16)
+    height = read(io, UInt16)
+    spare0 = read(io, UInt16)
     clipNear = read(io, Cfloat)
     clipFar = read(io, Cfloat)
     focalX = read(io, Cfloat)
@@ -2138,14 +2180,14 @@ function Base.read(io::IO, ::Type{RDB_CAMERA_t})
     principalX = read(io, Cfloat)
     principalY = read(io, Cfloat)
     pos = read(io, RDB_COORD_t)
-    spare1 = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    spare1 = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     RDB_CAMERA_t(id, width, height, spare0, clipNear, clipFar, focalX, focalY, principalX, principalY, pos, spare1)
 end
 function Base.read!(io::IO, struct::RDB_CAMERA_t)
-    struct.id = read(io, Uint16)
-    struct.width = read(io, Uint16)
-    struct.height = read(io, Uint16)
-    struct.spare0 = read(io, Uint16)
+    struct.id = read(io, UInt16)
+    struct.width = read(io, UInt16)
+    struct.height = read(io, UInt16)
+    struct.spare0 = read(io, UInt16)
     struct.clipNear = read(io, Cfloat)
     struct.clipFar = read(io, Cfloat)
     struct.focalX = read(io, Cfloat)
@@ -2153,7 +2195,7 @@ function Base.read!(io::IO, struct::RDB_CAMERA_t)
     struct.principalX = read(io, Cfloat)
     struct.principalY = read(io, Cfloat)
     struct.pos = read(io, RDB_COORD_t)
-    struct.spare1 = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    struct.spare1 = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_CAMERA_t)
@@ -2189,24 +2231,24 @@ Base.sizeof(::RDB_CAMERA_t) = 92
 Base.sizeof(::Type{RDB_CAMERA_t}) = 92
 
 function Base.read(io::IO, ::Type{RDB_LIGHT_SOURCE_BASE_t})
-    id = read(io, Uint16)
+    id = read(io, UInt16)
     templateId = read(io, Int8)
-    state = read(io, Uint8)
+    state = read(io, UInt8)
     playerId = read(io, Int32)
     pos = read(io, RDB_COORD_t)
-    flags = read(io, Uint16)
-    spare0 = read(io, Uint16)
+    flags = read(io, UInt16)
+    spare0 = read(io, UInt16)
     spare1 = (read(io, Int32), read(io, Int32))
     RDB_LIGHT_SOURCE_BASE_t(id, templateId, state, playerId, pos, flags, spare0, spare1)
 end
 function Base.read!(io::IO, struct::RDB_LIGHT_SOURCE_BASE_t)
-    struct.id = read(io, Uint16)
+    struct.id = read(io, UInt16)
     struct.templateId = read(io, Int8)
-    struct.state = read(io, Uint8)
+    struct.state = read(io, UInt8)
     struct.playerId = read(io, Int32)
     struct.pos = read(io, RDB_COORD_t)
-    struct.flags = read(io, Uint16)
-    struct.spare0 = read(io, Uint16)
+    struct.flags = read(io, UInt16)
+    struct.spare0 = read(io, UInt16)
     struct.spare1 = (read(io, Int32), read(io, Int32))
     struct
 end
@@ -2289,8 +2331,8 @@ function Base.show(io::IO, struct::RDB_LIGHT_SOURCE_t)
 end
 
 function Base.read(io::IO, ::Type{RDB_CONTACT_POINT_t})
-    id = read(io, Uint16)
-    flags = read(io, Uint16)
+    id = read(io, UInt16)
+    flags = read(io, UInt16)
     roadDataIn = read(io, RDB_COORD_t)
     friction = read(io, Cfloat)
     playerId = read(io, Int32)
@@ -2298,8 +2340,8 @@ function Base.read(io::IO, ::Type{RDB_CONTACT_POINT_t})
     RDB_CONTACT_POINT_t(id, flags, roadDataIn, friction, playerId, spare1)
 end
 function Base.read!(io::IO, struct::RDB_CONTACT_POINT_t)
-    struct.id = read(io, Uint16)
-    struct.flags = read(io, Uint16)
+    struct.id = read(io, UInt16)
+    struct.flags = read(io, UInt16)
     struct.roadDataIn = read(io, RDB_COORD_t)
     struct.friction = read(io, Cfloat)
     struct.playerId = read(io, Int32)
@@ -2325,39 +2367,39 @@ function Base.show(io::IO, struct::RDB_CONTACT_POINT_t)
 end
 
 function Base.read(io::IO, ::Type{RDB_TRAFFIC_SIGN_t})
-    id = read(io, Uint32)
-    playerId = read(io, Uint32)
+    id = read(io, UInt32)
+    playerId = read(io, UInt32)
     roadDist = read(io, Cfloat)
     pos = read(io, RDB_COORD_t)
     thetype = read(io, Int32)
     subType = read(io, Int32)
     value = read(io, Cfloat)
-    state = read(io, Uint32)
+    state = read(io, UInt32)
     readability = read(io, Int8)
     occlusion = read(io, Int8)
-    spare0 = read(io, Uint16)
-    addOnId = read(io, Uint32)
+    spare0 = read(io, UInt16)
+    addOnId = read(io, UInt32)
     minLane = read(io, Int8)
     maxLane = read(io, Int8)
-    spare = read(io, Uint16)
+    spare = read(io, UInt16)
     RDB_TRAFFIC_SIGN_t(id, playerId, roadDist, pos, thetype, subType, value, state, readability, occlusion, spare0, addOnId, minLane, maxLane, spare)
 end
 function Base.read!(io::IO, struct::RDB_TRAFFIC_SIGN_t)
-    struct.id = read(io, Uint32)
-    struct.playerId = read(io, Uint32)
+    struct.id = read(io, UInt32)
+    struct.playerId = read(io, UInt32)
     struct.roadDist = read(io, Cfloat)
     struct.pos = read(io, RDB_COORD_t)
     struct.thetype = read(io, Int32)
     struct.subType = read(io, Int32)
     struct.value = read(io, Cfloat)
-    struct.state = read(io, Uint32)
+    struct.state = read(io, UInt32)
     struct.readability = read(io, Int8)
     struct.occlusion = read(io, Int8)
-    struct.spare0 = read(io, Uint16)
-    struct.addOnId = read(io, Uint32)
+    struct.spare0 = read(io, UInt16)
+    struct.addOnId = read(io, UInt32)
     struct.minLane = read(io, Int8)
     struct.maxLane = read(io, Int8)
-    struct.spare = read(io, Uint16)
+    struct.spare = read(io, UInt16)
     struct
 end
 function Base.write(io::IO, struct::RDB_TRAFFIC_SIGN_t)
@@ -2397,26 +2439,26 @@ function Base.show(io::IO, struct::RDB_TRAFFIC_SIGN_t)
 end
 
 function Base.read(io::IO, ::Type{RDB_ROAD_STATE_t})
-    playerId = read(io, Uint32)
+    playerId = read(io, UInt32)
     wheelId = read(io, Int8)
-    spare0 = read(io, Uint8)
-    spare1 = read(io, Uint16)
-    roadId = read(io, Uint32)
+    spare0 = read(io, UInt8)
+    spare1 = read(io, UInt16)
+    roadId = read(io, UInt32)
     defaultSpeed = read(io, Cfloat)
     waterLevel = read(io, Cfloat)
-    eventMask = read(io, Uint32)
+    eventMask = read(io, UInt32)
     spare2 = (read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32))
     RDB_ROAD_STATE_t(playerId, wheelId, spare0, spare1, roadId, defaultSpeed, waterLevel, eventMask, spare2)
 end
 function Base.read!(io::IO, struct::RDB_ROAD_STATE_t)
-    struct.playerId = read(io, Uint32)
+    struct.playerId = read(io, UInt32)
     struct.wheelId = read(io, Int8)
-    struct.spare0 = read(io, Uint8)
-    struct.spare1 = read(io, Uint16)
-    struct.roadId = read(io, Uint32)
+    struct.spare0 = read(io, UInt8)
+    struct.spare1 = read(io, UInt16)
+    struct.roadId = read(io, UInt32)
     struct.defaultSpeed = read(io, Cfloat)
     struct.waterLevel = read(io, Cfloat)
-    struct.eventMask = read(io, Uint32)
+    struct.eventMask = read(io, UInt32)
     struct.spare2 = (read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32))
     struct
 end
@@ -2448,22 +2490,22 @@ Base.sizeof(::Type{RDB_ROAD_STATE_t}) = 72
 
 function Base.read(io::IO, ::Type{RDB_ENVIRONMENT_t})
     visibility = read(io, Cfloat)
-    timeOfDay = read(io, Uint32)
+    timeOfDay = read(io, UInt32)
     brightness = read(io, Cfloat)
-    precipitation = read(io, Uint8)
-    cloudState = read(io, Uint8)
-    flags = read(io, Uint16)
-    spare1 = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    precipitation = read(io, UInt8)
+    cloudState = read(io, UInt8)
+    flags = read(io, UInt16)
+    spare1 = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     RDB_ENVIRONMENT_t(visibility, timeOfDay, brightness, precipitation, cloudState, flags, spare1)
 end
 function Base.read!(io::IO, struct::RDB_ENVIRONMENT_t)
     struct.visibility = read(io, Cfloat)
-    struct.timeOfDay = read(io, Uint32)
+    struct.timeOfDay = read(io, UInt32)
     struct.brightness = read(io, Cfloat)
-    struct.precipitation = read(io, Uint8)
-    struct.cloudState = read(io, Uint8)
-    struct.flags = read(io, Uint16)
-    struct.spare1 = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    struct.precipitation = read(io, UInt8)
+    struct.cloudState = read(io, UInt8)
+    struct.flags = read(io, UInt16)
+    struct.spare1 = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_ENVIRONMENT_t)
@@ -2489,19 +2531,19 @@ Base.sizeof(::RDB_ENVIRONMENT_t) = 48
 Base.sizeof(::Type{RDB_ENVIRONMENT_t}) = 48
 
 function Base.read(io::IO, ::Type{RDB_PED_ANIMATION_t})
-    playerId = read(io, Uint32)
+    playerId = read(io, UInt32)
     pos = read(io, RDB_COORD_t)
-    spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
-    noCoords = read(io, Uint32)
-    dataSize = read(io, Uint32)
+    spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
+    noCoords = read(io, UInt32)
+    dataSize = read(io, UInt32)
     RDB_PED_ANIMATION_t(playerId, pos, spare, noCoords, dataSize)
 end
 function Base.read!(io::IO, struct::RDB_PED_ANIMATION_t)
-    struct.playerId = read(io, Uint32)
+    struct.playerId = read(io, UInt32)
     struct.pos = read(io, RDB_COORD_t)
-    struct.spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
-    struct.noCoords = read(io, Uint32)
-    struct.dataSize = read(io, Uint32)
+    struct.spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
+    struct.noCoords = read(io, UInt32)
+    struct.dataSize = read(io, UInt32)
     struct
 end
 function Base.write(io::IO, struct::RDB_PED_ANIMATION_t)
@@ -2523,25 +2565,25 @@ Base.sizeof(::RDB_PED_ANIMATION_t) = 72
 Base.sizeof(::Type{RDB_PED_ANIMATION_t}) = 72
 
 function Base.read(io::IO, ::Type{RDB_CUSTOM_SCORING_t})
-    playerId = read(io, Uint32)
+    playerId = read(io, UInt32)
     pathS = read(io, Cfloat)
     roadS = read(io, Cfloat)
     fuelCurrent = read(io, Cfloat)
     fuelAverage = read(io, Cfloat)
-    stateFlags = read(io, Uint32)
+    stateFlags = read(io, UInt32)
     slip = read(io, Cfloat)
-    spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     RDB_CUSTOM_SCORING_t(playerId, pathS, roadS, fuelCurrent, fuelAverage, stateFlags, slip, spare)
 end
 function Base.read!(io::IO, struct::RDB_CUSTOM_SCORING_t)
-    struct.playerId = read(io, Uint32)
+    struct.playerId = read(io, UInt32)
     struct.pathS = read(io, Cfloat)
     struct.roadS = read(io, Cfloat)
     struct.fuelCurrent = read(io, Cfloat)
     struct.fuelAverage = read(io, Cfloat)
-    struct.stateFlags = read(io, Uint32)
+    struct.stateFlags = read(io, UInt32)
     struct.slip = read(io, Cfloat)
-    struct.spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    struct.spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_CUSTOM_SCORING_t)
@@ -2570,13 +2612,13 @@ Base.sizeof(::Type{RDB_CUSTOM_SCORING_t}) = 44
 
 function Base.read(io::IO, ::Type{RDB_TRIGGER_t})
     deltaT = read(io, Cfloat)
-    frameNo = read(io, Uint32)
+    frameNo = read(io, UInt32)
     spare = read(io, Int32)
     RDB_TRIGGER_t(deltaT, frameNo, spare)
 end
 function Base.read!(io::IO, struct::RDB_TRIGGER_t)
     struct.deltaT = read(io, Cfloat)
-    struct.frameNo = read(io, Uint32)
+    struct.frameNo = read(io, UInt32)
     struct.spare = read(io, Int32)
     struct
 end
@@ -2593,7 +2635,7 @@ function Base.show(io::IO, struct::RDB_TRIGGER_t)
 end
 
 function Base.read(io::IO, ::Type{RDB_DRIVER_CTRL_t})
-    playerId = read(io, Uint32)
+    playerId = read(io, UInt32)
     steeringWheel = read(io, Cfloat)
     steeringSpeed = read(io, Cfloat)
     throttlePedal = read(io, Cfloat)
@@ -2605,19 +2647,19 @@ function Base.read(io::IO, ::Type{RDB_DRIVER_CTRL_t})
     steeringTorque = read(io, Cfloat)
     engineTorqueTgt = read(io, Cfloat)
     speedTgt = read(io, Cfloat)
-    gear = read(io, Uint8)
-    sourceId = read(io, Uint8)
-    spare0 = (read(io, Uint8), read(io, Uint8))
-    validityFlags = read(io, Uint32)
-    flags = read(io, Uint32)
-    mockupInput0 = read(io, Uint32)
-    mockupInput1 = read(io, Uint32)
-    mockupInput2 = read(io, Uint32)
-    spare = read(io, Uint32)
+    gear = read(io, UInt8)
+    sourceId = read(io, UInt8)
+    spare0 = (read(io, UInt8), read(io, UInt8))
+    validityFlags = read(io, UInt32)
+    flags = read(io, UInt32)
+    mockupInput0 = read(io, UInt32)
+    mockupInput1 = read(io, UInt32)
+    mockupInput2 = read(io, UInt32)
+    spare = read(io, UInt32)
     RDB_DRIVER_CTRL_t(playerId, steeringWheel, steeringSpeed, throttlePedal, brakePedal, clutchPedal, accelTgt, steeringTgt, curvatureTgt, steeringTorque, engineTorqueTgt, speedTgt, gear, sourceId, spare0, validityFlags, flags, mockupInput0, mockupInput1, mockupInput2, spare)
 end
 function Base.read!(io::IO, struct::RDB_DRIVER_CTRL_t)
-    struct.playerId = read(io, Uint32)
+    struct.playerId = read(io, UInt32)
     struct.steeringWheel = read(io, Cfloat)
     struct.steeringSpeed = read(io, Cfloat)
     struct.throttlePedal = read(io, Cfloat)
@@ -2629,15 +2671,15 @@ function Base.read!(io::IO, struct::RDB_DRIVER_CTRL_t)
     struct.steeringTorque = read(io, Cfloat)
     struct.engineTorqueTgt = read(io, Cfloat)
     struct.speedTgt = read(io, Cfloat)
-    struct.gear = read(io, Uint8)
-    struct.sourceId = read(io, Uint8)
-    struct.spare0 = (read(io, Uint8), read(io, Uint8))
-    struct.validityFlags = read(io, Uint32)
-    struct.flags = read(io, Uint32)
-    struct.mockupInput0 = read(io, Uint32)
-    struct.mockupInput1 = read(io, Uint32)
-    struct.mockupInput2 = read(io, Uint32)
-    struct.spare = read(io, Uint32)
+    struct.gear = read(io, UInt8)
+    struct.sourceId = read(io, UInt8)
+    struct.spare0 = (read(io, UInt8), read(io, UInt8))
+    struct.validityFlags = read(io, UInt32)
+    struct.flags = read(io, UInt32)
+    struct.mockupInput0 = read(io, UInt32)
+    struct.mockupInput1 = read(io, UInt32)
+    struct.mockupInput2 = read(io, UInt32)
+    struct.spare = read(io, UInt32)
     struct
 end
 function Base.write(io::IO, struct::RDB_DRIVER_CTRL_t)
@@ -2691,21 +2733,21 @@ Base.sizeof(::RDB_DRIVER_CTRL_t) = 80
 Base.sizeof(::Type{RDB_DRIVER_CTRL_t}) = 80
 
 function Base.read(io::IO, ::Type{RDB_DRIVER_PERCEPTION_t})
-    playerId = read(io, Uint32)
+    playerId = read(io, UInt32)
     speedFromRules = read(io, Cfloat)
     distToSpeed = read(io, Cfloat)
     spare0 = (read(io, Cfloat), read(io, Cfloat), read(io, Cfloat), read(io, Cfloat))
-    flags = read(io, Uint32)
-    spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    flags = read(io, UInt32)
+    spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     RDB_DRIVER_PERCEPTION_t(playerId, speedFromRules, distToSpeed, spare0, flags, spare)
 end
 function Base.read!(io::IO, struct::RDB_DRIVER_PERCEPTION_t)
-    struct.playerId = read(io, Uint32)
+    struct.playerId = read(io, UInt32)
     struct.speedFromRules = read(io, Cfloat)
     struct.distToSpeed = read(io, Cfloat)
     struct.spare0 = (read(io, Cfloat), read(io, Cfloat), read(io, Cfloat), read(io, Cfloat))
-    struct.flags = read(io, Uint32)
-    struct.spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    struct.flags = read(io, UInt32)
+    struct.spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_DRIVER_PERCEPTION_t)
@@ -2731,13 +2773,13 @@ Base.sizeof(::Type{RDB_DRIVER_PERCEPTION_t}) = 48
 function Base.read(io::IO, ::Type{RDB_TRAFFIC_LIGHT_BASE_t})
     id = read(io, Int32)
     state = read(io, Cfloat)
-    stateMask = read(io, Uint32)
+    stateMask = read(io, UInt32)
     RDB_TRAFFIC_LIGHT_BASE_t(id, state, stateMask)
 end
 function Base.read!(io::IO, struct::RDB_TRAFFIC_LIGHT_BASE_t)
     struct.id = read(io, Int32)
     struct.state = read(io, Cfloat)
-    struct.stateMask = read(io, Uint32)
+    struct.stateMask = read(io, UInt32)
     struct
 end
 function Base.write(io::IO, struct::RDB_TRAFFIC_LIGHT_BASE_t)
@@ -2754,14 +2796,14 @@ end
 
 function Base.read(io::IO, ::Type{RDB_TRAFFIC_LIGHT_PHASE_t})
     duration = read(io, Cfloat)
-    thetype = read(io, Uint8)
-    spare = (read(io, Uint8), read(io, Uint8), read(io, Uint8))
+    thetype = read(io, UInt8)
+    spare = (read(io, UInt8), read(io, UInt8), read(io, UInt8))
     RDB_TRAFFIC_LIGHT_PHASE_t(duration, thetype, spare)
 end
 function Base.read!(io::IO, struct::RDB_TRAFFIC_LIGHT_PHASE_t)
     struct.duration = read(io, Cfloat)
-    struct.thetype = read(io, Uint8)
-    struct.spare = (read(io, Uint8), read(io, Uint8), read(io, Uint8))
+    struct.thetype = read(io, UInt8)
+    struct.spare = (read(io, UInt8), read(io, UInt8), read(io, UInt8))
     struct
 end
 function Base.write(io::IO, struct::RDB_TRAFFIC_LIGHT_PHASE_t)
@@ -2781,15 +2823,15 @@ Base.sizeof(::Type{RDB_TRAFFIC_LIGHT_PHASE_t}) = 8
 function Base.read(io::IO, ::Type{RDB_TRAFFIC_LIGHT_EXT_t})
     ctrlId = read(io, Int32)
     cycleTime = read(io, Cfloat)
-    noPhases = read(io, Uint16)
-    dataSize = read(io, Uint32)
+    noPhases = read(io, UInt16)
+    dataSize = read(io, UInt32)
     RDB_TRAFFIC_LIGHT_EXT_t(ctrlId, cycleTime, noPhases, dataSize)
 end
 function Base.read!(io::IO, struct::RDB_TRAFFIC_LIGHT_EXT_t)
     struct.ctrlId = read(io, Int32)
     struct.cycleTime = read(io, Cfloat)
-    struct.noPhases = read(io, Uint16)
-    struct.dataSize = read(io, Uint32)
+    struct.noPhases = read(io, UInt16)
+    struct.dataSize = read(io, UInt32)
     struct
 end
 function Base.write(io::IO, struct::RDB_TRAFFIC_LIGHT_EXT_t)
@@ -2827,14 +2869,14 @@ function Base.show(io::IO, struct::RDB_TRAFFIC_LIGHT_t)
 end
 
 function Base.read(io::IO, ::Type{RDB_SYNC_t})
-    mask = read(io, Uint32)
-    cmdMask = read(io, Uint32)
+    mask = read(io, UInt32)
+    cmdMask = read(io, UInt32)
     systemTime = read(io, Cdouble)
     RDB_SYNC_t(mask, cmdMask, systemTime)
 end
 function Base.read!(io::IO, struct::RDB_SYNC_t)
-    struct.mask = read(io, Uint32)
-    struct.cmdMask = read(io, Uint32)
+    struct.mask = read(io, UInt32)
+    struct.cmdMask = read(io, UInt32)
     struct.systemTime = read(io, Cdouble)
     struct
 end
@@ -2851,17 +2893,17 @@ function Base.show(io::IO, struct::RDB_SYNC_t)
 end
 
 function Base.read(io::IO, ::Type{RDB_ROAD_QUERY_t})
-    id = read(io, Uint16)
-    flags = read(io, Uint16)
-    spare = (read(io, Uint16), read(io, Uint16))
+    id = read(io, UInt16)
+    flags = read(io, UInt16)
+    spare = (read(io, UInt16), read(io, UInt16))
     x = read(io, Cdouble)
     y = read(io, Cdouble)
     RDB_ROAD_QUERY_t(id, flags, spare, x, y)
 end
 function Base.read!(io::IO, struct::RDB_ROAD_QUERY_t)
-    struct.id = read(io, Uint16)
-    struct.flags = read(io, Uint16)
-    struct.spare = (read(io, Uint16), read(io, Uint16))
+    struct.id = read(io, UInt16)
+    struct.flags = read(io, UInt16)
+    struct.spare = (read(io, UInt16), read(io, UInt16))
     struct.x = read(io, Cdouble)
     struct.y = read(io, Cdouble)
     struct
@@ -2885,15 +2927,15 @@ Base.sizeof(::RDB_ROAD_QUERY_t) = 24
 Base.sizeof(::Type{RDB_ROAD_QUERY_t}) = 24
 
 function Base.read(io::IO, ::Type{RDB_SCP_t})
-    version = read(io, Uint16)
-    spare = read(io, Uint16)
-    dataSize = read(io, Uint32)
+    version = read(io, UInt16)
+    spare = read(io, UInt16)
+    dataSize = read(io, UInt32)
     RDB_SCP_t(version, spare, dataSize)
 end
 function Base.read!(io::IO, struct::RDB_SCP_t)
-    struct.version = read(io, Uint16)
-    struct.spare = read(io, Uint16)
-    struct.dataSize = read(io, Uint32)
+    struct.version = read(io, UInt16)
+    struct.spare = read(io, UInt16)
+    struct.dataSize = read(io, UInt32)
     struct
 end
 function Base.write(io::IO, struct::RDB_SCP_t)
@@ -2909,17 +2951,17 @@ function Base.show(io::IO, struct::RDB_SCP_t)
 end
 
 function Base.read(io::IO, ::Type{RDB_PROXY_t})
-    protocol = read(io, Uint16)
-    pkgId = read(io, Uint16)
-    spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
-    dataSize = read(io, Uint32)
+    protocol = read(io, UInt16)
+    pkgId = read(io, UInt16)
+    spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
+    dataSize = read(io, UInt32)
     RDB_PROXY_t(protocol, pkgId, spare, dataSize)
 end
 function Base.read!(io::IO, struct::RDB_PROXY_t)
-    struct.protocol = read(io, Uint16)
-    struct.pkgId = read(io, Uint16)
-    struct.spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
-    struct.dataSize = read(io, Uint32)
+    struct.protocol = read(io, UInt16)
+    struct.pkgId = read(io, UInt16)
+    struct.spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
+    struct.dataSize = read(io, UInt32)
     struct
 end
 function Base.write(io::IO, struct::RDB_PROXY_t)
@@ -2939,19 +2981,19 @@ Base.sizeof(::RDB_PROXY_t) = 32
 Base.sizeof(::Type{RDB_PROXY_t}) = 32
 
 function Base.read(io::IO, ::Type{RDB_TRAJECTORY_t})
-    playerId = read(io, Uint32)
+    playerId = read(io, UInt32)
     spacing = read(io, Cdouble)
-    flags = read(io, Uint16)
-    noDataPoints = read(io, Uint16)
-    spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    flags = read(io, UInt16)
+    noDataPoints = read(io, UInt16)
+    spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     RDB_TRAJECTORY_t(playerId, spacing, flags, noDataPoints, spare)
 end
 function Base.read!(io::IO, struct::RDB_TRAJECTORY_t)
-    struct.playerId = read(io, Uint32)
+    struct.playerId = read(io, UInt32)
     struct.spacing = read(io, Cdouble)
-    struct.flags = read(io, Uint16)
-    struct.noDataPoints = read(io, Uint16)
-    struct.spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    struct.flags = read(io, UInt16)
+    struct.noDataPoints = read(io, UInt16)
+    struct.spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_TRAJECTORY_t)
@@ -2973,19 +3015,19 @@ Base.sizeof(::RDB_TRAJECTORY_t) = 32
 Base.sizeof(::Type{RDB_TRAJECTORY_t}) = 32
 
 function Base.read(io::IO, ::Type{RDB_MOTION_SYSTEM_t})
-    playerId = read(io, Uint32)
-    flags = read(io, Uint32)
+    playerId = read(io, UInt32)
+    flags = read(io, UInt32)
     pos = read(io, RDB_COORD_t)
     speed = read(io, RDB_COORD_t)
-    spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     RDB_MOTION_SYSTEM_t(playerId, flags, pos, speed, spare)
 end
 function Base.read!(io::IO, struct::RDB_MOTION_SYSTEM_t)
-    struct.playerId = read(io, Uint32)
-    struct.flags = read(io, Uint32)
+    struct.playerId = read(io, UInt32)
+    struct.flags = read(io, UInt32)
     struct.pos = read(io, RDB_COORD_t)
     struct.speed = read(io, RDB_COORD_t)
-    struct.spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    struct.spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_MOTION_SYSTEM_t)
@@ -3031,21 +3073,21 @@ function Base.show(io::IO, struct::RDB_START_OF_FRAME_t)
 end
 
 function Base.read(io::IO, ::Type{RDB_STEER_2_DYN_t})
-    playerId = read(io, Uint32)
-    state = read(io, Uint32)
+    playerId = read(io, UInt32)
+    state = read(io, UInt32)
     angle = read(io, Cfloat)
     rev = read(io, Cfloat)
     torque = read(io, Cfloat)
-    spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     RDB_STEER_2_DYN_t(playerId, state, angle, rev, torque, spare)
 end
 function Base.read!(io::IO, struct::RDB_STEER_2_DYN_t)
-    struct.playerId = read(io, Uint32)
-    struct.state = read(io, Uint32)
+    struct.playerId = read(io, UInt32)
+    struct.state = read(io, UInt32)
     struct.angle = read(io, Cfloat)
     struct.rev = read(io, Cfloat)
     struct.torque = read(io, Cfloat)
-    struct.spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    struct.spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_STEER_2_DYN_t)
@@ -3069,31 +3111,31 @@ Base.sizeof(::RDB_STEER_2_DYN_t) = 52
 Base.sizeof(::Type{RDB_STEER_2_DYN_t}) = 52
 
 function Base.read(io::IO, ::Type{RDB_DYN_2_STEER_t})
-    playerId = read(io, Uint32)
-    state = read(io, Uint16)
-    cmd = read(io, Uint16)
-    effects = read(io, Uint32)
+    playerId = read(io, UInt32)
+    state = read(io, UInt16)
+    cmd = read(io, UInt16)
+    effects = read(io, UInt32)
     torque = read(io, Cfloat)
     friction = read(io, Cfloat)
     damping = read(io, Cfloat)
     stiffness = read(io, Cfloat)
     velocity = read(io, Cfloat)
     angle = read(io, Cfloat)
-    spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     RDB_DYN_2_STEER_t(playerId, state, cmd, effects, torque, friction, damping, stiffness, velocity, angle, spare)
 end
 function Base.read!(io::IO, struct::RDB_DYN_2_STEER_t)
-    struct.playerId = read(io, Uint32)
-    struct.state = read(io, Uint16)
-    struct.cmd = read(io, Uint16)
-    struct.effects = read(io, Uint32)
+    struct.playerId = read(io, UInt32)
+    struct.state = read(io, UInt16)
+    struct.cmd = read(io, UInt16)
+    struct.effects = read(io, UInt32)
     struct.torque = read(io, Cfloat)
     struct.friction = read(io, Cfloat)
     struct.damping = read(io, Cfloat)
     struct.stiffness = read(io, Cfloat)
     struct.velocity = read(io, Cfloat)
     struct.angle = read(io, Cfloat)
-    struct.spare = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    struct.spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_DYN_2_STEER_t)
@@ -3127,20 +3169,20 @@ Base.sizeof(::RDB_DYN_2_STEER_t) = 68
 Base.sizeof(::Type{RDB_DYN_2_STEER_t}) = 68
 
 # function Base.read(io::IO, ::Type{RDB_MSG_HDR_t})
-#     magicNo = read(io, Uint16)
-#     version = read(io, Uint16)
-#     headerSize = read(io, Uint32)
-#     dataSize = read(io, Uint32)
-#     frameNo = read(io, Uint32)
+#     magicNo = read(io, UInt16)
+#     version = read(io, UInt16)
+#     headerSize = read(io, UInt32)
+#     dataSize = read(io, UInt32)
+#     frameNo = read(io, UInt32)
 #     simTime = read(io, Cdouble)
 #     RDB_MSG_HDR_t(magicNo, version, headerSize, dataSize, frameNo, simTime)
 # end
 # function Base.read!(io::IO, struct::RDB_MSG_HDR_t)
-#     struct.magicNo = read(io, Uint16)
-#     struct.version = read(io, Uint16)
-#     struct.headerSize = read(io, Uint32)
-#     struct.dataSize = read(io, Uint32)
-#     struct.frameNo = read(io, Uint32)
+#     struct.magicNo = read(io, UInt16)
+#     struct.version = read(io, UInt16)
+#     struct.headerSize = read(io, UInt32)
+#     struct.dataSize = read(io, UInt32)
+#     struct.frameNo = read(io, UInt32)
 #     struct.simTime = read(io, Cdouble)
 #     struct
 # end
@@ -3163,19 +3205,19 @@ Base.sizeof(::Type{RDB_DYN_2_STEER_t}) = 68
 # end
 
 function Base.read(io::IO, ::Type{RDB_MSG_ENTRY_HDR_t})
-    headerSize = read(io, Uint32)
-    dataSize = read(io, Uint32)
-    elementSize = read(io, Uint32)
-    pkgId = read(io, Uint16)
-    flags = read(io, Uint16)
+    headerSize = read(io, UInt32)
+    dataSize = read(io, UInt32)
+    elementSize = read(io, UInt32)
+    pkgId = read(io, UInt16)
+    flags = read(io, UInt16)
     RDB_MSG_ENTRY_HDR_t(headerSize, dataSize, elementSize, pkgId, flags)
 end
 function Base.read!(io::IO, struct::RDB_MSG_ENTRY_HDR_t)
-    struct.headerSize = read(io, Uint32)
-    struct.dataSize = read(io, Uint32)
-    struct.elementSize = read(io, Uint32)
-    struct.pkgId = read(io, Uint16)
-    struct.flags = read(io, Uint16)
+    struct.headerSize = read(io, UInt32)
+    struct.dataSize = read(io, UInt32)
+    struct.elementSize = read(io, UInt32)
+    struct.pkgId = read(io, UInt16)
+    struct.flags = read(io, UInt16)
     struct
 end
 function Base.write(io::IO, struct::RDB_MSG_ENTRY_HDR_t)
@@ -3219,23 +3261,23 @@ end
 # end
 
 function Base.read(io::IO, ::Type{RDB_SHM_BUFFER_INFO_t})
-    thisSize = read(io, Uint32)
-    bufferSize = read(io, Uint32)
-    id = read(io, Uint16)
-    spare0 = read(io, Uint16)
-    flags = read(io, Uint32)
-    offset = read(io, Uint32)
-    spare1 = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    thisSize = read(io, UInt32)
+    bufferSize = read(io, UInt32)
+    id = read(io, UInt16)
+    spare0 = read(io, UInt16)
+    flags = read(io, UInt32)
+    offset = read(io, UInt32)
+    spare1 = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     RDB_SHM_BUFFER_INFO_t(thisSize, bufferSize, id, spare0, flags, offset, spare1)
 end
 function Base.read!(io::IO, struct::RDB_SHM_BUFFER_INFO_t)
-    struct.thisSize = read(io, Uint32)
-    struct.bufferSize = read(io, Uint32)
-    struct.id = read(io, Uint16)
-    struct.spare0 = read(io, Uint16)
-    struct.flags = read(io, Uint32)
-    struct.offset = read(io, Uint32)
-    struct.spare1 = (read(io, Uint32), read(io, Uint32), read(io, Uint32), read(io, Uint32))
+    struct.thisSize = read(io, UInt32)
+    struct.bufferSize = read(io, UInt32)
+    struct.id = read(io, UInt16)
+    struct.spare0 = read(io, UInt16)
+    struct.flags = read(io, UInt32)
+    struct.offset = read(io, UInt32)
+    struct.spare1 = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_SHM_BUFFER_INFO_t)
@@ -3261,15 +3303,15 @@ Base.sizeof(::RDB_SHM_BUFFER_INFO_t) = 36
 Base.sizeof(::Type{RDB_SHM_BUFFER_INFO_t}) = 36
 
 function Base.read(io::IO, ::Type{RDB_SHM_HDR_t})
-    headerSize = read(io, Uint32)
-    dataSize = read(io, Uint32)
-    noBuffers = read(io, Uint8)
+    headerSize = read(io, UInt32)
+    dataSize = read(io, UInt32)
+    noBuffers = read(io, UInt8)
     RDB_SHM_HDR_t(headerSize, dataSize, noBuffers)
 end
 function Base.read!(io::IO, struct::RDB_SHM_HDR_t)
-    struct.headerSize = read(io, Uint32)
-    struct.dataSize = read(io, Uint32)
-    struct.noBuffers = read(io, Uint8)
+    struct.headerSize = read(io, UInt32)
+    struct.dataSize = read(io, UInt32)
+    struct.noBuffers = read(io, UInt8)
     struct
 end
 function Base.write(io::IO, struct::RDB_SHM_HDR_t)
@@ -3499,7 +3541,7 @@ function rdb_type_to_pkg_id(rdbtype::Any)
     end
 end
 function rdb_pkg_id_to_type(id::Integer)
-    # NOTE(tim): returns a Uint16
+    # NOTE(tim): returns a UInt16
 
     if id == RDB_PKG_ID_START_OF_FRAME    
         RDB_START_OF_FRAME_t

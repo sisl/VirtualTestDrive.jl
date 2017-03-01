@@ -42,7 +42,7 @@ export
 
 type PlayerHeader
     ptype           :: Int     # player type
-    id              :: Uint    # player ID
+    id              :: UInt    # player ID
     name            :: String  # player name
     file            :: String  # ???
     length          :: Float64 # player length [m]         
@@ -50,7 +50,7 @@ type PlayerHeader
     center_offset_x :: Float64 # x-offset between center of geometry and player reference point (in body frame) [m]
     center_offset_y :: Float64 # x-offset between center of geometry and player reference point (in body frame) [m]
     model           :: Int     # graphical model
-    category        :: Uint    # category
+    category        :: UInt    # category
     ctrl            :: Int     # controller type
     ctrl_arg        :: Int     # controller argument
     master          :: Int     # player acted as master in the simulation {0,1}

@@ -4,7 +4,8 @@ using LibExpat
 using Compat
 using DataFrames
 
-import Base: TcpSocket, ==
+#import Base: TcpSocket, ==
+import Base: TCPSocket, == #Xiaobai
 
 macro lintpragma(s)
 end
