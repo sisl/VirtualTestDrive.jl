@@ -54,7 +54,7 @@ function step_with_udp_explicit_stepwidth(
     stepcount = 0
     Δt = convert(Cfloat, framestep)
     simTime = simtime_start
-    frameNo = convert(Uint32, frame_start)
+    frameNo = convert(UInt32, frame_start)
 
    # playerId:        1
    # steeringWheel:   +0.0000000000000000e+00

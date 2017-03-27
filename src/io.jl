@@ -30,6 +30,7 @@ type SCPMessage
         new(header, payload)
     end
     SCPMessage(payloadstr::String) = SCPMessage("SCP", "TaskControl", payloadstr)
+    #SCPMessage(payloadstr::String) = SCPMessage("ScVis", "SCP", payloadstr) #Xiaobai
 
     function SCPMessage(sender::Vector{UInt8},receiver::Vector{UInt8}, payload::Vector{UInt8})
         if payload[end] != NULL
@@ -71,8 +72,8 @@ end
 function Base.write(io::IO, message::SCPMessage)
     write(io, message.header)
     write(io, message.payload)
-    print_with_color(:blue, STDOUT, "SENDING\n")
-    print_message(message)
+    #print_with_color(:blue, STDOUT, "SENDING\n")
+    #print_message(message)
 end
 
 function Base.read(io::IO, ::Type{SCPMessage}, already_has_magic_number::Bool=false)

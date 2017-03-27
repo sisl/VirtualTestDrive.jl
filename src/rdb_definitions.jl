@@ -536,7 +536,7 @@ type RDB_ROADMARK_t <: RDB_PACKAGE_ELEMENT
     color::UInt8
     noDataPoints::UInt16
     #spare1::(UInt32, UInt32) #in type definition, expected Type{T}, got Tuple{DataType,DataType}
-    spare1::Union{UInt32, UInt32} #Xiaobai
+    spare1::Tuple{UInt32, UInt32} #Xiaobai
 end
 
 type RDB_LANE_INFO_t <: RDB_PACKAGE_ELEMENT
@@ -582,6 +582,7 @@ type RDB_OBJECT_STATE_BASE_t
     category::UInt8
     thetype::UInt8
     visMask::UInt16
+ name::Tuple{Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar,Cchar}
     geo::RDB_GEOMETRY_t
     pos::RDB_COORD_t
     parent::UInt32
@@ -591,8 +592,9 @@ end
 type RDB_OBJECT_STATE_EXT_t
     speed::RDB_COORD_t
     accel::RDB_COORD_t
+    traveledDist::Cfloat
     #spare::(UInt32, UInt32, UInt32, UInt32)
-    spare::Union{UInt32, UInt32, UInt32, UInt32} #Xiaobai
+    spare::Tuple{UInt32, UInt32, UInt32} #Xiaobai
 end
 
 type RDB_OBJECT_STATE_t <: RDB_PACKAGE_ELEMENT
@@ -605,7 +607,7 @@ type RDB_ENGINE_BASE_t
     rps::Cfloat
     load::Cfloat
     #spare1::(UInt32, UInt32)
-    spare1::Union{UInt32, UInt32} #Xiaobai
+    spare1::Tuple{UInt32, UInt32} #Xiaobai
 end
 
 type RDB_ENGINE_EXT_t
@@ -617,7 +619,7 @@ type RDB_ENGINE_EXT_t
     fuelCurrent::Cfloat
     fuelAverage::Cfloat
     #spare::(UInt32, UInt32)
-    spare::Union{UInt32, UInt32} #Xiaobai
+    spare::Tuple{UInt32, UInt32} #Xiaobai
 end
 
 type RDB_ENGINE_t <: RDB_PACKAGE_ELEMENT
@@ -632,7 +634,7 @@ type RDB_DRIVETRAIN_BASE_t
     gear::UInt8
     spare0::UInt8
     #spare1::(UInt32, UInt32)
-    spare1::Union{UInt32, UInt32} #Xiaobai
+    spare1::Tuple{UInt32, UInt32} #Xiaobai
 end
 
 type RDB_DRIVETRAIN_EXT_t
@@ -640,7 +642,7 @@ type RDB_DRIVETRAIN_EXT_t
     torqueCenterDiffOut::Cfloat
     torqueShaft::Cfloat
     #spare1::(UInt32, UInt32)
-    spare1::Union{UInt32, UInt32} #Xiaobai
+    spare1::Tuple{UInt32, UInt32} #Xiaobai
 end
 
 type RDB_DRIVETRAIN_t <: RDB_PACKAGE_ELEMENT
@@ -653,14 +655,14 @@ type RDB_WHEEL_BASE_t
     id::UInt8
     flags::UInt8
     #spare0::(UInt8, UInt8)
-    spare0::Union{UInt8, UInt8} #Xiaobai
+    spare0::Tuple{UInt8, UInt8} #Xiaobai
     radiusStatic::Cfloat
     springCompression::Cfloat
     rotAngle::Cfloat
     slip::Cfloat
     steeringAngle::Cfloat
     #spare1::(UInt32, UInt32, UInt32, UInt32)
-    spare1::Union{UInt32, UInt32, UInt32, UInt32} #Xiaobai
+    spare1::Tuple{UInt32, UInt32, UInt32, UInt32} #Xiaobai
 end
 
 type RDB_WHEEL_EXT_t
@@ -669,13 +671,13 @@ type RDB_WHEEL_EXT_t
     forceLat::Cfloat
     forceLong::Cfloat
     #forceTireWheelXYZ::(Cfloat, Cfloat, Cfloat)
-    forceTireWheelXYZ::Union{Cfloat, Cfloat, Cfloat} #Xiaobai
+    forceTireWheelXYZ::Tuple{Cfloat, Cfloat, Cfloat} #Xiaobai
     radiusDynamic::Cfloat
     brakePressure::Cfloat
     torqueDriveShaft::Cfloat
     damperSpeed::Cfloat
     #spare2::(UInt32, UInt32, UInt32, UInt32)
-    spare2::Union{UInt32, UInt32, UInt32, UInt32} #Xiaobai
+    spare2::Tuple{UInt32, UInt32, UInt32, UInt32} #Xiaobai
 end
 
 type RDB_WHEEL_t <: RDB_PACKAGE_ELEMENT
@@ -695,7 +697,7 @@ type RDB_VEHICLE_SYSTEMS_t <: RDB_PACKAGE_ELEMENT
     displayLightMask::UInt16
     spare0::UInt16
     #spare::(UInt32, UInt32, UInt32, UInt32, UInt32)
-    spare::Union{UInt32, UInt32, UInt32, UInt32, UInt32} #Xiaobai
+    spare::Tuple{UInt32, UInt32, UInt32, UInt32, UInt32} #Xiaobai
 end
 
 type RDB_VEHICLE_SETUP_t <: RDB_PACKAGE_ELEMENT
@@ -703,7 +705,7 @@ type RDB_VEHICLE_SETUP_t <: RDB_PACKAGE_ELEMENT
     mass::Cfloat
     wheelBase::Cfloat
     #spare::(Int32, Int32, Int32, Int32)
-    spare::Union{Int32, Int32, Int32, Int32} #Xiaobai
+    spare::Tuple{Int32, Int32, Int32, Int32} #Xiaobai
 end
 
 type RDB_IMAGE_t <: RDB_PACKAGE_ELEMENT
@@ -715,9 +717,9 @@ type RDB_IMAGE_t <: RDB_PACKAGE_ELEMENT
     cameraId::UInt16
     imgSize::UInt32
     #color::(UInt8, UInt8, UInt8, UInt8)
-    color::Union{UInt8, UInt8, UInt8, UInt8} #Xiaobai
+    color::Tuple{UInt8, UInt8, UInt8, UInt8} #Xiaobai
     #spare1::(UInt32, UInt32, UInt32)
-    spare1::Union{UInt32, UInt32, UInt32} #Xiaobai
+    spare1::Tuple{UInt32, UInt32, UInt32} #Xiaobai
 end
 
 type RDB_FUNCTION_t <: RDB_PACKAGE_ELEMENT
@@ -727,7 +729,7 @@ type RDB_FUNCTION_t <: RDB_PACKAGE_ELEMENT
     spare::UInt16
     dataSize::UInt32
     #spare1::(UInt32, UInt32, UInt32, UInt32)
-    spare1::Union{UInt32, UInt32, UInt32, UInt32} #Xiaobai
+    spare1::Tuple{UInt32, UInt32, UInt32, UInt32} #Xiaobai
 end
 
 type RDB_SENSOR_STATE_t <: RDB_PACKAGE_ELEMENT
@@ -737,13 +739,13 @@ type RDB_SENSOR_STATE_t <: RDB_PACKAGE_ELEMENT
     spare0::UInt16
     hostId::UInt32
     #fovHV::(Cfloat, Cfloat)
-    fovHV::Union{Cfloat, Cfloat} #Xiaobai
+    fovHV::Tuple{Cfloat, Cfloat} #Xiaobai
     #clipNF::(Cfloat, Cfloat)
-    clipNF::Union{Cfloat, Cfloat}
+    clipNF::Tuple{Cfloat, Cfloat}
     pos::RDB_COORD_t
     originCoordSys::RDB_COORD_t
     #spare::(Int32, Int32, Int32, Int32)
-    spare::Union{Int32, Int32, Int32, Int32} #Xiaobai
+    spare::Tuple{Int32, Int32, Int32, Int32} #Xiaobai
 end
 
 type RDB_SENSOR_OBJECT_t <: RDB_PACKAGE_ELEMENT
@@ -756,9 +758,9 @@ type RDB_SENSOR_OBJECT_t <: RDB_PACKAGE_ELEMENT
     sensorPos::RDB_COORD_t
     occlusion::Int8
     #spare0::(UInt8, UInt8, UInt8)
-    spare0::Union{UInt8, UInt8, UInt8}
+    spare0::Tuple{UInt8, UInt8, UInt8}
     #spare::(UInt32, UInt32, UInt32)
-    spare::Union{UInt32, UInt32, UInt32}
+    spare::Tuple{UInt32, UInt32, UInt32}
 end
 
 type RDB_CAMERA_t <: RDB_PACKAGE_ELEMENT
@@ -774,7 +776,7 @@ type RDB_CAMERA_t <: RDB_PACKAGE_ELEMENT
     principalY::Cfloat
     pos::RDB_COORD_t
     #spare1::(UInt32, UInt32, UInt32, UInt32)
-    spare1::Union{UInt32, UInt32, UInt32, UInt32}
+    spare1::Tuple{UInt32, UInt32, UInt32, UInt32}
 end
 
 type RDB_LIGHT_SOURCE_BASE_t
@@ -786,20 +788,20 @@ type RDB_LIGHT_SOURCE_BASE_t
     flags::UInt16
     spare0::UInt16
     #spare1::(Int32, Int32)
-    spare1::Union{Int32, Int32}
+    spare1::Tuple{Int32, Int32}
 end
 
 type RDB_LIGHT_SOURCE_EXT_t
     #nearFar::(Cfloat, Cfloat)
-    nearFar::Union{Cfloat, Cfloat}
+    nearFar::Tuple{Cfloat, Cfloat}
     #frustumLRBT::(Cfloat, Cfloat, Cfloat, Cfloat)
-    frustumLRBT::Union{Cfloat, Cfloat, Cfloat, Cfloat}
+    frustumLRBT::Tuple{Cfloat, Cfloat, Cfloat, Cfloat}
     #intensity::(Cfloat, Cfloat, Cfloat)
-    intensity::Union{Cfloat, Cfloat, Cfloat}
+    intensity::Tuple{Cfloat, Cfloat, Cfloat}
     #atten::(Cfloat, Cfloat, Cfloat)
-    atten::Union{Cfloat, Cfloat, Cfloat}
+    atten::Tuple{Cfloat, Cfloat, Cfloat}
     #spare1::(Int32, Int32, Int32)
-    spare1::Union{Int32, Int32, Int32}
+    spare1::Tuple{Int32, Int32, Int32}
 end
 
 type RDB_LIGHT_SOURCE_t <: RDB_PACKAGE_ELEMENT
@@ -844,7 +846,7 @@ type RDB_ROAD_STATE_t <: RDB_PACKAGE_ELEMENT
     waterLevel::Cfloat
     eventMask::UInt32
     #spare2::(Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32)
-    spare2::Union{Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32}
+    spare2::Tuple{Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32}
 end
 
 type RDB_ENVIRONMENT_t <: RDB_PACKAGE_ELEMENT
@@ -855,14 +857,14 @@ type RDB_ENVIRONMENT_t <: RDB_PACKAGE_ELEMENT
     cloudState::UInt8
     flags::UInt16
     #spare1::(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)
-    spare1::Union{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
+    spare1::Tuple{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
 end
 
 type RDB_PED_ANIMATION_t <: RDB_PACKAGE_ELEMENT
     playerId::UInt32
     pos::RDB_COORD_t
     #spare::(UInt32, UInt32, UInt32, UInt32)
-    spare::Union{UInt32, UInt32, UInt32, UInt32}
+    spare::Tuple{UInt32, UInt32, UInt32, UInt32}
     noCoords::UInt32
     dataSize::UInt32
 end
@@ -876,7 +878,7 @@ type RDB_CUSTOM_SCORING_t <: RDB_PACKAGE_ELEMENT
     stateFlags::UInt32
     slip::Cfloat
     #spare::(UInt32, UInt32, UInt32, UInt32)
-    spare::Union{UInt32, UInt32, UInt32, UInt32}
+    spare::Tuple{UInt32, UInt32, UInt32, UInt32}
 end
 
 type RDB_TRIGGER_t <: RDB_PACKAGE_ELEMENT
@@ -901,7 +903,7 @@ type RDB_DRIVER_CTRL_t <: RDB_PACKAGE_ELEMENT
     gear::UInt8
     sourceId::UInt8
     #spare0::(UInt8, UInt8)
-    spare0::Union{UInt8, UInt8}
+    spare0::Tuple{UInt8, UInt8}
     validityFlags::UInt32
     flags::UInt32
     mockupInput0::UInt32
@@ -915,10 +917,10 @@ type RDB_DRIVER_PERCEPTION_t <: RDB_PACKAGE_ELEMENT
     speedFromRules::Cfloat
     distToSpeed::Cfloat
     #spare0::(Cfloat, Cfloat, Cfloat, Cfloat)
-    spare0::Union{Cfloat, Cfloat, Cfloat, Cfloat}
+    spare0::Tuple{Cfloat, Cfloat, Cfloat, Cfloat}
     flags::UInt32
     #spare::(UInt32, UInt32, UInt32, UInt32)
-    spare::Union{UInt32, UInt32, UInt32, UInt32}
+    spare::Tuple{UInt32, UInt32, UInt32, UInt32}
 end
 
 type RDB_TRAFFIC_LIGHT_BASE_t
@@ -931,7 +933,7 @@ type RDB_TRAFFIC_LIGHT_PHASE_t
     duration::Cfloat
     thetype::UInt8
     #spare::(UInt8, UInt8, UInt8)
-    spare::Union{UInt8, UInt8, UInt8}
+    spare::Tuple{UInt8, UInt8, UInt8}
 end
 
 type RDB_TRAFFIC_LIGHT_EXT_t
@@ -956,7 +958,7 @@ type RDB_ROAD_QUERY_t
     id::UInt16
     flags::UInt16
     #spare::(UInt16, UInt16)
-    spare::Union{UInt16, UInt16}
+    spare::Tuple{UInt16, UInt16}
     x::Cdouble
     y::Cdouble
 end
@@ -971,7 +973,7 @@ type RDB_PROXY_t <: RDB_PACKAGE_ELEMENT
     protocol::UInt16
     pkgId::UInt16
     #spare::(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)
-    spare::Union{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
+    spare::Tuple{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
     dataSize::UInt32
 end
 
@@ -981,7 +983,7 @@ type RDB_TRAJECTORY_t
     flags::UInt16
     noDataPoints::UInt16
     #spare::(UInt32, UInt32, UInt32, UInt32)
-    spare::Union{UInt32, UInt32, UInt32, UInt32}
+    spare::Tuple{UInt32, UInt32, UInt32, UInt32}
 end
 
 type RDB_MOTION_SYSTEM_t <: RDB_PACKAGE_ELEMENT
@@ -990,13 +992,13 @@ type RDB_MOTION_SYSTEM_t <: RDB_PACKAGE_ELEMENT
     pos::RDB_COORD_t
     speed::RDB_COORD_t
     #spare::(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)
-    spare::Union{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
+    spare::Tuple{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
 end
 
-type RDB_END_OF_FRAME_t
+type RDB_END_OF_FRAME_t <: RDB_PACKAGE_ELEMENT #Xiaobai
 end
 
-type RDB_START_OF_FRAME_t
+type RDB_START_OF_FRAME_t <: RDB_PACKAGE_ELEMENT #Xiaobai
 end
 
 type RDB_STEER_2_DYN_t
@@ -1006,7 +1008,7 @@ type RDB_STEER_2_DYN_t
     rev::Cfloat
     torque::Cfloat
     #spare::(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)
-    spare::Union{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
+    spare::Tuple{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
 end
 
 type RDB_DYN_2_STEER_t
@@ -1021,7 +1023,7 @@ type RDB_DYN_2_STEER_t
     velocity::Cfloat
     angle::Cfloat
     #spare::(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)
-    spare::Union{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
+    spare::Tuple{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
 end
 
 type RDB_MSG_HDR_t
@@ -1055,7 +1057,7 @@ type RDB_SHM_BUFFER_INFO_t
     flags::UInt32
     offset::UInt32
     #spare1::(UInt32, UInt32, UInt32, UInt32)
-    spare1::Union{UInt32, UInt32, UInt32, UInt32}
+    spare1::Tuple{UInt32, UInt32, UInt32, UInt32}
 end
 
 type RDB_SHM_HDR_t
@@ -1487,17 +1489,19 @@ function Base.read(io::IO, ::Type{RDB_OBJECT_STATE_BASE_t})
     category = read(io, UInt8)
     thetype = read(io, UInt8)
     visMask = read(io, UInt16)
+    name = (read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar))
     geo = read(io, RDB_GEOMETRY_t)
     pos = read(io, RDB_COORD_t)
     parent = read(io, UInt32)
     spare1 = read(io, UInt32)
-    RDB_OBJECT_STATE_BASE_t(id, category, thetype, visMask, geo, pos, parent, spare1)
+    RDB_OBJECT_STATE_BASE_t(id, category, thetype, visMask,name, geo, pos, parent, spare1)
 end
 function Base.read!(io::IO, struct::RDB_OBJECT_STATE_BASE_t)
     struct.id = read(io, UInt32)
     struct.category = read(io, UInt8)
     struct.thetype = read(io, UInt8)
     struct.visMask = read(io, UInt16)
+    struct.name = (read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar),read(io,Cchar))
     struct.geo = read(io, RDB_GEOMETRY_t)
     struct.pos = read(io, RDB_COORD_t)
     struct.parent = read(io, UInt32)
@@ -1509,6 +1513,7 @@ function Base.write(io::IO, struct::RDB_OBJECT_STATE_BASE_t)
     write(io, struct.category)
     write(io, struct.thetype)
     write(io, struct.visMask)
+    write(io, struct.name)
     write(io, struct.geo)
     write(io, struct.pos)
     write(io, struct.parent)
@@ -1520,6 +1525,7 @@ function Base.show(io::IO, struct::RDB_OBJECT_STATE_BASE_t)
     @printf(io, "   category: %s\n", hex(struct.category))
     @printf(io, "   thetype:  %s\n", hex(struct.thetype))
     @printf(io, "   visMask:  %s\n", hex(struct.visMask))
+    println(io, "name: ",convert(Tuple{Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char,Char},struct.name))
     @printf(io, "   geo:      RDB_GEOMETRY_t\n")
     @printf(io, "   pos:      RDB_COORD_t\n")
     @printf(io, "   parent:   %s\n", hex(struct.parent))
@@ -1529,24 +1535,28 @@ end
 function Base.read(io::IO, ::Type{RDB_OBJECT_STATE_EXT_t})
     speed = read(io, RDB_COORD_t)
     accel = read(io, RDB_COORD_t)
-    spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
-    RDB_OBJECT_STATE_EXT_t(speed, accel, spare)
+    traveledDist = read(io,Cfloat)
+    spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32))
+    RDB_OBJECT_STATE_EXT_t(speed, accel, traveledDist, spare)
 end
 function Base.read!(io::IO, struct::RDB_OBJECT_STATE_EXT_t)
     struct.speed = read(io, RDB_COORD_t)
     struct.accel = read(io, RDB_COORD_t)
-    struct.spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32), read(io, UInt32))
+    struct.traveledDist = read(io,Cfloat)
+    struct.spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32))
     struct
 end
 function Base.write(io::IO, struct::RDB_OBJECT_STATE_EXT_t)
     write(io, struct.speed)
     write(io, struct.accel)
+    write(io, struct.traveledDist)
     write(io, struct.spare)
 end
 function Base.show(io::IO, struct::RDB_OBJECT_STATE_EXT_t)
     println(io, "RDB_OBJECT_STATE_EXT_t:")
     @printf(io, "   speed: RDB_COORD_t\n")
     @printf(io, "   accel: RDB_COORD_t\n")
+    @printf(io, "   traveledDist: %f\n",struct.traveledDist)
     @printf(io, "   spare: %s\n", hex(struct.spare))
 end
 Base.sizeof(::RDB_OBJECT_STATE_EXT_t) = 104
@@ -3334,7 +3344,7 @@ function Base.hex(tup::Tuple)
         if i != 1
             str = str * ", "
         end
-        str = str * hex(x)
+        str = str * hex(convert(Int,round(x))) #Xiaobai
     end
     str * ")"
 end
@@ -3438,7 +3448,7 @@ function rdb_pkg_id_to_string(id::Integer)
     elseif id == RDB_PKG_ID_CUSTOM_USER_A_END
         "RDB_PKG_ID_CUSTOM_USER_A_END"  
     else
-        warn("unknown RDB package id $id")
+        #warn("unknown RDB package id $id")
         "UNKNOWN"
     end
 end
@@ -3521,8 +3531,8 @@ function rdb_type_to_pkg_id(rdbtype::Any)
         RDB_PKG_ID_MOTION_SYSTEM
     # elseif isa(rdbtype, RDB_OCCLUSION_MATRIX_t
     #     RDB_PKG_ID_OCCLUSION_MATRIX
-    # elseif isa(rdbtype, RDB_CUSTOM_SCORING_t
-    #     RDB_PKG_ID_RDB_PKG_ID_CUSTOM_SCORING     
+    elseif isa(rdbtype, RDB_CUSTOM_SCORING_t)
+        RDB_PKG_ID_CUSTOM_SCORING     
     # elseif isa(rdbtype, RDB_CUSTOM_AUDI_FORUM_t
     #     RDB_PKG_ID_RDB_PKG_ID_CUSTOM_AUDI_FORUM  
     # elseif isa(rdbtype, RDB_CUSTOM_OPTIX_START_t
@@ -3621,8 +3631,8 @@ function rdb_pkg_id_to_type(id::Integer)
         RDB_MOTION_SYSTEM_t
     # elseif id == RDB_PKG_ID_OCCLUSION_MATRIX  
     #     RDB_OCCLUSION_MATRIX_t
-    # elseif id == RDB_PKG_ID_CUSTOM_SCORING
-    #     RDB_RDB_PKG_ID_CUSTOM_SCORING_t     
+    elseif id == RDB_PKG_ID_CUSTOM_SCORING
+        RDB_CUSTOM_SCORING_t     
     # elseif id == RDB_PKG_ID_CUSTOM_AUDI_FORUM
     #     RDB_RDB_PKG_ID_CUSTOM_AUDI_FORUM_t  
     # elseif id == RDB_PKG_ID_CUSTOM_OPTIX_START
@@ -3636,7 +3646,7 @@ function rdb_pkg_id_to_type(id::Integer)
     # elseif id == RDB_PKG_ID_CUSTOM_USER_A_END
     #     RDB_RDB_PKG_ID_CUSTOM_USER_A_END_t  
     else
-        warn("unknown RDB package id $id")
+        #warn("unknown RDB package id $id")
         "UNKNOWN"
     end
 end

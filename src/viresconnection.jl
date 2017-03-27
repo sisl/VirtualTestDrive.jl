@@ -50,8 +50,13 @@ type ViresConnection
         #     println(fout, read(UDP, RDB_Package))
         # end
 
-        @lintpragma( "Ignore unused obj" )
-        finalizer(retval, obj->stop_vires_components())
+        #@lintpragma( "Ignore unused obj" )
+        #finalizer(retval, obj->stop_vires_components())
         retval
     end
+end
+
+function disconnect!(connection::ViresConnection)
+        close(connection.SCP)
+        close(connection.UDP)
 end

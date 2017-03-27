@@ -89,6 +89,7 @@ function Base.read(io::IO, ::Type{RDB_Package}, already_read_magic_no::Bool=fals
 
     RDB_Package(header, entry_headers, data_blocks)
 end
+
 function Base.show(io::IO, pkg::RDB_Package)
     println(io, "RDB_Package:")
     println(io, "header: ", pkg.header)
@@ -104,13 +105,63 @@ function Base.show(io::IO, pkg::RDB_Package)
         data=pkg.data_blocks[i]
         @printf(io, "\t[%d %d %s %s]\n", eh.dataSize, eh.elementSize, rdb_pkg_id_to_string(eh.pkgId), hex(eh.flags))
         if rdb_pkg_id_to_string(eh.pkgId)=="DRIVER_CTRL"
+            #=
             playerId=convert(UInt32,data[1])
             println("playerId is ",playerId)
-            steeringTgt=convert(Cfloat,data[8])
+            println("size is ",size(data))
+            index=findn(data)
+            println("non-zero index is ",index)
+            println("non-zero value is",data[index])
+            =#
+            println("data is ", data)
         end
     end
     # Xiaobai
 end
+
+function write_udp_packet_with_start_end_of_frame(io::IO, elem::RDB_PACKAGE_ELEMENT, frameNo::Integer, simTime::Real, flags::UInt16=0x0000)
+
+    # println("sending $(typeof(elem)) packet")
+    #calculate dataSize
+    dataSize=convert(UInt32, sizeof(elem) + 3*sizeof(RDB_MSG_ENTRY_HDR_t))
+    
+    # write the RDB_MSG_HDR_t
+    write(io, RDB_MAGIC_NO)
+    write(io, RDB_VERSION)
+    write(io, convert(UInt32, sizeof(RDB_MSG_HDR_t)))
+    write(io, dataSize)
+    write(io, convert(UInt32, frameNo))
+    write(io, convert(Cdouble, simTime))
+    
+    #write start of frame
+        # write the RDB_MSG_ENTRY_HDR_t
+    write(io, convert(UInt32, sizeof(RDB_MSG_ENTRY_HDR_t)))
+    write(io, convert(UInt32, 0))
+    write(io, convert(UInt32, 0))
+    write(io, RDB_PKG_ID_START_OF_FRAME::UInt16)
+    write(io, flags)
+    
+    #write the entry
+        # write the RDB_MSG_ENTRY_HDR_t
+    write(io, convert(UInt32, sizeof(RDB_MSG_ENTRY_HDR_t)))
+    write(io, convert(UInt32, sizeof(elem)))
+    write(io, convert(UInt32, sizeof(elem)))
+    write(io, rdb_type_to_pkg_id(elem)::UInt16)
+    write(io, flags)
+
+        # write the entry
+    write(io, elem)
+    
+    #write end of frame
+        # write the RDB_MSG_ENTRY_HDR_t
+    write(io, convert(UInt32, sizeof(RDB_MSG_ENTRY_HDR_t)))
+    write(io, convert(UInt32, 0))
+    write(io, convert(UInt32, 0))
+    write(io, RDB_PKG_ID_END_OF_FRAME::UInt16)
+    write(io, flags)
+end
+
+###Xiaobai
 
 function write_udp_packet(io::IO, elem::RDB_PACKAGE_ELEMENT, frameNo::Integer, simTime::Real, flags::UInt16=0x0000)
 
@@ -134,7 +185,6 @@ function write_udp_packet(io::IO, elem::RDB_PACKAGE_ELEMENT, frameNo::Integer, s
     # write the entry
     write(io, elem)
 end
-
 function write_udp_packet(io::IO, ::RDB_START_OF_FRAME_t, frameNo::Integer, simTime::Real, flags::UInt16=0x0000)
 
     # println("sending start of frame")

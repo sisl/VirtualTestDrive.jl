@@ -22,7 +22,8 @@ function create_udp_entry_header{T<:RDB_PACKAGE_ELEMENT}(elements::Vector{T}, fl
     headerSize = sizeof(RDB_MSG_ENTRY_HDR_t)
     dataSize = sizeof(elements)
     elementSize = div(dataSize, length(elements))
-    pkgId = rdb_type_to_pkg_id(T)
+    #pkgId = rdb_type_to_pkg_id(T)
+    pkgId = rdb_type_to_pkg_id(elements[1])
     RDB_MSG_ENTRY_HDR_t(headerSize, dataSize, elementSize, pkgId, flags)
 end
 
@@ -41,7 +42,7 @@ function create_udp_entry(::Type{RDB_DRIVER_CTRL_t},
     speedTgt::Cfloat=convert(Cfloat,0),
     gear::UInt8=convert(UInt8,0),
     sourceId::UInt8=convert(UInt8,0),
-    spare0::Union{UInt8, UInt8}=convert(UInt8,0),
+    spare0::Tuple{UInt8, UInt8}=(convert(UInt8,0),convert(UInt8,0)),
     validityFlags::UInt32=convert(UInt32,0),
     flags::UInt32=convert(UInt32,0),
     mockupInput0::UInt32=convert(UInt32,0),
@@ -70,6 +71,6 @@ function create_udp_entry(::Type{RDB_DRIVER_CTRL_t},
     mockupInput0,
     mockupInput1,
     mockupInput2,
-    spare::UInt32)
+    spare)
         
 end
