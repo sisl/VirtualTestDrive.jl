@@ -4,7 +4,8 @@ using LibExpat
 using Compat
 using DataFrames
 
-import Base: TcpSocket, ==
+#import Base: TcpSocket, ==
+import Base: TCPSocket, == #Xiaobai
 
 macro lintpragma(s)
 end
@@ -45,6 +46,7 @@ export
     
     idle_and_print_messages
 
+    include("viresconnection.jl")
     include("constants.jl")
     include("rdb_definitions.jl")
     include("rdb_package_gen.jl")
@@ -52,10 +54,11 @@ export
     include("system.jl")
     include("driver_definition.jl")
     include("io.jl")
-    include("viresconnection.jl")
     include("xml_utils.jl")
     include("scp_xml.jl")
     include("outward_facing.jl")
     include("virescsv.jl")
 
+
+    include("rdb_process.jl")
 end # module

@@ -1,6 +1,6 @@
 type SCPHeader
-    sender::Vector{Uint8} # 64-byte sender string
-    receiver::Vector{Uint8} # 64-byte receiver string
+    sender::Vector{UInt8} # 64-byte sender string
+    receiver::Vector{UInt8} # 64-byte receiver string
     len::Int32
 
     function SCPHeader(senderstr::String, receiverstr::String, len::Int32)
@@ -9,51 +9,52 @@ type SCPHeader
         SCPHeader(sender_short,receiver_short,len)
     end
 
-    function SCPHeader(sender_in::Vector{Uint8},receiver_in::Vector{Uint8},len::Int32)
-        sender = zeros(Uint8, VIRES_HEADER_STRING_LEN)
-        receiver = zeros(Uint8, VIRES_HEADER_STRING_LEN)
+    function SCPHeader(sender_in::Vector{UInt8},receiver_in::Vector{UInt8},len::Int32)
+        sender = zeros(UInt8, VIRES_HEADER_STRING_LEN)
+        receiver = zeros(UInt8, VIRES_HEADER_STRING_LEN)
         copy!(sender, 1, sender_in, 1, min(length(sender_in), VIRES_HEADER_STRING_LEN))
         copy!(receiver, 1, receiver_in, 1, min(length(receiver_in), VIRES_HEADER_STRING_LEN))
-        sender[end] = uint8(0) # ensure null-terminate
-        receiver[end] = uint8(0)
+        sender[end] = UInt8(0) # ensure null-terminate
+        receiver[end] = UInt8(0)
         
         new(sender, receiver, len)
     end
 end
 type SCPMessage
     header::SCPHeader
-    payload::Vector{Uint8} # <- xml string
+    payload::Vector{UInt8} # <- xml string
 
     function SCPMessage(sender::String, receiver::String, payloadstr::String)
         payload = string_to_zeroed_null_terminated_array(payloadstr)
-        header = SCPHeader(sender, receiver, int32(length(payload)))
+        header = SCPHeader(sender, receiver, Int32(length(payload)))
         new(header, payload)
     end
     SCPMessage(payloadstr::String) = SCPMessage("SCP", "TaskControl", payloadstr)
+    #SCPMessage(payloadstr::String) = SCPMessage("ScVis", "SCP", payloadstr) #Xiaobai
 
-    function SCPMessage(sender::Vector{Uint8},receiver::Vector{Uint8}, payload::Vector{Uint8})
+    function SCPMessage(sender::Vector{UInt8},receiver::Vector{UInt8}, payload::Vector{UInt8})
         if payload[end] != NULL
             push!(payload, NULL)
         end
-        header = SCPHeader(sender, receiver, int32(length(payload)))
+        header = SCPHeader(sender, receiver, Int32(length(payload)))
         new(header, payload)
     end
 end
 
 function string_to_zeroed_null_terminated_array(str::String)
     strlen = length(str)
-    arr = zeros(Uint8, strlen+1)
-    arr[1:strlen] = convert(Vector{Uint8}, str)
+    arr = zeros(UInt8, strlen+1)
+    arr[1:strlen] = convert(Vector{UInt8}, str)
     arr[end] = NULL
     arr
 end
 function string_to_zeroed_null_terminated_array(str::String, array_length::Int)
-    arr = zeros(Uint8, array_length)
+    arr = zeros(UInt8, array_length)
     len = min(array_length-1, length(str))
-    arr[1:len] = convert(Vector{Uint8}, str)[1:len]
+    arr[1:len] = convert(Vector{UInt8}, str)[1:len]
     arr
 end
-function string_from_buffer(arr::Vector{Uint8})
+function string_from_buffer(arr::Vector{UInt8})
     nulindex = findfirst(arr, NULL)
     if nulindex == 0
         nulindex = length(arr)
@@ -71,8 +72,8 @@ end
 function Base.write(io::IO, message::SCPMessage)
     write(io, message.header)
     write(io, message.payload)
-    print_with_color(:blue, STDOUT, "SENDING\n")
-    print_message(message)
+    #print_with_color(:blue, STDOUT, "SENDING\n")
+    #print_message(message)
 end
 
 function Base.read(io::IO, ::Type{SCPMessage}, already_has_magic_number::Bool=false)
@@ -80,7 +81,7 @@ function Base.read(io::IO, ::Type{SCPMessage}, already_has_magic_number::Bool=fa
         scan_for_value(io, VIRES_MAGIC_NUMBER)
     end
 
-    version_number = read(io, Uint16)
+    version_number = read(io, UInt16)
     sender = readbytes(io, 64)
     receiver = readbytes(io, 64)
     payloadsize = read(io, Int32)
@@ -109,7 +110,7 @@ function print_message(message::SCPMessage)
     # println(STDOUT, "\t              ", bytes2hex(message.payload))
 end
 function print_message_bytes(message::SCPMessage)
-    dat = Array(Uint8, VIRES_HEADER_LEN + message.header.len + 1)
+    dat = Array(UInt8, VIRES_HEADER_LEN + message.header.len + 1)
     buf = IOBuffer(dat, true, true)
     write(buf, message)
     println(STDOUT, "STRING BUFFER: ")
@@ -124,17 +125,17 @@ function idle_and_print_messages(io::IO, sleeptime::Float64)
     end
 end
 
-function scan_for_value(io::IO, target::Uint8)
+function scan_for_value(io::IO, target::UInt8)
     #=
     Blocks the stream until you get the byte you want
     =#
 
-    while read(io, Uint8) != target
+    while read(io, UInt8) != target
         # do nothing
     end
     nothing
 end
-function scan_for_value(io::IO, value::Uint16)
+function scan_for_value(io::IO, value::UInt16)
 
     #=
     Blocks the stream until you get the bytes you want
@@ -142,13 +143,13 @@ function scan_for_value(io::IO, value::Uint16)
     =#
 
     byte_index = 1
-    lo = uint8(value & 0x00FF)
-    hi = uint8((value & 0xFF00) >> 8)
+    lo = UInt8(value & 0x00FF)
+    hi = UInt8((value & 0xFF00) >> 8)
 
     while byte_index ≤ 2
-        val = read(io, Uint8)
+        val = read(io, UInt8)
         if byte_index == 1
-            byte_index += int(val == lo)
+            byte_index += Int(val == lo)
         else
             byte_index = (val == hi) ? 3 : 1
         end

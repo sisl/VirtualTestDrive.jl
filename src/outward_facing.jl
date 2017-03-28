@@ -1,6 +1,7 @@
 function load_and_init(
     vires::ViresConnection,
-    scenario::Union(String, ETree),
+    #scenario::Union(String, ETree),
+    scenario::Union{String, ETree},
     mode::Symbol;
     timeout::Float64=TIMEOUT_LONG_DEFAULT,
     ntries::Int=3
@@ -53,7 +54,7 @@ function step_with_udp_explicit_stepwidth(
     stepcount = 0
     Δt = convert(Cfloat, framestep)
     simTime = simtime_start
-    frameNo = convert(Uint32, frame_start)
+    frameNo = convert(UInt32, frame_start)
 
    # playerId:        1
    # steeringWheel:   +0.0000000000000000e+00
@@ -259,9 +260,12 @@ end
 function set_driver_behavior(
     vires::ViresConnection,
     def::DriverBehavior; 
-    name::Union(Nothing,String)=nothing,
-    id::Union(Nothing,Int)=nothing,
-    visible::Union(Nothing,Bool)=nothing,
+    #name::Union(Nothing,String)=nothing,
+    name::Union{Void,String}=nothing,
+    #id::Union(Nothing,Int)=nothing,
+    id::Union{Void,Int}=nothing,
+    #visible::Union(Nothing,Bool)=nothing,
+    visible::Union{Void,Bool}=nothing,
     timeout::Float64=TIMEOUT_DEFAULT
     )
 

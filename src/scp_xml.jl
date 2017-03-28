@@ -20,7 +20,8 @@ function get_xml_simctrl_load_init(scenario::String, initmode::Symbol)
     @assert(initmode == :preparation || initmode == :operation)
     "<SimCtrl><LoadScenario filename=\""*scenario*"\"/><Init mode=\""*string(initmode)*"\"/></SimCtrl>"
 end
-function get_xml_simctrl_load_init(scenario::ETree, initmode::Union(Nothing,Symbol)=nothing)
+#function get_xml_simctrl_load_init(scenario::ETree, initmode::Union(Nothing,Symbol)=nothing) #Nothing not defined
+function get_xml_simctrl_load_init(scenario::ETree, initmode::Union{Void,Symbol}=nothing) #Xiaobai
     @assert(scenario.name == "Scenario")
 
     retval = ETree("SimCtrl")
@@ -81,9 +82,12 @@ end
 
 function get_xml_player_driver_behavior_normalized(
     def::DriverBehavior; 
-    name::Union(Nothing,String)=nothing,
-    id::Union(Nothing,Int)=nothing,
-    visible::Union(Nothing,Bool)=nothing
+    #name::Union(Nothing,String)=nothing,
+    name::Union{Void,String}=nothing,
+    #id::Union(Nothing,Int)=nothing,
+    id::Union{Void,Int}=nothing,
+    #visible::Union(Nothing,Bool)=nothing
+    visible::Union{Void,Bool}=nothing
     )
     retval = "<Player"
     if isa(name,String)
@@ -105,12 +109,18 @@ function get_xml_player_driver_behavior_normalized(
     )
 end
 function get_xml_player_driver_input(;
-    name::Union(Nothing,String)=nothing,
-    id::Union(Nothing,Int)=nothing,
-    visible::Union(Nothing,Bool)=nothing,
-    override::Union(Nothing,Bool)=nothing,
-    throttle::Union(Nothing,Float64)=nothing,
-    brake::Union(Nothing,Float64)=nothing
+    #name::Union(Nothing,String)=nothing,
+    name::Union{Void,String}=nothing,
+    #id::Union(Nothing,Int)=nothing,
+    id::Union{Void,Int}=nothing,
+    #visible::Union(Nothing,Bool)=nothing,
+    visible::Union{Void,Bool}=nothing,
+    #override::Union(Nothing,Bool)=nothing,
+    override::Union{Void,Bool}=nothing,
+    #throttle::Union(Nothing,Float64)=nothing,
+    throttle::Union{Void,Float64}=nothing,
+    #brake::Union(Nothing,Float64)=nothing
+    brake::Union{Void,Float64}=nothing
     )
 
     @assert(isa(override,Bool) || isa(throttle,Float64) || isa(brake, Float64))
@@ -205,9 +215,12 @@ get_xml_traffic_trigger(id::String, active::Bool) = @sprintf("<Traffic><Trigger 
 function get_xml_traffic_action_autonomous(actor::String; 
     enable::Bool=true,
     force::Bool=true,
-    delayTime::Union(Nothing,Real)=nothing,
-    triggerRef::Union(Nothing,String)=nothing,
-    activateOnExit::Union(Nothing,Bool)=nothing
+    #delayTime::Union(Nothing,Real)=nothing,
+    delayTime::Union{Void,Real}=nothing,
+    #triggerRef::Union(Nothing,String)=nothing,
+    triggerRef::Union{Void,String}=nothing,
+    #activateOnExit::Union(Nothing,Bool)=nothing
+    activateOnExit::Union{Void,Bool}=nothing
     )
 
     retval = @sprintf("<Traffic><ActionAutonomous actor=\"%s\" enable=\"%s\" force=\"%s\"",
@@ -229,11 +242,15 @@ function get_xml_traffic_action_speedchange(
     actor::String,
     target_speed::Float64, # [m/s]
     accel_to_use::Float64; # [m/s²]
-    pivot::Union(Nothing,String)=nothing,
+    #pivot::Union(Nothing,String)=nothing,
+    pivot::Union{Void,String}=nothing,
     force::Bool=true,
-    delayTime::Union(Nothing,Float64)=nothing,
-    triggerRef::Union(Nothing,String)=nothing,
-    activateOnExit::Union(Nothing,Bool)=nothing
+    #delayTime::Union(Nothing,Float64)=nothing,
+    delayTime::Union{Void,Float64}=nothing,
+    #triggerRef::Union(Nothing,String)=nothing,
+    triggerRef::Union{Void,String}=nothing,
+    #activateOnExit::Union(Nothing,Bool)=nothing
+    activateOnExit::Union{Void,Bool}=nothing
     )
 
     retval = @sprintf("<Traffic><ActionSpeedChange actor=\"%s\" target=\"%f\" rate=\"%f\" force=\"%s\"",
