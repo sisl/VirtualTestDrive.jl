@@ -43,61 +43,108 @@ function Base.read(io::IO, ::Type{RDB_Message}, already_read_magic_no::Bool=fals
 end
 
 
-function processNFrame(N::Int=10,udp_entry=nothing)
+function processNFrame(N::Int=10,udp_entries::Array{RDB_PACKAGE_ELEMENT}=Array(RDB_PACKAGE_ELEMENT,0))
     entries=nothing
     for i=1:N
-        entries=processOneFrame(udp_entry)
+        entries=processOneFrame(udp_entries)
     end
     return entries
-    #=
-    #println("bytes available : ",nb_available(connection.UDP))
-    #readbytes(connection.UDP, nb_available(connection.UDP))
-    payload="<SimCtrl> <Step size=\"10\"/> </SimCtrl>"
-    #payload=@sprintf("<SimCtrl> <Sync dt=\"%.2f\"/> </SimCtrl>", dt)
-    SCPmessage=SCPMessage(payload)
-    connection=ViresConnection()
-    if udp_entry != nothing
-        VirtualTestDrive.write_udp_packet(connection.UDP, udp_entry, 0, 0.0)
-    end
-    write(connection.SCP, SCPmessage)
-    entries=nothing
-    for i=1:10
-        finish=false
-        entries=VirtualTestDrive.RDB_PACKAGE_ELEMENT[]
-        while !finish
-            message=read(connection.UDP,VirtualTestDrive.RDB_Message)    
-            if VirtualTestDrive.rdb_pkg_id_to_string(message.entry_headers[1].pkgId)=="END_OF_FRAME"
-                push!(entries,VirtualTestDrive.RDB_END_OF_FRAME_t())
-            elseif VirtualTestDrive.rdb_pkg_id_to_string(message.entry_headers[1].pkgId)=="START_OF_FRAME"
-                push!(entries,VirtualTestDrive.RDB_START_OF_FRAME_t())
-            else
-                push!(entries,message.entries[1])
-            end
-    
-            if VirtualTestDrive.rdb_pkg_id_to_string(message.entry_headers[1].pkgId)=="END_OF_FRAME"
-                finish=true
-            end
-        end
-    end
-    #write(connection.SCP, SCPmessage)
-    disconnect!(connection)
-    return entries
-    =#
 end
 ###Xiaobai
 
-function processOneFrame(udp_entry=nothing)
+function processOneFrame(udp_entries::Array{RDB_PACKAGE_ELEMENT}=Array(RDB_PACKAGE_ELEMENT,0))
     #println("bytes available : ",nb_available(connection.UDP))
     #readbytes(connection.UDP, nb_available(connection.UDP))
     payload="<SimCtrl> <Step size=\"1\"/> </SimCtrl>"
     #payload=@sprintf("<SimCtrl> <Sync dt=\"%.2f\"/> </SimCtrl>", dt)
     SCPmessage=SCPMessage(payload)
     connection=ViresConnection()
-    if udp_entry != nothing
-        VirtualTestDrive.write_udp_packet(connection.UDP, udp_entry, 0, 0.0)
+    if length(udp_entries)>0
+        VirtualTestDrive.write_udp_packets(connection.UDP, udp_entries, 0, 0.0)
     end
     write(connection.SCP, SCPmessage)
     
+    
+    finish=false
+    entries=[]
+    
+    while !finish
+        message=read(connection.UDP,VirtualTestDrive.RDB_Message)    
+        if isempty(message.entry_headers)
+            break
+        end
+
+        if VirtualTestDrive.rdb_pkg_id_to_string(message.entry_headers[1].pkgId)=="END_OF_FRAME"
+            push!(entries,VirtualTestDrive.RDB_END_OF_FRAME_t())
+        elseif VirtualTestDrive.rdb_pkg_id_to_string(message.entry_headers[1].pkgId)=="START_OF_FRAME"
+            push!(entries,VirtualTestDrive.RDB_START_OF_FRAME_t())
+        else
+            push!(entries,message.entries)
+        end
+    
+        if VirtualTestDrive.rdb_pkg_id_to_string(message.entry_headers[1].pkgId)=="END_OF_FRAME"
+            # if udp_entry != nothing
+            #     VirtualTestDrive.write_udp_packet(connection.UDP, udp_entry, message.header.frameNo, message.header.simTime)
+            # end
+            finish=true
+        end
+    end
+    #write(connection.SCP, SCPmessage)
+    disconnect!(connection)
+    return entries
+end
+
+function processOneFrame_debug(udp_entries::Array{RDB_PACKAGE_ELEMENT}=Array(RDB_PACKAGE_ELEMENT,0))
+    #println("bytes available : ",nb_available(connection.UDP))
+    #readbytes(connection.UDP, nb_available(connection.UDP))
+    payload="<SimCtrl> <Step size=\"1\"/> </SimCtrl>"
+    #payload=@sprintf("<SimCtrl> <Sync dt=\"%.2f\"/> </SimCtrl>", dt)
+    SCPmessage=SCPMessage(payload)
+    connection=ViresConnection()
+    if length(udp_entries)>0
+        VirtualTestDrive.write_udp_packets(connection.UDP, udp_entries, 0, 0.0)
+    end
+    write(connection.SCP, SCPmessage)
+    
+    
+    finish=false
+    entries=[]
+    message=nothing
+    while !finish
+        message=read(connection.UDP,VirtualTestDrive.RDB_Message)    
+        if isempty(message.entry_headers)
+            break
+        end
+        if VirtualTestDrive.rdb_pkg_id_to_string(message.entry_headers[1].pkgId)=="END_OF_FRAME"
+            push!(entries,VirtualTestDrive.RDB_END_OF_FRAME_t())
+        elseif VirtualTestDrive.rdb_pkg_id_to_string(message.entry_headers[1].pkgId)=="START_OF_FRAME"
+            push!(entries,VirtualTestDrive.RDB_START_OF_FRAME_t())
+        else
+            push!(entries,message.entries)
+        end
+    
+        if VirtualTestDrive.rdb_pkg_id_to_string(message.entry_headers[1].pkgId)=="END_OF_FRAME"
+            # if udp_entry != nothing
+            #     VirtualTestDrive.write_udp_packet(connection.UDP, udp_entry, message.header.frameNo, message.header.simTime)
+            # end
+            finish=true
+        end
+    end
+    #write(connection.SCP, SCPmessage)
+    disconnect!(connection)
+    return message
+end
+
+
+function processOneFrameContinuous(udp_entry=nothing,connection=nothing)
+    external_connect = true
+    if connection == nothing
+        external_connect = false
+        connection=ViresConnection()
+    end
+    if udp_entry != nothing
+        VirtualTestDrive.write_udp_packet(connection.UDP, udp_entry, 0, 0.0)
+    end
     
     finish=false
     entries=VirtualTestDrive.RDB_PACKAGE_ELEMENT[]
@@ -119,11 +166,16 @@ function processOneFrame(udp_entry=nothing)
             # if udp_entry != nothing
             #     VirtualTestDrive.write_udp_packet(connection.UDP, udp_entry, message.header.frameNo, message.header.simTime)
             # end
+            #println(message.header)
             finish=true
         end
     end
     #write(connection.SCP, SCPmessage)
-    disconnect!(connection)
+    if external_connect == false
+        disconnect!(connection)
+    end
     return entries
 end
+
+
 ###Xiaobai
