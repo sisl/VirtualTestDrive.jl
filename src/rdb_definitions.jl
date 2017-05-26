@@ -563,6 +563,9 @@ type RDB_OBJECT_CFG_t <: RDB_PACKAGE_ELEMENT
     category::UInt8
     thetype::UInt8
     modelId::Int16
+    name::Array{Cchar}
+    modelName::Array{Cchar}
+    fileName::Array{Cchar}
     flags::UInt16
     spare0::UInt16
     spare1::UInt32
@@ -739,6 +742,7 @@ type RDB_SENSOR_STATE_t <: RDB_PACKAGE_ELEMENT
     spare0::UInt16
     hostId::UInt32
     #fovHV::(Cfloat, Cfloat)
+    name::Array{Cchar}
     fovHV::Tuple{Cfloat, Cfloat} #Xiaobai
     #clipNF::(Cfloat, Cfloat)
     clipNF::Tuple{Cfloat, Cfloat}
@@ -1413,16 +1417,40 @@ function Base.read(io::IO, ::Type{RDB_OBJECT_CFG_t})
     category = read(io, UInt8)
     thetype = read(io, UInt8)
     modelId = read(io, Int16)
+    name = Array(Cchar,32)
+    for i=1:32
+        name[i] = read(io,Cchar)
+    end
+    modelName = Array(Cchar,32)
+    for i=1:32
+        modelName[i] = read(io,Cchar)
+    end
+    fileName = Array(Cchar,1024)
+    for i=1:1024
+        fileName[i] = read(io,Cchar)
+    end
     flags = read(io, UInt16)
     spare0 = read(io, UInt16)
     spare1 = read(io, UInt32)
-    RDB_OBJECT_CFG_t(id, category, thetype, modelId, flags, spare0, spare1)
+    RDB_OBJECT_CFG_t(id, category, thetype, modelId, name,modelName,fileName,flags, spare0, spare1)
 end
 function Base.read!(io::IO, struct::RDB_OBJECT_CFG_t)
     struct.id = read(io, UInt32)
     struct.category = read(io, UInt8)
     struct.thetype = read(io, UInt8)
     struct.modelId = read(io, Int16)
+    struct.name = Array(Cchar,32)
+    for i=1:32
+        struct.name[i] = read(io,Cchar)
+    end
+    struct.modelName = Array(Cchar,32)
+    for i=1:32
+        struct.modelName[i] = read(io,Cchar)
+    end
+    struct.fileName = Array(Cchar,1024)
+    for i=1:1024
+        struct.fileName[i] = read(io,Cchar)
+    end
     struct.flags = read(io, UInt16)
     struct.spare0 = read(io, UInt16)
     struct.spare1 = read(io, UInt32)
@@ -1443,6 +1471,9 @@ function Base.show(io::IO, struct::RDB_OBJECT_CFG_t)
     @printf(io, "   category: %s\n", hex(struct.category))
     @printf(io, "   thetype:  %s\n", hex(struct.thetype))
     @printf(io, "   modelId:  %d\n",struct.modelId)
+    println(io,"   name: ",convert(Array{Char},struct.name))
+    println(io,"   modelName: ",convert(Array{Char},struct.modelName))
+    println(io,"   fileName: ",convert(Array{Char},struct.fileName))
     @printf(io, "   flags:    %s\n", hex(struct.flags))
     @printf(io, "   spare0:   %s\n", hex(struct.spare0))
     @printf(io, "   spare1:   %s\n", hex(struct.spare1))
@@ -2076,12 +2107,16 @@ function Base.read(io::IO, ::Type{RDB_SENSOR_STATE_t})
     hostCategory = read(io, UInt8)
     spare0 = read(io, UInt16)
     hostId = read(io, UInt32)
+    name = Array(Cchar,32)
+    for i=1:32
+        name[i] = read(io,Cchar)
+    end
     fovHV = (read(io, Cfloat), read(io, Cfloat))
     clipNF = (read(io, Cfloat), read(io, Cfloat))
     pos = read(io, RDB_COORD_t)
     originCoordSys = read(io, RDB_COORD_t)
     spare = (read(io, Int32), read(io, Int32), read(io, Int32), read(io, Int32))
-    RDB_SENSOR_STATE_t(id, thetype, hostCategory, spare0, hostId, fovHV, clipNF, pos, originCoordSys, spare)
+    RDB_SENSOR_STATE_t(id, thetype, hostCategory, spare0, hostId, name, fovHV, clipNF, pos, originCoordSys, spare)
 end
 function Base.read!(io::IO, struct::RDB_SENSOR_STATE_t)
     struct.id = read(io, UInt32)
@@ -2089,6 +2124,10 @@ function Base.read!(io::IO, struct::RDB_SENSOR_STATE_t)
     struct.hostCategory = read(io, UInt8)
     struct.spare0 = read(io, UInt16)
     struct.hostId = read(io, UInt32)
+    struct.name = Array(Cchar,32)
+    for i=1:32
+        struct.name[i] = read(io,Cchar)
+    end
     struct.fovHV = (read(io, Cfloat), read(io, Cfloat))
     struct.clipNF = (read(io, Cfloat), read(io, Cfloat))
     struct.pos = read(io, RDB_COORD_t)
@@ -2102,6 +2141,9 @@ function Base.write(io::IO, struct::RDB_SENSOR_STATE_t)
     write(io, struct.hostCategory)
     write(io, struct.spare0)
     write(io, struct.hostId)
+    for i=1:32
+        write(io, struct.name[i])
+    end
     write(io, struct.fovHV)
     write(io, struct.clipNF)
     write(io, struct.pos)

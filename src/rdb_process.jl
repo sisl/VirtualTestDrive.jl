@@ -35,6 +35,7 @@ function Base.read(io::IO, ::Type{RDB_Message}, already_read_magic_no::Bool=fals
                 push!(entries, entry)
             end
         else
+            println("unkown package id")
             break
         end     
     end
