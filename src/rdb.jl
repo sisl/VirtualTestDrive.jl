@@ -185,6 +185,30 @@ function write_udp_packet(io::IO, elem::RDB_PACKAGE_ELEMENT, frameNo::Integer, s
     # write the entry
     write(io, elem)
 end
+
+##Xiaobdi
+function write_udp_packets(io::IO, elements::Array{RDB_PACKAGE_ELEMENT}, frameNo::Integer, simTime::Real, flags::UInt16=0x0000)
+
+    # println("sending $(typeof(elem)) packet")
+    # println(sizeof(elements))
+    # write the RDB_MSG_HDR_t
+    write(io, RDB_MAGIC_NO)
+    write(io, RDB_VERSION)
+    write(io, convert(UInt32, sizeof(RDB_MSG_HDR_t)))
+    write(io, convert(UInt32, sizeof(elements[1])*length(elements) + sizeof(RDB_MSG_ENTRY_HDR_t)))
+    write(io, convert(UInt32, frameNo))
+    write(io, convert(Cdouble, simTime))
+
+    # write the RDB_MSG_ENTRY_HDR_t
+    entry_hdr = create_udp_entry_header(elements, flags)
+    write(io,entry_hdr)
+
+    # write the entry
+    for elem in elements
+        write(io, elem)
+    end
+end
+
 function write_udp_packet(io::IO, ::RDB_START_OF_FRAME_t, frameNo::Integer, simTime::Real, flags::UInt16=0x0000)
 
     # println("sending start of frame")

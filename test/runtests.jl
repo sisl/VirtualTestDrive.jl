@@ -6,5 +6,5 @@ lintpkg("VirtualTestDrive")
 using VirtualTestDrive
 using LibExpat
 
-reload("test_io.jl")
-reload("test_virescsvs.jl")
+include("test_io.jl")
+include("test_virescsvs.jl")

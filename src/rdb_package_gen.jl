@@ -20,8 +20,10 @@ end
 
 function create_udp_entry_header{T<:RDB_PACKAGE_ELEMENT}(elements::Vector{T}, flags::UInt16=0x0000)
     headerSize = sizeof(RDB_MSG_ENTRY_HDR_t)
-    dataSize = sizeof(elements)
-    elementSize = div(dataSize, length(elements))
+    #dataSize = sizeof(elements)
+    #elementSize = div(dataSize, length(elements))
+    dataSize = sizeof(elements[1])*length(elements)
+    elementSize = sizeof(elements[1])
     #pkgId = rdb_type_to_pkg_id(T)
     pkgId = rdb_type_to_pkg_id(elements[1])
     RDB_MSG_ENTRY_HDR_t(headerSize, dataSize, elementSize, pkgId, flags)
