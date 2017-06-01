@@ -1,4 +1,3 @@
-###Xiaobai
 type RDB_Message
     header::RDB_MSG_HDR_t
     entry_headers::Vector{RDB_MSG_ENTRY_HDR_t}
@@ -177,6 +176,3 @@ function processOneFrameContinuous(udp_entry=nothing,connection=nothing)
     end
     return entries
 end
-
-
-###Xiaobai

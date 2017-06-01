@@ -208,7 +208,6 @@ function write_udp_packets(io::IO, elements::Array{RDB_PACKAGE_ELEMENT}, frameNo
         write(io, elem)
     end
 end
-##Xiaobai
 
 function write_udp_packet(io::IO, ::RDB_START_OF_FRAME_t, frameNo::Integer, simTime::Real, flags::UInt16=0x0000)
 
