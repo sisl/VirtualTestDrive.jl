@@ -118,9 +118,9 @@ function read_vires_csv(pathname::String)
         for (key,value) in zip(dictkeys, dictvalues)
             if key == :player_type
                 push!(player_headers, PlayerHeader())
-                player_headers[end].ptype = int(value)
+                player_headers[end].ptype = parse(Int,value)
             elseif key == :player_ID
-                player_headers[end].id = int(value)
+                player_headers[end].id = parse(Int,value)
             elseif key == :player_name
                 player_headers[end].name = value
             elseif key == :file_name
@@ -134,20 +134,20 @@ function read_vires_csv(pathname::String)
             elseif key == :player_offset_y
                 player_headers[end].ctr_offset_y = float(value)
             elseif key == :player_model
-                player_headers[end].model = int(value)
+                player_headers[end].model = parse(Int,value)
             elseif key == :player_category
-                player_headers[end].category = int(value)
+                player_headers[end].category = parse(Int,value)
             elseif key == :player_ctrl
-                player_headers[end].ctrl = int(value)
+                player_headers[end].ctrl = parse(Int,value)
             elseif key == :player_ctrl_arg
-                player_headers[end].ctrl_arg = int(value)
+                player_headers[end].ctrl_arg = parse(Int,value)
             elseif key == :master
-                player_headers[end].master = int(value)
+                player_headers[end].master = parse(Int,value)
             else
                 header_variables[key] = value
             end
         end
-        @assert(int(get(header_variables, :no_of_players, "0")) == length(player_headers))
+        @assert(parse(Int,get(header_variables, :no_of_players, "0")) == length(player_headers))
         
 
         line = readline(fin)
