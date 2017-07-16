@@ -622,7 +622,8 @@ type RDB_ENGINE_EXT_t
     fuelCurrent::Cfloat
     fuelAverage::Cfloat
     #spare::(UInt32, UInt32)
-    spare::Tuple{UInt32, UInt32} #Xiaobai
+    oilTemperature::Cfloat
+    temperature::Cfloat
 end
 
 type RDB_ENGINE_t <: RDB_PACKAGE_ELEMENT
@@ -1651,8 +1652,10 @@ function Base.read(io::IO, ::Type{RDB_ENGINE_EXT_t})
     torqueFriction = read(io, Cfloat)
     fuelCurrent = read(io, Cfloat)
     fuelAverage = read(io, Cfloat)
-    spare = (read(io, UInt32), read(io, UInt32))
-    RDB_ENGINE_EXT_t(rpsStart, torque, torqueInner, torqueMax, torqueFriction, fuelCurrent, fuelAverage, spare)
+    #spare = (read(io, UInt32), read(io, UInt32))
+    oilTemperature = read(io, Cfloat)
+    temperature = read(io,Cfloat)
+    RDB_ENGINE_EXT_t(rpsStart, torque, torqueInner, torqueMax, torqueFriction, fuelCurrent, fuelAverage, oilTemperature, temperature)
 end
 function Base.read!(io::IO, struct::RDB_ENGINE_EXT_t)
     struct.rpsStart = read(io, Cfloat)
@@ -1662,7 +1665,8 @@ function Base.read!(io::IO, struct::RDB_ENGINE_EXT_t)
     struct.torqueFriction = read(io, Cfloat)
     struct.fuelCurrent = read(io, Cfloat)
     struct.fuelAverage = read(io, Cfloat)
-    struct.spare = (read(io, UInt32), read(io, UInt32))
+    struct.oilTemperature = read(io, Cfloat)
+    struct.temperature = read(io,Cfloat)
     struct
 end
 function Base.write(io::IO, struct::RDB_ENGINE_EXT_t)
@@ -1673,7 +1677,8 @@ function Base.write(io::IO, struct::RDB_ENGINE_EXT_t)
     write(io, struct.torqueFriction)
     write(io, struct.fuelCurrent)
     write(io, struct.fuelAverage)
-    write(io, struct.spare)
+    write(io, struct.oilTemperature)
+    write(io, struct.temperature)
 end
 function Base.show(io::IO, struct::RDB_ENGINE_EXT_t)
     println(io, "RDB_ENGINE_EXT_t:")
@@ -1684,7 +1689,8 @@ function Base.show(io::IO, struct::RDB_ENGINE_EXT_t)
     @printf(io, "   torqueFriction: %+.16e\n",struct.torqueFriction)
     @printf(io, "   fuelCurrent:    %+.16e\n",struct.fuelCurrent)
     @printf(io, "   fuelAverage:    %+.16e\n",struct.fuelAverage)
-    @printf(io, "   spare:          %s\n", hex(struct.spare))
+    @printf(io, "   oilTemperature:    %+.16e\n",struct.oilTemperature)
+    @printf(io, "   temperature:    %+.16e\n",struct.temperature)
 end
 Base.sizeof(::RDB_ENGINE_EXT_t) = 36
 Base.sizeof(::Type{RDB_ENGINE_EXT_t}) = 36

@@ -34,8 +34,11 @@ function Base.read(io::IO, ::Type{RDB_Message}, already_read_magic_no::Bool=fals
                 push!(entries, entry)
             end
         else
-            println("unkown package id")
+            println("unkown package id",entry_header.pkgId)
             break
+            #dummy = readbytes(io, entry_header.elementSize)
+            #println("entry : ",entry)
+            #bytes_remaining -= entry_header.elementSize
         end     
     end
 
