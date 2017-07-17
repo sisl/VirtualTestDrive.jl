@@ -138,44 +138,82 @@ function processOneFrame_debug(udp_entries::Array{RDB_PACKAGE_ELEMENT}=Array(RDB
     return message
 end
 
-
-function processOneFrameContinuous(udp_entry=nothing,connection=nothing)
-    external_connect = true
-    if connection == nothing
-        external_connect = false
-        connection=ViresConnection()
-    end
-    if udp_entry != nothing
-        VirtualTestDrive.write_udp_packet(connection.UDP, udp_entry, 0, 0.0)
-    end
+function initialize()
+    #println("bytes available : ",nb_available(connection.UDP))
+    #readbytes(connection.UDP, nb_available(connection.UDP))
+    payload="<SimCtrl> <Step size=\"1\"/> </SimCtrl>"
+    #payload=@sprintf("<SimCtrl> <Sync dt=\"%.2f\"/> </SimCtrl>", dt)
+    SCPmessage=SCPMessage(payload)
+    connection=ViresConnection()
+    write(connection.SCP, SCPmessage)
+    disconnect!(connection)
+    
+    connection=ViresConnection()
+    write(connection.SCP, SCPmessage)
     
     finish=false
-    entries=VirtualTestDrive.RDB_PACKAGE_ELEMENT[]
+    entries=[]
     
     while !finish
         message=read(connection.UDP,VirtualTestDrive.RDB_Message)    
         if isempty(message.entry_headers)
             break
         end
+
         if VirtualTestDrive.rdb_pkg_id_to_string(message.entry_headers[1].pkgId)=="END_OF_FRAME"
             push!(entries,VirtualTestDrive.RDB_END_OF_FRAME_t())
         elseif VirtualTestDrive.rdb_pkg_id_to_string(message.entry_headers[1].pkgId)=="START_OF_FRAME"
             push!(entries,VirtualTestDrive.RDB_START_OF_FRAME_t())
         else
-            push!(entries,message.entries[1])
+            push!(entries,message.entries)
         end
     
         if VirtualTestDrive.rdb_pkg_id_to_string(message.entry_headers[1].pkgId)=="END_OF_FRAME"
             # if udp_entry != nothing
             #     VirtualTestDrive.write_udp_packet(connection.UDP, udp_entry, message.header.frameNo, message.header.simTime)
             # end
-            #println(message.header)
+            finish=true
+        end
+    end
+    return connection,entries
+end
+
+function processOneFrame_continuous(connection::ViresConnection,udp_entries::Array{RDB_PACKAGE_ELEMENT}=Array(RDB_PACKAGE_ELEMENT,0))
+    #println("bytes available : ",nb_available(connection.UDP))
+    #readbytes(connection.UDP, nb_available(connection.UDP))
+    payload="<SimCtrl> <Step size=\"1\"/> </SimCtrl>"
+    #payload=@sprintf("<SimCtrl> <Sync dt=\"%.2f\"/> </SimCtrl>", dt)
+    SCPmessage=SCPMessage(payload)
+    if length(udp_entries)>0
+        VirtualTestDrive.write_udp_packets(connection.UDP, udp_entries, 0, 0.0)
+    end
+    write(connection.SCP, SCPmessage)
+    
+    
+    finish=false
+    entries=[]
+    
+    while !finish
+        message=read(connection.UDP,VirtualTestDrive.RDB_Message)    
+        if isempty(message.entry_headers)
+            break
+        end
+
+        if VirtualTestDrive.rdb_pkg_id_to_string(message.entry_headers[1].pkgId)=="END_OF_FRAME"
+            push!(entries,VirtualTestDrive.RDB_END_OF_FRAME_t())
+        elseif VirtualTestDrive.rdb_pkg_id_to_string(message.entry_headers[1].pkgId)=="START_OF_FRAME"
+            push!(entries,VirtualTestDrive.RDB_START_OF_FRAME_t())
+        else
+            push!(entries,message.entries)
+        end
+    
+        if VirtualTestDrive.rdb_pkg_id_to_string(message.entry_headers[1].pkgId)=="END_OF_FRAME"
+            # if udp_entry != nothing
+            #     VirtualTestDrive.write_udp_packet(connection.UDP, udp_entry, message.header.frameNo, message.header.simTime)
+            # end
             finish=true
         end
     end
     #write(connection.SCP, SCPmessage)
-    if external_connect == false
-        disconnect!(connection)
-    end
     return entries
 end
