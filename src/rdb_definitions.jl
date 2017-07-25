@@ -472,7 +472,7 @@ const RDB_MOTION_SYSTEM_FLAG_ERROR = @compat UInt16(0x0002)
 
 abstract RDB_PACKAGE_ELEMENT
 
-type RDB_POINT_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_POINT_t <: RDB_PACKAGE_ELEMENT
     x::Cdouble
     y::Cdouble
     z::Cdouble
@@ -481,7 +481,7 @@ type RDB_POINT_t <: RDB_PACKAGE_ELEMENT
     system::UInt16
 end
 
-type RDB_COORD_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_COORD_t <: RDB_PACKAGE_ELEMENT
     x::Cdouble
     y::Cdouble
     z::Cdouble
@@ -493,13 +493,13 @@ type RDB_COORD_t <: RDB_PACKAGE_ELEMENT
     system::UInt16
 end
 
-type RDB_COORD_SYSTEM_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_COORD_SYSTEM_t <: RDB_PACKAGE_ELEMENT
     id::UInt16
     spare::UInt16
     pos::RDB_COORD_t
 end
 
-type RDB_ROAD_POS_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_ROAD_POS_t <: RDB_PACKAGE_ELEMENT
     playerId::UInt32
     roadId::UInt16
     laneId::Int8
@@ -516,7 +516,7 @@ type RDB_ROAD_POS_t <: RDB_PACKAGE_ELEMENT
     pathS::Cfloat
 end
 
-type RDB_ROADMARK_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_ROADMARK_t <: RDB_PACKAGE_ELEMENT
     playerId::UInt32
     id::Int8
     prevId::Int8
@@ -539,7 +539,7 @@ type RDB_ROADMARK_t <: RDB_PACKAGE_ELEMENT
     spare1::Tuple{UInt32, UInt32} #Xiaobai
 end
 
-type RDB_LANE_INFO_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_LANE_INFO_t <: RDB_PACKAGE_ELEMENT
     roadId::UInt16
     id::Int8
     neighborMask::UInt8
@@ -558,7 +558,7 @@ type RDB_LANE_INFO_t <: RDB_PACKAGE_ELEMENT
     spare1::UInt32
 end
 
-type RDB_OBJECT_CFG_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_OBJECT_CFG_t <: RDB_PACKAGE_ELEMENT
     id::UInt32
     category::UInt8
     thetype::UInt8
@@ -571,7 +571,7 @@ type RDB_OBJECT_CFG_t <: RDB_PACKAGE_ELEMENT
     spare1::UInt32
 end
 
-type RDB_GEOMETRY_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_GEOMETRY_t <: RDB_PACKAGE_ELEMENT
     dimX::Cfloat
     dimY::Cfloat
     dimZ::Cfloat
@@ -580,7 +580,7 @@ type RDB_GEOMETRY_t <: RDB_PACKAGE_ELEMENT
     offZ::Cfloat
 end
 
-type RDB_OBJECT_STATE_BASE_t
+mutable struct RDB_OBJECT_STATE_BASE_t
     id::UInt32
     category::UInt8
     thetype::UInt8
@@ -592,7 +592,7 @@ type RDB_OBJECT_STATE_BASE_t
     spare1::UInt32
 end
 
-type RDB_OBJECT_STATE_EXT_t
+mutable struct RDB_OBJECT_STATE_EXT_t
     speed::RDB_COORD_t
     accel::RDB_COORD_t
     traveledDist::Cfloat
@@ -600,12 +600,12 @@ type RDB_OBJECT_STATE_EXT_t
     spare::Tuple{UInt32, UInt32, UInt32} #Xiaobai
 end
 
-type RDB_OBJECT_STATE_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_OBJECT_STATE_t <: RDB_PACKAGE_ELEMENT
     base::RDB_OBJECT_STATE_BASE_t
     ext::RDB_OBJECT_STATE_EXT_t
 end
 
-type RDB_ENGINE_BASE_t
+mutable struct RDB_ENGINE_BASE_t
     playerId::UInt32
     rps::Cfloat
     load::Cfloat
@@ -613,7 +613,7 @@ type RDB_ENGINE_BASE_t
     spare1::Tuple{UInt32, UInt32} #Xiaobai
 end
 
-type RDB_ENGINE_EXT_t
+mutable struct RDB_ENGINE_EXT_t
     rpsStart::Cfloat
     torque::Cfloat
     torqueInner::Cfloat
@@ -626,12 +626,12 @@ type RDB_ENGINE_EXT_t
     temperature::Cfloat
 end
 
-type RDB_ENGINE_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_ENGINE_t <: RDB_PACKAGE_ELEMENT
     base::RDB_ENGINE_BASE_t
     ext::RDB_ENGINE_EXT_t
 end
 
-type RDB_DRIVETRAIN_BASE_t
+mutable struct RDB_DRIVETRAIN_BASE_t
     playerId::UInt32
     gearBoxType::UInt8
     driveTrainType::UInt8
@@ -641,7 +641,7 @@ type RDB_DRIVETRAIN_BASE_t
     spare1::Tuple{UInt32, UInt32} #Xiaobai
 end
 
-type RDB_DRIVETRAIN_EXT_t
+mutable struct RDB_DRIVETRAIN_EXT_t
     torqueGearBoxIn::Cfloat
     torqueCenterDiffOut::Cfloat
     torqueShaft::Cfloat
@@ -649,12 +649,12 @@ type RDB_DRIVETRAIN_EXT_t
     spare1::Tuple{UInt32, UInt32} #Xiaobai
 end
 
-type RDB_DRIVETRAIN_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_DRIVETRAIN_t <: RDB_PACKAGE_ELEMENT
     base::RDB_DRIVETRAIN_BASE_t
     ext::RDB_DRIVETRAIN_EXT_t
 end
 
-type RDB_WHEEL_BASE_t
+mutable struct RDB_WHEEL_BASE_t
     playerId::UInt32
     id::UInt8
     flags::UInt8
@@ -669,7 +669,7 @@ type RDB_WHEEL_BASE_t
     spare1::Tuple{UInt32, UInt32, UInt32, UInt32} #Xiaobai
 end
 
-type RDB_WHEEL_EXT_t
+mutable struct RDB_WHEEL_EXT_t
     vAngular::Cfloat
     forceZ::Cfloat
     forceLat::Cfloat
@@ -684,12 +684,12 @@ type RDB_WHEEL_EXT_t
     spare2::Tuple{UInt32, UInt32, UInt32, UInt32} #Xiaobai
 end
 
-type RDB_WHEEL_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_WHEEL_t <: RDB_PACKAGE_ELEMENT
     base::RDB_WHEEL_BASE_t
     ext::RDB_WHEEL_EXT_t
 end
 
-type RDB_VEHICLE_SYSTEMS_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_VEHICLE_SYSTEMS_t <: RDB_PACKAGE_ELEMENT
     playerId::UInt32
     lightMask::UInt32
     steering::Cfloat
@@ -704,7 +704,7 @@ type RDB_VEHICLE_SYSTEMS_t <: RDB_PACKAGE_ELEMENT
     spare::Tuple{UInt32, UInt32, UInt32, UInt32, UInt32} #Xiaobai
 end
 
-type RDB_VEHICLE_SETUP_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_VEHICLE_SETUP_t <: RDB_PACKAGE_ELEMENT
     playerId::UInt32
     mass::Cfloat
     wheelBase::Cfloat
@@ -712,7 +712,7 @@ type RDB_VEHICLE_SETUP_t <: RDB_PACKAGE_ELEMENT
     spare::Tuple{Int32, Int32, Int32, Int32} #Xiaobai
 end
 
-type RDB_IMAGE_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_IMAGE_t <: RDB_PACKAGE_ELEMENT
     id::UInt32
     width::UInt16
     height::UInt16
@@ -726,7 +726,7 @@ type RDB_IMAGE_t <: RDB_PACKAGE_ELEMENT
     spare1::Tuple{UInt32, UInt32, UInt32} #Xiaobai
 end
 
-type RDB_FUNCTION_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_FUNCTION_t <: RDB_PACKAGE_ELEMENT
     id::UInt32
     thetype::UInt8
     dimension::UInt8
@@ -736,7 +736,7 @@ type RDB_FUNCTION_t <: RDB_PACKAGE_ELEMENT
     spare1::Tuple{UInt32, UInt32, UInt32, UInt32} #Xiaobai
 end
 
-type RDB_SENSOR_STATE_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_SENSOR_STATE_t <: RDB_PACKAGE_ELEMENT
     id::UInt32
     thetype::UInt8
     hostCategory::UInt8
@@ -753,7 +753,7 @@ type RDB_SENSOR_STATE_t <: RDB_PACKAGE_ELEMENT
     spare::Tuple{Int32, Int32, Int32, Int32} #Xiaobai
 end
 
-type RDB_SENSOR_OBJECT_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_SENSOR_OBJECT_t <: RDB_PACKAGE_ELEMENT
     category::UInt8
     thetype::UInt8
     flags::UInt16
@@ -768,7 +768,7 @@ type RDB_SENSOR_OBJECT_t <: RDB_PACKAGE_ELEMENT
     spare::Tuple{UInt32, UInt32, UInt32}
 end
 
-type RDB_CAMERA_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_CAMERA_t <: RDB_PACKAGE_ELEMENT
     id::UInt16
     width::UInt16
     height::UInt16
@@ -784,7 +784,7 @@ type RDB_CAMERA_t <: RDB_PACKAGE_ELEMENT
     spare1::Tuple{UInt32, UInt32, UInt32, UInt32}
 end
 
-type RDB_LIGHT_SOURCE_BASE_t
+mutable struct RDB_LIGHT_SOURCE_BASE_t
     id::UInt16
     templateId::Int8
     state::UInt8
@@ -796,7 +796,7 @@ type RDB_LIGHT_SOURCE_BASE_t
     spare1::Tuple{Int32, Int32}
 end
 
-type RDB_LIGHT_SOURCE_EXT_t
+mutable struct RDB_LIGHT_SOURCE_EXT_t
     #nearFar::(Cfloat, Cfloat)
     nearFar::Tuple{Cfloat, Cfloat}
     #frustumLRBT::(Cfloat, Cfloat, Cfloat, Cfloat)
@@ -809,12 +809,12 @@ type RDB_LIGHT_SOURCE_EXT_t
     spare1::Tuple{Int32, Int32, Int32}
 end
 
-type RDB_LIGHT_SOURCE_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_LIGHT_SOURCE_t <: RDB_PACKAGE_ELEMENT
     base::RDB_LIGHT_SOURCE_BASE_t
     ext::RDB_LIGHT_SOURCE_EXT_t
 end
 
-type RDB_CONTACT_POINT_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_CONTACT_POINT_t <: RDB_PACKAGE_ELEMENT
     id::UInt16
     flags::UInt16
     roadDataIn::RDB_COORD_t
@@ -823,7 +823,7 @@ type RDB_CONTACT_POINT_t <: RDB_PACKAGE_ELEMENT
     spare1::Int32
 end
 
-type RDB_TRAFFIC_SIGN_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_TRAFFIC_SIGN_t <: RDB_PACKAGE_ELEMENT
     id::UInt32
     playerId::UInt32
     roadDist::Cfloat
@@ -841,7 +841,7 @@ type RDB_TRAFFIC_SIGN_t <: RDB_PACKAGE_ELEMENT
     spare::UInt16
 end
 
-type RDB_ROAD_STATE_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_ROAD_STATE_t <: RDB_PACKAGE_ELEMENT
     playerId::UInt32
     wheelId::Int8
     spare0::UInt8
@@ -854,7 +854,7 @@ type RDB_ROAD_STATE_t <: RDB_PACKAGE_ELEMENT
     spare2::Tuple{Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32}
 end
 
-type RDB_ENVIRONMENT_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_ENVIRONMENT_t <: RDB_PACKAGE_ELEMENT
     visibility::Cfloat
     timeOfDay::UInt32
     brightness::Cfloat
@@ -865,7 +865,7 @@ type RDB_ENVIRONMENT_t <: RDB_PACKAGE_ELEMENT
     spare1::Tuple{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
 end
 
-type RDB_PED_ANIMATION_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_PED_ANIMATION_t <: RDB_PACKAGE_ELEMENT
     playerId::UInt32
     pos::RDB_COORD_t
     #spare::(UInt32, UInt32, UInt32, UInt32)
@@ -874,7 +874,7 @@ type RDB_PED_ANIMATION_t <: RDB_PACKAGE_ELEMENT
     dataSize::UInt32
 end
 
-type RDB_CUSTOM_SCORING_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_CUSTOM_SCORING_t <: RDB_PACKAGE_ELEMENT
     playerId::UInt32
     pathS::Cfloat
     roadS::Cfloat
@@ -886,13 +886,13 @@ type RDB_CUSTOM_SCORING_t <: RDB_PACKAGE_ELEMENT
     spare::Tuple{UInt32, UInt32, UInt32, UInt32}
 end
 
-type RDB_TRIGGER_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_TRIGGER_t <: RDB_PACKAGE_ELEMENT
     deltaT::Cfloat
     frameNo::UInt32
     spare::Int32
 end
 
-type RDB_DRIVER_CTRL_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_DRIVER_CTRL_t <: RDB_PACKAGE_ELEMENT
     playerId::UInt32
     steeringWheel::Cfloat
     steeringSpeed::Cfloat
@@ -917,7 +917,7 @@ type RDB_DRIVER_CTRL_t <: RDB_PACKAGE_ELEMENT
     spare::UInt32
 end
 
-type RDB_DRIVER_PERCEPTION_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_DRIVER_PERCEPTION_t <: RDB_PACKAGE_ELEMENT
     playerId::UInt32
     speedFromRules::Cfloat
     distToSpeed::Cfloat
@@ -928,38 +928,38 @@ type RDB_DRIVER_PERCEPTION_t <: RDB_PACKAGE_ELEMENT
     spare::Tuple{UInt32, UInt32, UInt32, UInt32}
 end
 
-type RDB_TRAFFIC_LIGHT_BASE_t
+mutable struct RDB_TRAFFIC_LIGHT_BASE_t
     id::Int32
     state::Cfloat
     stateMask::UInt32
 end
 
-type RDB_TRAFFIC_LIGHT_PHASE_t
+mutable struct RDB_TRAFFIC_LIGHT_PHASE_t
     duration::Cfloat
     thetype::UInt8
     #spare::(UInt8, UInt8, UInt8)
     spare::Tuple{UInt8, UInt8, UInt8}
 end
 
-type RDB_TRAFFIC_LIGHT_EXT_t
+mutable struct RDB_TRAFFIC_LIGHT_EXT_t
     ctrlId::Int32
     cycleTime::Cfloat
     noPhases::UInt16
     dataSize::UInt32
 end
 
-type RDB_TRAFFIC_LIGHT_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_TRAFFIC_LIGHT_t <: RDB_PACKAGE_ELEMENT
     base::RDB_TRAFFIC_LIGHT_BASE_t
     ext::RDB_TRAFFIC_LIGHT_EXT_t
 end
 
-type RDB_SYNC_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_SYNC_t <: RDB_PACKAGE_ELEMENT
     mask::UInt32
     cmdMask::UInt32
     systemTime::Cdouble
 end
 
-type RDB_ROAD_QUERY_t
+mutable struct RDB_ROAD_QUERY_t
     id::UInt16
     flags::UInt16
     #spare::(UInt16, UInt16)
@@ -968,13 +968,13 @@ type RDB_ROAD_QUERY_t
     y::Cdouble
 end
 
-type RDB_SCP_t
+mutable struct RDB_SCP_t
     version::UInt16
     spare::UInt16
     dataSize::UInt32
 end
 
-type RDB_PROXY_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_PROXY_t <: RDB_PACKAGE_ELEMENT
     protocol::UInt16
     pkgId::UInt16
     #spare::(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)
@@ -982,7 +982,7 @@ type RDB_PROXY_t <: RDB_PACKAGE_ELEMENT
     dataSize::UInt32
 end
 
-type RDB_TRAJECTORY_t
+mutable struct RDB_TRAJECTORY_t
     playerId::UInt32
     spacing::Cdouble
     flags::UInt16
@@ -991,7 +991,7 @@ type RDB_TRAJECTORY_t
     spare::Tuple{UInt32, UInt32, UInt32, UInt32}
 end
 
-type RDB_MOTION_SYSTEM_t <: RDB_PACKAGE_ELEMENT
+mutable struct RDB_MOTION_SYSTEM_t <: RDB_PACKAGE_ELEMENT
     playerId::UInt32
     flags::UInt32
     pos::RDB_COORD_t
@@ -1000,13 +1000,13 @@ type RDB_MOTION_SYSTEM_t <: RDB_PACKAGE_ELEMENT
     spare::Tuple{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
 end
 
-type RDB_END_OF_FRAME_t <: RDB_PACKAGE_ELEMENT #Xiaobai
+mutable struct RDB_END_OF_FRAME_t <: RDB_PACKAGE_ELEMENT #Xiaobai
 end
 
-type RDB_START_OF_FRAME_t <: RDB_PACKAGE_ELEMENT #Xiaobai
+mutable struct RDB_START_OF_FRAME_t <: RDB_PACKAGE_ELEMENT #Xiaobai
 end
 
-type RDB_STEER_2_DYN_t
+mutable struct RDB_STEER_2_DYN_t
     playerId::UInt32
     state::UInt32
     angle::Cfloat
@@ -1016,7 +1016,7 @@ type RDB_STEER_2_DYN_t
     spare::Tuple{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
 end
 
-type RDB_DYN_2_STEER_t
+mutable struct RDB_DYN_2_STEER_t
     playerId::UInt32
     state::UInt16
     cmd::UInt16
@@ -1031,7 +1031,7 @@ type RDB_DYN_2_STEER_t
     spare::Tuple{UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32}
 end
 
-type RDB_MSG_HDR_t
+mutable struct RDB_MSG_HDR_t
     magicNo::UInt16
     version::UInt16
     headerSize::UInt32
@@ -1040,7 +1040,7 @@ type RDB_MSG_HDR_t
     simTime::Cdouble
 end
 
-type RDB_MSG_ENTRY_HDR_t
+mutable struct RDB_MSG_ENTRY_HDR_t
     headerSize::UInt32
     dataSize::UInt32
     elementSize::UInt32
@@ -1048,13 +1048,13 @@ type RDB_MSG_ENTRY_HDR_t
     flags::UInt16
 end
 
-# type RDB_MSG_t
+# mutable struct RDB_MSG_t
 #     hdr::RDB_MSG_HDR_t
 #     entryHdr::RDB_MSG_ENTRY_HDR_t
 #     u::RDB_MSG_UNION_t
 # end
 
-type RDB_SHM_BUFFER_INFO_t
+mutable struct RDB_SHM_BUFFER_INFO_t
     thisSize::UInt32
     bufferSize::UInt32
     id::UInt16
@@ -1065,7 +1065,7 @@ type RDB_SHM_BUFFER_INFO_t
     spare1::Tuple{UInt32, UInt32, UInt32, UInt32}
 end
 
-type RDB_SHM_HDR_t
+mutable struct RDB_SHM_HDR_t
     headerSize::UInt32
     dataSize::UInt32
     noBuffers::UInt8

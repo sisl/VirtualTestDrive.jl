@@ -1,5 +1,5 @@
 
-type RDB_Package
+mutable struct RDB_Package
     header::RDB_MSG_HDR_t
     entry_headers::Vector{RDB_MSG_ENTRY_HDR_t}
     data_blocks::Vector{Vector{UInt8}}

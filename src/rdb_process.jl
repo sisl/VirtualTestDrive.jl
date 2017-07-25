@@ -1,4 +1,4 @@
-type RDB_Message
+mutable struct RDB_Message
     header::RDB_MSG_HDR_t
     entry_headers::Vector{RDB_MSG_ENTRY_HDR_t}
     entries::Vector{RDB_PACKAGE_ELEMENT}
@@ -46,7 +46,7 @@ function Base.read(io::IO, ::Type{RDB_Message}, already_read_magic_no::Bool=fals
 end
 
 
-function processNFrame(N::Int=10,udp_entries::Array{RDB_PACKAGE_ELEMENT}=Array(RDB_PACKAGE_ELEMENT,0))
+function processNFrame(N::Int=10,udp_entries::Array{RDB_PACKAGE_ELEMENT}=Array{RDB_PACKAGE_ELEMENT}(0))
     entries=nothing
     for i=1:N
         entries=processOneFrame(udp_entries)
@@ -55,7 +55,7 @@ function processNFrame(N::Int=10,udp_entries::Array{RDB_PACKAGE_ELEMENT}=Array(R
 end
 ###Xiaobai
 
-function processOneFrame(udp_entries::Array{RDB_PACKAGE_ELEMENT}=Array(RDB_PACKAGE_ELEMENT,0))
+function processOneFrame(udp_entries::Array{RDB_PACKAGE_ELEMENT}=Array{RDB_PACKAGE_ELEMENT}(0))
     #println("bytes available : ",nb_available(connection.UDP))
     #readbytes(connection.UDP, nb_available(connection.UDP))
     payload="<SimCtrl> <Step size=\"1\"/> </SimCtrl>"
@@ -97,7 +97,7 @@ function processOneFrame(udp_entries::Array{RDB_PACKAGE_ELEMENT}=Array(RDB_PACKA
     return entries
 end
 
-function processOneFrame_debug(udp_entries::Array{RDB_PACKAGE_ELEMENT}=Array(RDB_PACKAGE_ELEMENT,0))
+function processOneFrame_debug(udp_entries::Array{RDB_PACKAGE_ELEMENT}=Array{RDB_PACKAGE_ELEMENT}(0))
     #println("bytes available : ",nb_available(connection.UDP))
     #readbytes(connection.UDP, nb_available(connection.UDP))
     payload="<SimCtrl> <Step size=\"1\"/> </SimCtrl>"
@@ -178,7 +178,7 @@ function initialize()
     return connection,entries
 end
 
-function processOneFrame_continuous(connection::ViresConnection,udp_entries::Array{RDB_PACKAGE_ELEMENT}=Array(RDB_PACKAGE_ELEMENT,0))
+function processOneFrame_continuous(connection::ViresConnection,udp_entries::Array{RDB_PACKAGE_ELEMENT}=Array{RDB_PACKAGE_ELEMENT}(0))
     #println("bytes available : ",nb_available(connection.UDP))
     #readbytes(connection.UDP, nb_available(connection.UDP))
     payload="<SimCtrl> <Step size=\"1\"/> </SimCtrl>"

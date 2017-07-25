@@ -1,7 +1,7 @@
 const SCP_PORT = 48179
 const UDP_PORT = 48190
 
-type ViresConnection
+mutable struct ViresConnection
     #SCP::TcpSocket
     #UDP::TcpSocket
     SCP::TCPSocket

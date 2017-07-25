@@ -1,4 +1,4 @@
-type SCPHeader
+mutable struct SCPHeader
     sender::Vector{UInt8} # 64-byte sender string
     receiver::Vector{UInt8} # 64-byte receiver string
     len::Int32
@@ -20,7 +20,7 @@ type SCPHeader
         new(sender, receiver, len)
     end
 end
-type SCPMessage
+mutable struct SCPMessage
     header::SCPHeader
     payload::Vector{UInt8} # <- xml string
 

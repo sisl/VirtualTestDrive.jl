@@ -1,4 +1,4 @@
-type DriverBehavior
+mutable struct DriverBehavior
     desired_speed        :: Float64
     desired_acceleraion  :: Float64
     desired_deceleration :: Float64
