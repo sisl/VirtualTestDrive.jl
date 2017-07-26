@@ -1,6 +1,5 @@
 function find_vtd_directory(error_on_fail::Bool=true)
-    @linux ? (
-            begin
+    @static is_linux() ? let
                 hd = homedir()
                 for content in readdir(hd)
                     path = joinpath(hd, content)
@@ -9,12 +8,11 @@ function find_vtd_directory(error_on_fail::Bool=true)
                     end
                 end
                 error_on_fail && error("VTD directory not found")
-            end
-            : begin
+            end : let
                 error_on_fail && error("non-linux os's not supported!")
             end
-            )
-    "" # return empty string if no error was thrown and path was not found
+            
+    return "" # return empty string if no error was thrown and path was not found
 end
 function start_vires_vtd_tasks()
     dir = joinpath(find_vtd_directory(), "Data", "Setups", "Current", "Bin")

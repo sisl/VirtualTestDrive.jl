@@ -1165,7 +1165,7 @@ function Base.read!(io::IO, structure::RDB_COORD_SYSTEM_t)
     structure.id = read(io, UInt16)
     structure.spare = read(io, UInt16)
     structure.pos = read(io, RDB_COORD_t)
-    struct
+    structure
 end
 function Base.write(io::IO, structure::RDB_COORD_SYSTEM_t)
     write(io, structure.id)
@@ -1418,15 +1418,15 @@ function Base.read(io::IO, ::Type{RDB_OBJECT_CFG_t})
     category = read(io, UInt8)
     thetype = read(io, UInt8)
     modelId = read(io, Int16)
-    name = Array(Cchar,32)
+    name = Array{Cchar}(32)
     for i=1:32
         name[i] = read(io,Cchar)
     end
-    modelName = Array(Cchar,32)
+    modelName = Array{Cchar}(32)
     for i=1:32
         modelName[i] = read(io,Cchar)
     end
-    fileName = Array(Cchar,1024)
+    fileName = Array{Cchar}(1024)
     for i=1:1024
         fileName[i] = read(io,Cchar)
     end
@@ -1440,15 +1440,15 @@ function Base.read!(io::IO, structure::RDB_OBJECT_CFG_t)
     structure.category = read(io, UInt8)
     structure.thetype = read(io, UInt8)
     structure.modelId = read(io, Int16)
-    structure.name = Array(Cchar,32)
+    structure.name = Array{Cchar}(32)
     for i=1:32
         structure.name[i] = read(io,Cchar)
     end
-    structure.modelName = Array(Cchar,32)
+    structure.modelName = Array{Cchar}(32)
     for i=1:32
         structure.modelName[i] = read(io,Cchar)
     end
-    structure.fileName = Array(Cchar,1024)
+    structure.fileName = Array{Cchar}(1024)
     for i=1:1024
         structure.fileName[i] = read(io,Cchar)
     end
@@ -1576,7 +1576,7 @@ function Base.read!(io::IO, structure::RDB_OBJECT_STATE_EXT_t)
     structure.accel = read(io, RDB_COORD_t)
     structure.traveledDist = read(io,Cfloat)
     structure.spare = (read(io, UInt32), read(io, UInt32), read(io, UInt32))
-    struct
+    structure
 end
 function Base.write(io::IO, structure::RDB_OBJECT_STATE_EXT_t)
     write(io, structure.speed)
@@ -2113,7 +2113,7 @@ function Base.read(io::IO, ::Type{RDB_SENSOR_STATE_t})
     hostCategory = read(io, UInt8)
     spare0 = read(io, UInt16)
     hostId = read(io, UInt32)
-    name = Array(Cchar,32)
+    name = Array{Cchar}(32)
     for i=1:32
         name[i] = read(io,Cchar)
     end
@@ -2130,7 +2130,7 @@ function Base.read!(io::IO, structure::RDB_SENSOR_STATE_t)
     structure.hostCategory = read(io, UInt8)
     structure.spare0 = read(io, UInt16)
     structure.hostId = read(io, UInt32)
-    structure.name = Array(Cchar,32)
+    structure.name = Array{Cchar}(32)
     for i=1:32
         structure.name[i] = read(io,Cchar)
     end
@@ -3110,7 +3110,7 @@ function Base.read(io::IO, ::Type{RDB_END_OF_FRAME_t})
     RDB_END_OF_FRAME_t()
 end
 function Base.read!(io::IO, structure::RDB_END_OF_FRAME_t)
-    struct
+    structure
 end
 function Base.write(io::IO, structure::RDB_END_OF_FRAME_t)
 end

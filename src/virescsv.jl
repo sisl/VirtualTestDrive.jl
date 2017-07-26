@@ -82,7 +82,7 @@ function read_vires_csv(pathname::String)
         map!(str->replace(str, " ", "_"), substrings) # replace_spaces_with_underscores
         map!(str->replace(str, r"[.,]", ""), substrings) # remove periods and commas
         substrings = filter!(s->!isempty(s), substrings)
-        dictkeys = map(str->symbol(str), substrings)
+        dictkeys = map(str->Symbol(str), substrings)
 
         line = readline(fin)
         nbytes -= length(line)

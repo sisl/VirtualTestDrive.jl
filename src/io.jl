@@ -59,7 +59,7 @@ function string_from_buffer(arr::Vector{UInt8})
     if nulindex == 0
         nulindex = length(arr)
     end
-    bytestring(arr[1:nulindex-1])
+    convert(String,arr[1:nulindex-1])
 end
 
 function Base.write(io::IO, header::SCPHeader)

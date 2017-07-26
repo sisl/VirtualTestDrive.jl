@@ -17,18 +17,18 @@ function Base.read(io::IO, ::Type{RDB_MSG_HDR_t}, already_read_magic_no::Bool=fa
     simTime = read(io, Cdouble)
     RDB_MSG_HDR_t(RDB_MAGIC_NO, version, headerSize, dataSize, frameNo, simTime)
 end
-function Base.read!(io::IO, struct::RDB_MSG_HDR_t, already_read_magic_no::Bool=false)
+function Base.read!(io::IO, structure::RDB_MSG_HDR_t, already_read_magic_no::Bool=false)
     if !already_read_magic_no
         scan_for_value(io, RDB_MAGIC_NO)
     end
 
-    struct.magicNo = RDB_MAGIC_NO
-    struct.version = read(io, UInt16)
-    struct.headerSize = read(io, UInt32)
-    struct.dataSize = read(io, UInt32)
-    struct.frameNo = read(io, UInt32)
-    struct.simTime = read(io, Cdouble)
-    struct
+    structure.magicNo = RDB_MAGIC_NO
+    structure.version = read(io, UInt16)
+    structure.headerSize = read(io, UInt32)
+    structure.dataSize = read(io, UInt32)
+    structure.frameNo = read(io, UInt32)
+    structure.simTime = read(io, Cdouble)
+    structure
 end
 # function Base.write(io::IO, header::RDB_MSG_HDR_t)
 #     write(io, header.magicNo)
