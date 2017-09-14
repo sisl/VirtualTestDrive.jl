@@ -82,7 +82,8 @@ function Base.read(io::IO, ::Type{SCPMessage}, already_has_magic_number::Bool=fa
     end
 
     version_number = read(io, UInt16)
-    sender = readbytes(io, 64)
+    sender = Array(UInt8, 64)
+    @assert readbytes!(io, sender) == 64
     receiver = readbytes(io, 64)
     payloadsize = read(io, Int32)
     payload = readbytes(io, payloadsize)   
