@@ -76,7 +76,7 @@ function Base.write(io::IO, message::SCPMessage)
     #print_message(message)
 end
 
-function Base.read(io::IO, ::Type{SCPMessage}, already_has_magic_number::Bool=false)
+function Base.read(io::IO, ::Type{SCPMessage}, already_has_magic_number::Bool=false, verbose::Bool=false)
     if !already_has_magic_number
         scan_for_value(io, VIRES_MAGIC_NUMBER)
     end
@@ -87,12 +87,13 @@ function Base.read(io::IO, ::Type{SCPMessage}, already_has_magic_number::Bool=fa
     receiver = Array{UInt8}(64)
     @assert readbytes!(io, receiver) == 64
     payloadsize = read(io, Int32)
-    println(payloadsize)
     payload = Array{UInt8}(payloadsize)
     @assert readbytes!(io, payload) == payloadsize   
     message = SCPMessage(sender,receiver,payload)
-    println(STDOUT, "READING")
-    print_message(message)
+    if verbose
+        println(STDOUT, "READING")
+        print_message(message)
+    end
     message
 end
 function write_bytehex_to_stdout(f::Function)
