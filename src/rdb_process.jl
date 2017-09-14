@@ -178,6 +178,16 @@ function initialize()
     return connection,entries
 end
 
+function reset(connection::ViresConnection)
+
+    payload="<SimCtrl> <Restart/> </SimCtrl>"
+    #payload="<SimCtrl> <Init> </SimCtrl>"
+    #payload=@sprintf("<SimCtrl> <Sync dt=\"%.2f\"/> </SimCtrl>", dt)
+    SCPmessage=SCPMessage(payload)
+    #connection=ViresConnection()
+    write(connection.SCP, SCPmessage)
+end
+
 function processOneFrame_continuous(connection::ViresConnection,udp_entries::Array{RDB_PACKAGE_ELEMENT}=Array{RDB_PACKAGE_ELEMENT}(0))
     #println("bytes available : ",nb_available(connection.UDP))
     #readbytes(connection.UDP, nb_available(connection.UDP))
