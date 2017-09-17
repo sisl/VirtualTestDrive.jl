@@ -60,3 +60,29 @@ function disconnect!(connection::ViresConnection)
         close(connection.SCP)
         close(connection.UDP)
 end
+
+function connect!(connection::ViresConnection,
+	scp_port::Integer=SCP_PORT, 
+	udp_port::Integer=UDP_PORT;
+        sleeptime::Float64=0.05, # [sec]
+        timeout::Float64=TIMEOUT_LONG_DEFAULT)
+
+        SCP = connect(scp_port)
+        start_time = time()
+        while !isopen(SCP) && time() - start_time < timeout
+            sleep(sleeptime)
+        end
+
+        # connect and idle until connection is available
+        UDP = connect(udp_port)
+        start_time = time()
+        while !isopen(UDP) && time() - start_time < timeout
+            sleep(sleeptime)
+        end
+
+        @assert(isopen(SCP))
+        @assert(isopen(UDP))
+
+	connection.SCP = SCP
+	connection.UDP = UDP
+end
