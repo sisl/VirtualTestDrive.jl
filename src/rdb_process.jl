@@ -210,9 +210,9 @@ function processOneFrame_continuous(connection::ViresConnection,udp_entries::Arr
         end
 
         if VirtualTestDrive.rdb_pkg_id_to_string(message.entry_headers[1].pkgId)=="END_OF_FRAME"
-            push!(entries,VirtualTestDrive.RDB_END_OF_FRAME_t())
+            push!(entries,[VirtualTestDrive.RDB_END_OF_FRAME_t()])
         elseif VirtualTestDrive.rdb_pkg_id_to_string(message.entry_headers[1].pkgId)=="START_OF_FRAME"
-            push!(entries,VirtualTestDrive.RDB_START_OF_FRAME_t())
+            push!(entries,[VirtualTestDrive.RDB_START_OF_FRAME_t()])
         else
             push!(entries,message.entries)
         end
@@ -226,4 +226,14 @@ function processOneFrame_continuous(connection::ViresConnection,udp_entries::Arr
     end
     #write(connection.SCP, SCPmessage)
     return entries
+end
+
+
+function processNFrame_continuous(connection::ViresConnection,udp_entries::Array{RDB_PACKAGE_ELEMENT}=Array{RDB_PACKAGE_ELEMENT}(0),N::Int=10)
+	entries = nothing
+	for i=1:N
+		entries=processOneFrame_continuous(connection,udp_entries)
+		#println(sqrt.(entries[3][1].ext.accel.x^2+entries[3][1].ext.accel.y^2))
+	end
+	return entries
 end
